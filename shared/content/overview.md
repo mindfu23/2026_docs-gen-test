@@ -4,6 +4,11 @@
 > 69 paths). Open5e serves Dungeons & Dragons 5e SRD content (spells, monsters, classes,
 > items, rules) over a clean REST API. This is the shared subject documented by all five tools.
 
+![A twenty-sided die](../assets/sample-d20.svg)
+
+> The image above is the **sample asset** for the authoring-operations test — each publishing
+> tool should be exercised by adding it to a page (see `shared/AUTHORING_OPS.md`).
+
 ## What this is
 
 **Open5e** is an open REST API for 5th-edition d20 game content — the SRD plus other

@@ -31,6 +31,7 @@ They are **not competitors — they are three layers of the docs toolchain:**
 | Setup time (actual) | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
 | Lock-in / portability | _TBD_ | _TBD_ | _TBD_ | none | _TBD_ |
 | Primary audience | SDK consumers | developers | mixed technical/non-tech | engineering teams | doc maintainers |
+| Authoring ops (CRUD) | n/a — config + regen | files + nav (web editor) | WYSIWYG drag-and-drop | files + sidebar config | n/a — drafts edits via PR |
 
 ## Findings  *(write as you go)*
 

@@ -57,15 +57,28 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 2026_docs-gen-test/
 ├── PLAN.md                    # this file
 ├── COMPARISON.md              # THE DELIVERABLE — matrix + write-up (fill as you go)
+├── FURTHER_TESTING.md         # backlog of extra functionality axes, by category (explore after core)
+├── NOTICE.md                  # CC-BY-4.0 attribution (required in published artifacts)
 ├── shared/
-│   ├── openapi.json           # input A — generate via Kaggle (README in this folder)
-│   └── content/               # input B — overview.md, endpoints.md, concepts.md ✅
+│   ├── openapi.json           # spec variant: full Open5e (69 paths, read-only) ✅
+│   ├── openapi-subset.json    # spec variant: trimmed demo subset (Phase 0.5) — to author
+│   ├── openapi-auth.json      # spec variant: subset + 1 fake auth POST (Phase 0.5) — to author
+│   ├── content/               # input B — overview / endpoints / concepts (D&D) ✅
+│   ├── AUTHORING_OPS.md        # the create/edit/move/image battery
+│   └── MODEL_LAYER.md         # swappable base+RAG+LoRA serving design
 ├── stainless/                 # spec → typed SDK
 ├── mintlify/                  # docs.json + adapted MDX → hosted site
-├── docusaurus/                # scaffold + openapi plugin → self-hosted static site
+├── docusaurus/                # openapi plugin → self-hosted static site (+ RAG chatbot, netlify stubs)
 ├── gitbook/                   # git-sync target + adapted Markdown → hosted site
-└── promptless/                # reacts to repo changes → doc-update PRs
+├── promptless/                # reacts to repo changes → doc-update PRs
+└── showcase/                  # React+Vite+Tailwind hub — tabs per tool + Summary (PUBLIC ARTIFACT)
 ```
+
+The **showcase/** hub is a curated presentation layer, not a co-host of the five live outputs
+(they're heterogeneous and mostly externally hosted). Each tab is driven by data in
+`showcase/src/tools.ts` — the **capture contract**: per tool you collect a live URL, a
+screenshot, a representative artifact (page/code/diff), setup notes, and a findings paragraph.
+Filling a tab after a run = editing data, not code. The Summary tab is the deliverable.
 
 ---
 
@@ -83,6 +96,19 @@ facts and an optional **LoRA** for house voice. The serving engine is **vLLM** b
 
 Full design + the env-var seam + provider table: **`shared/MODEL_LAYER.md`**.
 
+## Comparison principle — preserve every option
+
+When a step has more than one viable approach, **try each and compare — never collapse to one.**
+The whole project's value is the comparison, so divergent options are features, not forks to
+resolve. Recurring multi-option points (each tagged *(try all & compare)* below and in
+`FURTHER_TESTING.md`):
+- **Spec variants:** full vs. subset vs. auth-augmented (Phase 0.5).
+- **Serving providers:** vLLM vs. Hugging Face vs. Cloudflare (`MODEL_LAYER.md`).
+- **Base models:** Mistral vs. Qwen vs. Llama (LoRA-compat permitting).
+- **Voice LoRAs:** American vs. British.
+- **RAG retrieval:** your own index vs. Open5e's built-in `vector=true`.
+- **Search, i18n, review workflows:** across all three publishers.
+
 ## Phased execution (cheap-first; Phase 1 is parallel once Phase 0 lands)
 
 ### Phase 0 — Hub + inputs  ✅ mostly done
@@ -92,7 +118,28 @@ Full design + the env-var seam + provider table: **`shared/MODEL_LAYER.md`**.
 - [x] Author the 3 seed pages on the **Open5e D&D surface** (spells / creatures / classes /
       items; pagination, Django-style filters, vector search, documents/licensing)
 
-**Phase 0 complete.** Next: fan out to the five tools (Phase 1).
+**Phase 0 complete.** Next: Phase 0.5 critical fixes, then fan out (Phase 1).
+
+### Phase 0.5 — Critical fixes (from the plan review — do before/with Phase 1)
+The four highest-value fixes surfaced by the plan review. *Preserve every spec variant — they
+exist to be compared, not replaced.*
+- [ ] **Auth + mutation coverage** *(spec)* — author `shared/openapi-auth.json`: the subset plus
+      **one fake authenticated `POST`** (e.g. `POST /v2/encounters` with a bearer security scheme),
+      purely to exercise request-body / auth / mutation rendering the read-only spec can't.
+      *Closes the biggest coverage gap.* Keep all three spec variants and compare.
+- [ ] **Demo-subset spec** — author `shared/openapi-subset.json` (≈ spells + creatures + classes)
+      to dodge free-tier caps and drf-spectacular param noise. Run ≥1 tool against **both** full
+      and subset to capture the scale/noise finding *(try all & compare)*.
+- [ ] **CORS check** *(verify)* — one request with an `Origin` header to `api.open5e.com` to learn
+      whether the interactive "Try It" consoles can make **live in-browser calls** (else they fall
+      back to copy-paste). Gates the "interactive" claim for Mintlify/GitBook.
+- [ ] **i18n + voice LoRAs** *(localization)* — stand up the localization seam (Docusaurus i18n
+      first) as the home for the **British/American voice LoRAs** → "the same docs in two house
+      voices." Mechanism now; *voiced* variants once the LoRAs clear the safety screen
+      (`MODEL_LAYER.md`). Extend the i18n comparison across publishers *(try all & compare)*.
+
+> **Compliance reminder (standing):** CC-BY-4.0 attribution (`NOTICE.md`) must appear in **every
+> published output** — each docs site, the SDK, and the showcase — not just this repo.
 
 ### Phase 1 — Fan out (per-tool steps in each folder's README)
 - [ ] **Stainless** (~20–30 min): upload spec → generate Python/TS SDK → screenshot a
@@ -107,6 +154,14 @@ Full design + the env-var seam + provider table: **`shared/MODEL_LAYER.md`**.
       (`shared/MODEL_LAYER.md`) — base-only first, then attach an HF LoRA once it passes the
       safety screen. Default serving = vLLM; prove an HF/Cloudflare swap is config-only.
 
+### Phase 1.5 — Showcase hub  ✅ scaffolded
+- [x] Thin `showcase/` shell: tabs per tool + Summary, data-driven capture contract
+- [ ] Per tool, fill its `showcase/src/tools.ts` entry as you complete it (URL, screenshot,
+      artifact, setup notes, findings, status → `done`)
+- [ ] Run the **authoring-operations battery** (`shared/AUTHORING_OPS.md`) in each layer-②
+      tool — create/edit/move pages & folders, add `shared/assets/sample-d20.svg`, reorganize —
+      and record *how* each does it in that tool's `operations` list
+
 ### Phase 2 — Evaluate + write up (~45 min)
 - [ ] Fill the matrix in `COMPARISON.md`
 - [ ] Write the contrast + LinkedIn hook
@@ -120,7 +175,8 @@ artifact. Promptless is the only real access/time risk — describe it conceptua
 
 layer · primary input · primary output · hosting (SaaS/self/CI) · content format ·
 OpenAPI ingestion quality · git model · AI features · pricing / OSS-free · setup time ·
-lock-in / portability · primary audience
+lock-in / portability · primary audience · **authoring operations** (create/edit/move pages &
+folders, add images, reorganize — the battery in `shared/AUTHORING_OPS.md`)
 
 ### Overlaps to call out explicitly (the senior signal)
 - **Spec consumers:** Stainless, Mintlify, GitBook, Docusaurus all ingest OpenAPI but emit
@@ -131,6 +187,15 @@ lock-in / portability · primary audience
 - **Maintenance overlap:** Promptless vs Mintlify's built-in "outdated docs" PR check vs
   GitBook AI. Promptless isn't unique — it's the most *dedicated*.
 - **Format portability:** MDX ports between Mintlify/Docusaurus; GitBook uses its own blocks.
+
+## Further testing (backlog — explore after the core is done)
+
+Once Phases 0.5–2 are set up and tested, work through **[`FURTHER_TESTING.md`](FURTHER_TESTING.md)**
+— every remaining gotcha and functionality-testing opportunity from the plan review, grouped by
+**testing category** (reference rendering · search · versioning/localization · authoring depth ·
+maintenance/quality gates · hosting/portability/compliance · RAG & model layer). Items needing a
+head-to-head are marked *(try all & compare)*. That file is the single place to recall and pick up
+the optional tangents.
 
 ---
 
@@ -187,4 +252,8 @@ tools deploy themselves.
   and added a **swappable model layer** (`shared/MODEL_LAYER.md`) so HF/Cloudflare serving and
   Mistral/Qwen base models are config swaps, with LoRAs referenced by HF repo id. Confirmed the
   base model (`mistralai/Mistral-7B-Instruct-v0.2`), the private LoRA repos, and the exact
-  HF/Cloudflare endpoints. Next: rework the seed pages to the D&D surface, then fan out.
+  HF/Cloudflare endpoints. Reworked the 3 pages to the D&D surface, scaffolded the `showcase/`
+  hub + capture contract, and added the authoring-ops battery + sample image. Finally ran a
+  **plan review**: folded 4 critical fixes into **Phase 0.5** (auth/POST spec variant, demo
+  subset, CORS check, i18n+voice LoRAs), added the "preserve every option" principle, and filed
+  the rest in **`FURTHER_TESTING.md`** by category. Next: Phase 0.5, then fan out to the tools.

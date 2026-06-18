@@ -1,0 +1,16 @@
+# The showcase hub is the project's public artifact. Standard GitHub → Netlify.
+# Set Netlify base directory = "showcase" (or move this file to the repo root and uncomment base).
+
+[build]
+  # base    = "showcase"
+  command = "npm run build"
+  publish = "dist"            # Vite outputs to ./dist
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA fallback (single-page app, state-based tabs).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
