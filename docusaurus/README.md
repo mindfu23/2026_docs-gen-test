@@ -23,3 +23,10 @@ heavier setup against Mintlify/GitBook's instant SaaS hosting.
 The "own your stack" option: maximum flexibility and zero recurring cost, paid for in setup
 and maintenance effort. The OpenAPI playground is less turnkey than Mintlify's. Best fit for
 engineering-heavy teams that want no lock-in.
+
+## RAG chatbot (the LoRA / vLLM showcase)
+Because Docusaurus is your own React app, it's the one tool here that can host a **RAG
+chatbot** grounded in the Open5e content, answered by a **base LLM + your LoRA**. Serving is
+**swappable by config** (vLLM ↔ Hugging Face ↔ Cloudflare; Llama ↔ Mistral ↔ Qwen) — see
+[`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md). Start base-only; attach the HF LoRA
+once it clears the safety screen.

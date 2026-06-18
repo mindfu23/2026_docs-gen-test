@@ -35,9 +35,16 @@ frame it.
 
 | Shared input | Built once | Feeds |
 |---|---|---|
-| **A. `shared/openapi.json`** | vLLM on Kaggle (see `shared/openapi.json.README.md`) | Stainless, Mintlify, GitBook, Docusaurus |
-| **B. `shared/content/` (3 seed pages)** | Hand-authored from vLLM standard spec ✅ done | Mintlify, GitBook, Docusaurus |
+| **A. `shared/openapi.json`** | **Open5e API** (`api.open5e.com/schema/`) ✅ obtained — OpenAPI 3.0.3, 69 paths | Stainless, Mintlify, GitBook, Docusaurus |
+| **B. `shared/content/` (3 seed pages)** | Authored for vLLM ⚠️ rework to D&D surface | Mintlify, GitBook, Docusaurus |
 | **C. This repo** | `git init` ✅ done | All five; Promptless reacts to *changes* here |
+
+> **Theme pivot (2026-06-18):** the shared API is now the **Open5e D&D 5e API**, not vLLM.
+> Open5e publishes a real, openly-licensed (CC-BY-4.0) OpenAPI spec, so **no GPU/Kaggle run
+> is needed**, and one fun theme unifies the whole project: the spec feeds the doc tools, the
+> same API's data (spells/creatures/classes) is the Docusaurus RAG corpus, and the LoRA gives
+> it house voice. vLLM is now optional (only to *serve* the base+LoRA model). Attribution
+> lives in `NOTICE.md`. Source details in `shared/openapi.SOURCE.md`.
 
 The "same MDX" needs light per-tool adaptation (Mintlify components vs Docusaurus
 admonitions vs GitBook blocks). **That portability gap is itself a finding** — document it.
@@ -62,13 +69,29 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 
 ---
 
+## Generation layer — RAG + LoRA + swappable serving (for the Docusaurus portion)
+
+The Docusaurus RAG chatbot (and any drafting loop) runs on a **base LLM**, with **RAG** for
+facts and an optional **LoRA** for house voice. The serving engine is **vLLM** by default
+(also a project topic), but the layer is designed to be **swappable by config, not code**:
+
+- **Switch serving** vLLM ↔ Hugging Face ↔ Cloudflare, and **switch base model**
+  Llama ↔ Mistral ↔ Qwen, by changing env vars only (all talk OpenAI-compatible APIs).
+- **Reference LoRAs by Hugging Face repo id** — vLLM loads an HF base model + HF LoRA directly
+  (`vllm serve <hf-base> --enable-lora --lora-modules voice=<hf-lora-repo>`).
+- **Constraint:** a LoRA only fits the base family it was trained on; base-only is the fallback.
+
+Full design + the env-var seam + provider table: **`shared/MODEL_LAYER.md`**.
+
 ## Phased execution (cheap-first; Phase 1 is parallel once Phase 0 lands)
 
-### Phase 0 — Hub + inputs  ✅ partially done
+### Phase 0 — Hub + inputs  ✅ mostly done
 - [x] `git init` hub (pre-existing repo)
-- [x] Author 3 seed pages from vLLM standard spec (`shared/content/`)
-- [ ] Generate real `shared/openapi.json` (Kaggle, ~30 min)
-- [ ] Reconcile seed pages against the real spec (version, server URL, model name)
+- [x] Author 3 seed pages (format/structure templates) (`shared/content/`)
+- [x] Obtain real `shared/openapi.json` — **Open5e**, OpenAPI 3.0.3, 69 paths (no GPU needed)
+- [x] Add CC-BY-4.0 attribution (`NOTICE.md`)
+- [ ] **Rework the 3 seed pages to the D&D surface** (spells / creatures / classes / magic
+      items) — they're currently written for vLLM's chat API
 
 ### Phase 1 — Fan out (per-tool steps in each folder's README)
 - [ ] **Stainless** (~20–30 min): upload spec → generate Python/TS SDK → screenshot a
@@ -79,6 +102,9 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 - [ ] **GitBook** (~30 min): create space → Git Sync → import OpenAPI → hosted site.
 - [ ] **Promptless** (stretch — *check access first*): connect repo → edit spec/add a param
       → review the drafted doc-update PR.
+- [ ] **Docusaurus RAG chatbot** (the LoRA/vLLM showcase): stand up the swappable model seam
+      (`shared/MODEL_LAYER.md`) — base-only first, then attach an HF LoRA once it passes the
+      safety screen. Default serving = vLLM; prove an HF/Cloudflare swap is config-only.
 
 ### Phase 2 — Evaluate + write up (~45 min)
 - [ ] Fill the matrix in `COMPARISON.md`
@@ -114,8 +140,23 @@ lock-in / portability · primary audience
 - GitBook Git-Sync + OpenAPI specifics and OSS pricing
 - Promptless OSS / trial access (the likely blocker)
 
+## Related projects
+- **LoRA content-safety screen** *(separate, linked)* — the humor LoRAs must be tested on a
+  battery of text and judged "clean enough to be safe" before being wired into this pipeline.
+  Until a LoRA passes, the generation layer runs **base-only**. See `shared/MODEL_LAYER.md`.
+- **`llm-training-free`** — where the humor LoRAs were trained. **Base model:
+  `mistralai/Mistral-7B-Instruct-v0.2`** (r=32, α=64). LoRA repos (HF, **private pre-release**):
+  `mindfu/humor-lora-american-1929`, `mindfu/humor-lora-british-1929`. Stay base-only until
+  they pass the safety screen and are flipped public.
+
 ## Two-line history
 - **Jun 7 (Copilot chat):** architected the seeding approach (spec → structure + authored
   explanation → hand to a maintenance tool). Never executed; left at "draft the 3 pages?"
-- **Jun 18 (this session):** scaffolded the hub, authored the 3 seed pages, added GitBook
-  to the tool set, wrote this plan. Next: generate the real spec, then fan out.
+- **Jun 18 (this session):** scaffolded the hub, authored the 3 seed pages, added GitBook to
+  the tool set, wrote this plan. Then pivoted the theme to the **Open5e D&D 5e API** —
+  verified it ships a CC-BY-4.0 OpenAPI 3.0.3 spec (69 paths) and captured it to
+  `shared/openapi.json` (no GPU needed). Kept vLLM as a topic + the reference serving engine,
+  and added a **swappable model layer** (`shared/MODEL_LAYER.md`) so HF/Cloudflare serving and
+  Mistral/Qwen base models are config swaps, with LoRAs referenced by HF repo id. Confirmed the
+  base model (`mistralai/Mistral-7B-Instruct-v0.2`), the private LoRA repos, and the exact
+  HF/Cloudflare endpoints. Next: rework the seed pages to the D&D surface, then fan out.
