@@ -61,8 +61,8 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 ├── NOTICE.md                  # CC-BY-4.0 attribution (required in published artifacts)
 ├── shared/
 │   ├── openapi.json           # spec variant: full Open5e (69 paths, read-only) ✅
-│   ├── openapi-subset.json    # spec variant: trimmed demo subset (Phase 0.5) — to author
-│   ├── openapi-auth.json      # spec variant: subset + 1 fake auth POST (Phase 0.5) — to author
+│   ├── openapi-subset.json    # spec variant: trimmed demo subset (6 paths) ✅
+│   ├── openapi-auth.json      # spec variant: subset + 1 fake auth POST (7 paths) ✅
 │   ├── content/               # input B — overview / endpoints / concepts (D&D) ✅
 │   ├── AUTHORING_OPS.md        # the create/edit/move/image battery
 │   └── MODEL_LAYER.md         # swappable base+RAG+LoRA serving design
@@ -120,23 +120,28 @@ resolve. Recurring multi-option points (each tagged *(try all & compare)* below 
 
 **Phase 0 complete.** Next: Phase 0.5 critical fixes, then fan out (Phase 1).
 
-### Phase 0.5 — Critical fixes (from the plan review — do before/with Phase 1)
+### Phase 0.5 — Critical fixes (from the plan review)  ✅ 3 of 4 done (2026-06-18)
 The four highest-value fixes surfaced by the plan review. *Preserve every spec variant — they
 exist to be compared, not replaced.*
-- [ ] **Auth + mutation coverage** *(spec)* — author `shared/openapi-auth.json`: the subset plus
-      **one fake authenticated `POST`** (e.g. `POST /v2/encounters` with a bearer security scheme),
-      purely to exercise request-body / auth / mutation rendering the read-only spec can't.
-      *Closes the biggest coverage gap.* Keep all three spec variants and compare.
-- [ ] **Demo-subset spec** — author `shared/openapi-subset.json` (≈ spells + creatures + classes)
-      to dodge free-tier caps and drf-spectacular param noise. Run ≥1 tool against **both** full
+- [x] **Auth + mutation coverage** *(spec)* — `shared/openapi-auth.json`: the subset **plus a fake
+      authenticated `POST /v2/encounters/`** (bearer security, `EncounterRequest`/`Encounter`
+      schemas, 201/401), to exercise request-body / auth / mutation rendering the read-only spec
+      can't. Keep all three spec variants and compare.
+- [x] **Demo-subset spec** — `shared/openapi-subset.json` (spells + creatures + classes, list +
+      detail = 6 paths) to dodge free-tier caps and param noise. Run ≥1 tool against **both** full
       and subset to capture the scale/noise finding *(try all & compare)*.
-- [ ] **CORS check** *(verify)* — one request with an `Origin` header to `api.open5e.com` to learn
-      whether the interactive "Try It" consoles can make **live in-browser calls** (else they fall
-      back to copy-paste). Gates the "interactive" claim for Mintlify/GitBook.
-- [ ] **i18n + voice LoRAs** *(localization)* — stand up the localization seam (Docusaurus i18n
-      first) as the home for the **British/American voice LoRAs** → "the same docs in two house
-      voices." Mechanism now; *voiced* variants once the LoRAs clear the safety screen
-      (`MODEL_LAYER.md`). Extend the i18n comparison across publishers *(try all & compare)*.
+- [x] **CORS check** *(verify)* — **DONE: `api.open5e.com` returns `access-control-allow-origin: *`**,
+      so the interactive "Try It" consoles **can make live in-browser calls.** The "interactive"
+      claim for Mintlify/GitBook/Docusaurus is unblocked.
+- [ ] **i18n + voice LoRAs** *(localization)* — **rolls into Phase 1 (needs Docusaurus scaffolded
+      first).** Stand up the localization seam (Docusaurus i18n) as the home for the
+      **British/American voice LoRAs** → "the same docs in two house voices." Mechanism first;
+      *voiced* variants once the LoRAs clear the safety screen (`MODEL_LAYER.md`). Extend across
+      publishers *(try all & compare)*.
+
+**Three spec variants now exist** (all valid OpenAPI 3.0.3): `openapi.json` (full, 69 paths) ·
+`openapi-subset.json` (6) · `openapi-auth.json` (7, +auth POST). Feed each tool whichever fits,
+and compare full-vs-subset and read-only-vs-auth.
 
 > **Compliance reminder (standing):** CC-BY-4.0 attribution (`NOTICE.md`) must appear in **every
 > published output** — each docs site, the SDK, and the showcase — not just this repo.

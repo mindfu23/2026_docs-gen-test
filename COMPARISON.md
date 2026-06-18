@@ -41,6 +41,13 @@ They are **not competitors — they are three layers of the docs toolchain:**
 - **Docusaurus —** _deployed URL; effort to wire the OpenAPI plugin + deploy._
 - **Promptless —** _the drafted PR (or conceptual description if access blocked)._
 
+## Test setup notes
+- **Three spec variants** drive the comparison: `openapi.json` (full, 69 paths), `openapi-subset.json`
+  (6), `openapi-auth.json` (7, +fake auth POST). Compare full-vs-subset (scale/noise) and
+  read-only-vs-auth (request-body/security rendering).
+- **Live "Try It" works:** `api.open5e.com` sends `access-control-allow-origin: *`, so interactive
+  consoles can make real in-browser GETs.
+
 ## Cross-cutting observations
 
 - **Same spec, different artifacts:** _Stainless code vs three reference sites._

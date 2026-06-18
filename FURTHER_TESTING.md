@@ -18,8 +18,9 @@ tabs in `showcase/src/tools.ts`.
   compare how each reference renders a wall of optional query params (collapse? group? dump?).
 - **Multi-language code samples** — quality of the auto-generated curl / Python / JS samples on
   each reference page. *(try all & compare: Mintlify vs GitBook vs Docusaurus-plugin)*
-- **Live "Try It" calls** — *depends on the Phase 0.5 CORS check.* If CORS allows, exercise live
-  in-browser requests against `api.open5e.com` in each interactive console; compare UX.
+- **Live "Try It" calls** — ✅ *unblocked:* the Phase 0.5 CORS check confirmed
+  `access-control-allow-origin: *`. Exercise live in-browser GETs against `api.open5e.com` in each
+  interactive console and compare UX. *(try all & compare)*
 
 ## 2. Search & discovery
 *Category: finding content once published.*

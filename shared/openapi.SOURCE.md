@@ -8,6 +8,21 @@ Stored here as both `openapi.json` (~352 KB, generated) and `openapi.yaml` (the 
 This is the **one artifact** every spec-consuming tool ingests — Stainless, Mintlify,
 GitBook, and the Docusaurus OpenAPI plugin.
 
+## Spec variants (Phase 0.5 — try all & compare)
+
+| File | Paths | Purpose |
+|---|---|---|
+| `openapi.json` | 69 | full Open5e (read-only) — the scale/noise case |
+| `openapi-subset.json` | 6 | spells + creatures + classes (list + detail) — clean demo, dodges free-tier caps |
+| `openapi-auth.json` | 7 | subset + a fake authenticated `POST /v2/encounters/` (bearer security) — exercises request-body / auth / mutation rendering |
+
+Regenerate the variants from `openapi.json` with the Phase 0.5 trim/augment script (inline in
+that commit). Feed each tool whichever variant fits its demo; compare full-vs-subset and
+read-only-vs-auth.
+
+**CORS (checked 2026-06-18):** `api.open5e.com` returns `access-control-allow-origin: *`, so the
+interactive "Try It" consoles can make **live in-browser calls** — no proxy needed for read GETs.
+
 ## Why this replaced the vLLM/Kaggle plan
 
 The original plan ran a throwaway vLLM server to produce a spec. Open5e *publishes* a real
