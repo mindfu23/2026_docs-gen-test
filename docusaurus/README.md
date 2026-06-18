@@ -24,6 +24,23 @@ npm start                 # local preview
 npm run build             # → build/ ; deploy via GitHub → Netlify (base directory = docusaurus/site)
 ```
 
+## i18n (en-GB) — confirm translation works
+The locale is declared (`en` + `en-GB`) and the **British content tree is scaffolded** at
+`site/i18n/en-GB/docusaurus-plugin-content-docs/current/` (the 3 guides, British-spelled + a
+banner so the switch is visible). This folder is the **target for the British-voice LoRA** output.
+
+How Docusaurus i18n works, and how to confirm it:
+```bash
+cd docusaurus/site
+# Generate the theme/UI string files for the locale (correct keys for your version — don't hand-write these):
+npm run write-translations -- --locale en-GB     # creates i18n/en-GB/code.json + theme JSON
+npm start -- --locale en-GB                        # preview the British locale at /en-GB/
+npm run build                                      # builds BOTH locales; the navbar locale dropdown switches them
+```
+Translated docs content = a **copy** of each page under `i18n/en-GB/.../current/` that you edit
+(already done here). Theme/UI strings = generated JSON you then edit. Swapping the locale dropdown
+in the navbar confirms the whole chain end to end.
+
 ## Spec variants (try all & compare)
 `docusaurus.config.ts` → plugin `specPath` currently uses `openapi-subset.json`. Swap to
 `openapi.json` (full/noisy) or `openapi-auth.json` (auth + POST) and re-run `gen-api-docs` to

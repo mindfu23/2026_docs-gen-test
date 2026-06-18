@@ -133,8 +133,10 @@ exist to be compared, not replaced.*
 - [x] **CORS check** *(verify)* — **DONE: `api.open5e.com` returns `access-control-allow-origin: *`**,
       so the interactive "Try It" consoles **can make live in-browser calls.** The "interactive"
       claim for Mintlify/GitBook/Docusaurus is unblocked.
-- [~] **i18n + voice LoRAs** *(localization)* — **seam done:** Docusaurus configured for `en` +
-      `en-GB` (the British-voice home). Voiced translations pending the LoRA safety screen. Original note:
+- [~] **i18n + voice LoRAs** *(localization)* — **seam + en-GB content scaffolded:** Docusaurus is
+      configured for `en` + `en-GB`, and the British content tree is seeded at
+      `docusaurus/site/i18n/en-GB/...` (British-spelled placeholder + banner). Confirm with
+      `npm start -- --locale en-GB`. Voiced prose pending the LoRA safety screen. Original note:
       **British/American voice LoRAs** → "the same docs in two house voices." Mechanism first;
       *voiced* variants once the LoRAs clear the safety screen (`MODEL_LAYER.md`). Extend across
       publishers *(try all & compare)*.
