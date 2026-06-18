@@ -1,0 +1,37 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Open5e Docs",
+  "description": "The Open5e D&D 5e API, documented with Mintlify (one of five tools compared).",
+  "colors": { "primary": "#7c3aed", "light": "#a78bfa", "dark": "#4f46e5" },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          { "group": "Getting Started", "pages": ["overview", "endpoints", "concepts"] }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "openapi": "api-reference/openapi.json"
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      { "label": "GitHub", "href": "https://github.com/mindfu23/2026_docs-gen-test" }
+    ]
+  },
+  "footer": {
+    "links": [
+      {
+        "header": "Attribution",
+        "items": [
+          { "label": "D&D 5e SRD (CC-BY-4.0) via Open5e", "href": "https://open5e.com" }
+        ]
+      }
+    ]
+  }
+}

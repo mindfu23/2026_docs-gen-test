@@ -1,26 +1,36 @@
 # GitBook — Layer ② Publish site (SaaS, WYSIWYG + git-sync)
 
-**Job:** publish a hosted docs/knowledge-base site with an API reference imported from
-`shared/openapi.json`. Distinctive trait: a **WYSIWYG editor with bidirectional Git Sync** —
-non-engineers can edit in the UI while changes round-trip to Markdown in the repo.
+**Job:** publish a hosted docs/KB site with an API reference. Distinctive trait: a **WYSIWYG
+editor with bidirectional Git Sync** — non-engineers edit in the UI while changes round-trip to
+Markdown in the repo.
 
-**Input:** `../shared/openapi.json` + adapted Markdown from `../shared/content/`
-→ **Output:** hosted docs/KB + API reference.
+**Status: prepped ✅.** A self-contained Git-Sync content root lives in **[`content/`](content/)**;
+this folder is the planning wrapper.
 
-## Steps
-1. Create a GitBook account → new **space** (free tier for personal/OSS — *verify current terms*).
-2. Set up **Git Sync** against this repo so a `gitbook/` content folder round-trips as Markdown.
-3. Import the OpenAPI spec (GitBook generates API pages / OpenAPI blocks from it).
-4. Add the 3 seed pages as Markdown (GitBook converts them to its block model — note any
-   fidelity loss vs the Mintlify/Docusaurus renderings).
-5. Publish.
+## What's prepped
+- [`.gitbook.yaml`](.gitbook.yaml) — Git Sync config (`root: ./content/`, README + SUMMARY).
+- [`content/SUMMARY.md`](content/SUMMARY.md) — the table of contents (GitBook's nav model).
+- [`content/README.md`](content/README.md) · `endpoints.md` · `concepts.md` — the 3 guides using
+  GitBook **`{% hint %}`** callouts (vs Mintlify `<Info>` vs Docusaurus `:::` — the format-
+  portability finding, in three dialects).
+- [`content/api-reference/`](content/api-reference/) — the spec (`openapi.json`) + import notes.
+- `content/.gitbook/assets/sample-d20.svg` — the sample image.
+
+## Fast path (once logged in)
+1. Create a GitBook account → new **space** (free for personal/OSS — *verify terms*).
+2. **Git Sync** → connect this repo, point it at the **`gitbook/`** subdirectory (or move
+   `.gitbook.yaml` to the repo root per its comment). The Markdown + SUMMARY import as a space.
+3. Add the **OpenAPI** reference (UI import of `content/api-reference/openapi.json`, or the live
+   URL) — see `content/api-reference/README.md`.
+4. **Exercise the authoring battery** (`shared/AUTHORING_OPS.md`) here — this is the tool where
+   create/drag-reorder/nest/inline-image-upload is the headline. Watch edits round-trip to the repo.
 
 ## What to capture
-The hosted site **and** a screenshot of the WYSIWYG editor + Git Sync settings — that combo
-is GitBook's differentiator. Note how its block model handles the same Markdown the other two
-tools rendered.
+The hosted site **and** a screenshot of the WYSIWYG editor + Git Sync settings — that combo is
+GitBook's differentiator. Note how its block model handles the same Markdown the other tools rendered.
 
 ## For the write-up
-The mixed-audience option: best when non-technical contributors (PMs, support, marketing)
-co-author alongside engineers. More content-platform than dev-docs-framework. Compare its
-git model (bidirectional sync) against Mintlify (git-as-source) and Docusaurus (git-is-the-repo).
+The mixed-audience option: best when non-technical contributors co-author alongside engineers.
+More content-platform than dev-docs-framework. Compare its git model (bidirectional sync) against
+Mintlify (git-as-source) and Docusaurus (git-is-the-repo). **Watch the sync direction** — editing
+in the GUI can overwrite repo files if mis-set (see `FURTHER_TESTING.md` §4).

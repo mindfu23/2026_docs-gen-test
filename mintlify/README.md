@@ -1,32 +1,36 @@
 # Mintlify — Layer ② Publish site (SaaS, dev-docs-native)
 
-**Job:** render `shared/openapi.json` as an interactive API reference, plus guides authored
-in MDX. Hosted SaaS with a strong "Try It" playground and AI search.
+**Job:** render the spec as an interactive API reference, plus guides authored in MDX. Hosted
+SaaS with a strong "Try It" playground and AI search.
 
-**Input:** `../shared/openapi.json` + adapted MDX from `../shared/content/`
-→ **Output:** hosted, searchable reference + guides.
+**Input:** the spec + Mintlify-flavored MDX  →  **Output:** hosted, searchable reference + guides.
 
-## Steps
-1. Sign up at mintlify.com with GitHub SSO → onboarding clones a starter kit into a repo and
-   deploys a docs site. Install the Mintlify GitHub App so pushes auto-deploy.
-2. Add `openapi.json` to the repo (e.g. `api-reference/`), then wire it in **`docs.json`**
-   (the config file — it used to be `mint.json`; ignore stale tutorials):
+## Config prepped ✅
+This folder is a ready Mintlify docs root:
+- [`docs.json`](docs.json) — theme + a **Guides** tab (overview/endpoints/concepts) and an **API
+  Reference** tab pointed at `api-reference/openapi.json`.
+- [`api-reference/openapi.json`](api-reference/openapi.json) — a copy of `shared/openapi-subset.json`
+  (Mintlify's GitHub-App deploy needs the spec inside the docs root; regenerate via the Phase 0.5
+  script to swap variants — *try all & compare*).
+- [`overview.mdx`](overview.mdx) · [`endpoints.mdx`](endpoints.mdx) · [`concepts.mdx`](concepts.mdx)
+  — Mintlify-flavored (`<Info>`, `<CodeGroup>`, `<Card>`, `<Warning>`) vs Docusaurus admonitions:
+  the format-portability finding, live.
+- `favicon.svg` — the sample d20.
 
-   ```json
-   { "tab": "API Reference",
-     "groups": [ { "group": "Endpoints",
-       "openapi": { "source": "/api-reference/openapi.json", "directory": "api-reference" } } ] }
-   ```
-3. Optionally pre-generate MDX endpoint pages:
-   `npx @mintlify/scraping openapi-file ./api-reference/openapi.json -o ./api-reference`
-4. Add the 3 concept/guide pages (adapt `../shared/content/*` to Mintlify MDX components).
-5. Preview: `npm i -g mintlify && mintlify dev` → localhost:3000. Push to deploy.
+## Fast path (once logged in)
+1. Sign up at **mintlify.com** with GitHub SSO; install the **Mintlify GitHub App** on the repo so
+   pushes auto-deploy. Point it at this **`mintlify/`** subfolder as the docs root.
+2. Live in minutes — `docs.json` already wires the spec + guides. (CORS is `*`, so the "Try It"
+   playground can make **live** calls against `api.open5e.com` — see Phase 0.5.)
+3. Local preview (optional): `npm i -g mintlify && mintlify dev` from this folder → localhost:3000.
 
 ## What to capture
-The published site with the interactive **"Try It"** playground and AI search. Same spec as
-Stainless, completely different artifact.
+The published site with the interactive **"Try It"** playground + AI search. Drop the URL +
+screenshot into the showcase tab. Same spec as Stainless, completely different artifact.
 
 ## For the write-up
 The polished dev-docs default. Compare against GitBook (WYSIWYG/git-sync) and Docusaurus
-(self-host). Also note Mintlify's GitHub App can flag outdated docs on PRs — a lighter
-built-in cousin of Promptless (Layer ③).
+(self-host). Note Mintlify's GitHub App can flag outdated docs on PRs — a lighter built-in cousin
+of Promptless (Layer ③) — and that it has added its own SDK generation (overlaps Stainless).
+
+*Verify against the current `docs.json` schema — Mintlify's config evolves.*

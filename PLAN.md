@@ -133,8 +133,8 @@ exist to be compared, not replaced.*
 - [x] **CORS check** *(verify)* — **DONE: `api.open5e.com` returns `access-control-allow-origin: *`**,
       so the interactive "Try It" consoles **can make live in-browser calls.** The "interactive"
       claim for Mintlify/GitBook/Docusaurus is unblocked.
-- [ ] **i18n + voice LoRAs** *(localization)* — **rolls into Phase 1 (needs Docusaurus scaffolded
-      first).** Stand up the localization seam (Docusaurus i18n) as the home for the
+- [~] **i18n + voice LoRAs** *(localization)* — **seam done:** Docusaurus configured for `en` +
+      `en-GB` (the British-voice home). Voiced translations pending the LoRA safety screen. Original note:
       **British/American voice LoRAs** → "the same docs in two house voices." Mechanism first;
       *voiced* variants once the LoRAs clear the safety screen (`MODEL_LAYER.md`). Extend across
       publishers *(try all & compare)*.
@@ -147,14 +147,21 @@ and compare full-vs-subset and read-only-vs-auth.
 > published output** — each docs site, the SDK, and the showcase — not just this repo.
 
 ### Phase 1 — Fan out (per-tool steps in each folder's README)
-- [ ] **Stainless** (~20–30 min): upload spec → generate Python/TS SDK → screenshot a
-      typed method + docstring.
-- [ ] **Mintlify** (~30–45 min): GitHub SSO → `docs.json` `openapi` source → live site + "Try It".
-- [ ] **Docusaurus** (~30–45 min): `create-docusaurus` + `docusaurus-plugin-openapi-docs`
-      → build → deploy (Netlify/GH Pages).
-- [ ] **GitBook** (~30 min): create space → Git Sync → import OpenAPI → hosted site.
-- [ ] **Promptless** (stretch — *check access first*): connect repo → edit spec/add a param
-      → review the drafted doc-update PR.
+- [~] **Stainless** — **config prepped ✅** (`stainless/stainless.yml`: clean spells/creatures/
+      classes resources). *Your run:* log in → upload `openapi-subset.json` + the config → generate
+      Python/TS SDK → capture a typed method + docstring.
+- [~] **Mintlify** — **config prepped ✅** (`mintlify/` is a ready docs root: `docs.json`, copied
+      spec, 3 Mintlify-flavored MDX guides). *Your run:* GitHub SSO → install the App on this repo,
+      point it at `mintlify/` → live site + "Try It" → capture URL/screenshot.
+- [~] **Docusaurus** — **scaffolded ✅** in `docusaurus/site/` (3.10.1 + OpenAPI plugin v5 wired to
+      `openapi-subset.json`; 3 D&D guides as admonition MDX; i18n en/en-GB seam; sample image as
+      logo; netlify + RAG-proxy stubs moved in). *Your run:* `npm install` → `npm run gen-api-docs`
+      → `npm run build` → deploy → fill the showcase tab.
+- [~] **GitBook** — **prepped ✅** (`gitbook/content/` Git-Sync root: `.gitbook.yaml`, `SUMMARY.md`,
+      3 `{% hint %}`-flavored guides, spec + import notes). *Your run:* create space → Git Sync to
+      the `gitbook/` subdir → import OpenAPI → run the authoring battery → capture.
+- [~] **Promptless** — **connected ✅** (vLLM v2 fork GitHub + Slack); demo recipe in
+      `promptless/README.md`. Next: open a controlled PR → review the drafted doc-update PR.
 - [ ] **Docusaurus RAG chatbot** (the LoRA/vLLM showcase): stand up the swappable model seam
       (`shared/MODEL_LAYER.md`) — base-only first, then attach an HF LoRA once it passes the
       safety screen. Default serving = vLLM; prove an HF/Cloudflare swap is config-only.

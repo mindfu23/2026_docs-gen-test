@@ -97,7 +97,7 @@ export const tools: Tool[] = [
     output: "Doc-update PRs",
     hosting: "PR bot (no site)",
     artifact: { kind: "diff", note: "A drafted doc-update PR — screenshot/embed the diff + link." },
-    operations: "No manual CRUD — drafts edits to existing docs; trigger a change, review the PR.",
+    operations: "No manual CRUD — drafts doc-update PRs from a GitHub PR or a Slack @mention; review/iterate via GitHub comments.",
     ...pending({}),
   },
 ];

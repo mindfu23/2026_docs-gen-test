@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="d20 die">
+  <title>Sample image — d20</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#4f46e5"/>
+    </linearGradient>
+  </defs>
+  <polygon points="60,8 106,34 106,86 60,112 14,86 14,34" fill="url(#g)" stroke="#312e81" stroke-width="2"/>
+  <polygon points="60,8 106,34 60,52 14,34" fill="#a78bfa" opacity="0.55"/>
+  <polygon points="14,34 60,52 60,112 14,86" fill="#6d28d9" opacity="0.45"/>
+  <polygon points="106,34 106,86 60,112 60,52" fill="#4338ca" opacity="0.45"/>
+  <polygon points="60,30 84,46 74,72 46,72 36,46" fill="none" stroke="#ede9fe" stroke-width="1.5" opacity="0.7"/>
+  <text x="60" y="62" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#ffffff">20</text>
+</svg>

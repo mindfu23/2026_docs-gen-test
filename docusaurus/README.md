@@ -1,43 +1,41 @@
 # Docusaurus — Layer ② Publish site (self-hosted, max control)
 
-**Job:** build a static docs site from MDX, with API reference via a community OpenAPI
-plugin. Open-source, React-based, **you own the build and deploy** (no SaaS, no per-seat cost).
+**Job:** build a static docs site from MDX, with API reference via the OpenAPI plugin.
+Open-source, React-based, **you own the build and deploy** (no SaaS, no per-seat cost).
 
-**Input:** adapted MDX from `../shared/content/` + `../shared/openapi.json` (via plugin)
-→ **Output:** static site you deploy (Netlify / GH Pages / Cloudflare).
+**Status: scaffolded ✅** (Docusaurus 3.10.1, TypeScript). The real site is in **[`site/`](site/)**;
+this folder is the planning wrapper.
 
-## Steps
-1. `npx create-docusaurus@latest site classic` (run inside this folder).
-2. Add the OpenAPI plugin: `npm i docusaurus-plugin-openapi-docs docusaurus-theme-openapi-docs`
-   (*verify current package names/versions*).
-3. Configure the plugin in `docusaurus.config.js` to point at `../../shared/openapi.json`;
-   generate reference MDX with the plugin's `gen-api-docs` command.
-4. Drop the 3 seed pages into `docs/` (adapt to Docusaurus admonitions/format).
-5. `npm run start` to preview; `npm run build` then deploy the static output.
+## What's wired
+- `site/docusaurus.config.ts` — site metadata; **i18n seam** (`en` + `en-GB` for the British-voice
+  LoRA); the **OpenAPI plugin** pointed at `../../shared/openapi-subset.json`; docs at site root.
+- `site/docs/` — the 3 D&D guides (`overview` / `endpoints` / `concepts`), adapted to Docusaurus
+  `:::` admonitions (a live demo of the cross-tool format-portability finding).
+- `site/static/img/sample-d20.svg` — the authoring-ops sample image, used as the navbar logo.
+- `site/netlify.toml` + `site/netlify/functions/chat.ts` + `site/.env.example` — the deploy +
+  RAG-chatbot-proxy stubs (moved in so `site/` is a self-contained deploy unit).
 
-## What to capture
-The self-hosted site + the fact that **you** wired the plugin, theme, and deploy. Contrast the
-heavier setup against Mintlify/GitBook's instant SaaS hosting.
+## Run it (your steps — deps not installed yet)
+```bash
+cd docusaurus/site
+npm install
+npm run gen-api-docs      # generate docs/api/* from the spec (then uncomment apiSidebar in sidebars.ts)
+npm start                 # local preview
+npm run build             # → build/ ; deploy via GitHub → Netlify (base directory = docusaurus/site)
+```
 
-## For the write-up
-The "own your stack" option: maximum flexibility and zero recurring cost, paid for in setup
-and maintenance effort. The OpenAPI playground is less turnkey than Mintlify's. Best fit for
-engineering-heavy teams that want no lock-in.
+## Spec variants (try all & compare)
+`docusaurus.config.ts` → plugin `specPath` currently uses `openapi-subset.json`. Swap to
+`openapi.json` (full/noisy) or `openapi-auth.json` (auth + POST) and re-run `gen-api-docs` to
+compare how the reference renders each. Keep all three — see `../PLAN.md` "preserve every option".
 
 ## RAG chatbot (the LoRA / vLLM showcase)
-Because Docusaurus is your own React app, it's the one tool here that can host a **RAG
-chatbot** grounded in the Open5e content, answered by a **base LLM + your LoRA**. Serving is
-**swappable by config** (vLLM ↔ Hugging Face ↔ Cloudflare; Llama ↔ Mistral ↔ Qwen) — see
-[`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md). Start base-only; attach the HF LoRA
-once it clears the safety screen.
+Docusaurus is your own React app, so it hosts a **RAG chatbot** grounded in the Open5e content,
+answered by a **base LLM + your LoRA**, served via the swappable config in
+[`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md) through `site/netlify/functions/chat.ts`.
+Start base-only; attach the HF LoRA once it clears the safety screen.
 
-## Staging / deployment (pre-staged)
-This is the one tool that rides the standard **GitHub → Netlify** pipeline. Ready stubs, live
-once Docusaurus is scaffolded here in Phase 1:
-- [`netlify.toml`](netlify.toml) — build (`npm run build` → `build/`), Node 20, functions dir,
-  `/api/chat` redirect. Set Netlify **base directory = `docusaurus/`** (or move this to repo root).
-- [`netlify/functions/chat.ts`](netlify/functions/chat.ts) — the RAG-chatbot LLM proxy that
-  keeps the endpoint/token server-side (no `VITE_` secrets) and makes provider swaps env-only.
-- [`.env.example`](.env.example) — the `LLM_*` vars the function reads.
-
-See `../PLAN.md` → "Staging / deployment" for the full per-tool breakdown.
+## What to capture / for the write-up
+The self-hosted site + the fact that **you** wired the plugin, theme, i18n, and deploy — the
+"own your stack" option: max flexibility and zero recurring cost, paid for in setup effort. The
+OpenAPI playground is less turnkey than Mintlify's. Best for engineering teams that want no lock-in.

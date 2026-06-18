@@ -1,0 +1,10 @@
+# GitBook Git Sync config. Point GitBook's Git Sync at the `gitbook/` subdirectory (configurable
+# when you connect the repo). `root` is relative to this file.
+#
+# If GitBook requires .gitbook.yaml at the repository root instead, move this file up and set
+#   root: ./gitbook/content/
+root: ./content/
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md

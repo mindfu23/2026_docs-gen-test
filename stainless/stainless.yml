@@ -1,0 +1,52 @@
+# Stainless SDK config for the Open5e (D&D 5e) API — Layer ① generate client.
+#
+# Upload this alongside the spec in the Stainless Studio (app.stainless.com):
+#   spec   = ../shared/openapi-subset.json   (swap to openapi.json / openapi-auth.json to compare)
+#   config = this file
+#
+# The explicit resources/methods below give clean SDK calls — client.spells.list(),
+# client.spells.retrieve(key) — instead of the drf-spectacular auto names (spells_list, …).
+# That curation IS the finding: Stainless turns a messy auto-generated spec into a tidy SDK.
+
+organization:
+  name: open5e
+  docs: https://open5e.com/api-docs
+
+targets:
+  typescript:
+    package_name: open5e
+    production_repo: null
+    publish:
+      npm: false
+  python:
+    package_name: open5e
+    production_repo: null
+    publish:
+      pypi: false
+
+# Read-only API: only list + retrieve. (The openapi-auth.json variant adds an `encounters.create`
+# you can wire here to exercise a mutation method + request body.)
+resources:
+  spells:
+    models:
+      spell: Spell
+    methods:
+      list: get /v2/spells/
+      retrieve: get /v2/spells/{key}/
+
+  creatures:
+    models:
+      creature: Creature
+    methods:
+      list: get /v2/creatures/
+      retrieve: get /v2/creatures/{key}/
+
+  classes:
+    models:
+      character_class: CharacterClass
+    methods:
+      list: get /v2/classes/
+      retrieve: get /v2/classes/{key}/
+
+settings:
+  license: MIT

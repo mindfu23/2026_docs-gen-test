@@ -39,7 +39,11 @@ They are **not competitors — they are three layers of the docs toolchain:**
 - **Mintlify —** _live URL; how the "Try It" playground rendered the spec._
 - **GitBook —** _live URL; WYSIWYG + git-sync fidelity vs the raw Markdown._
 - **Docusaurus —** _deployed URL; effort to wire the OpenAPI plugin + deploy._
-- **Promptless —** _the drafted PR (or conceptual description if access blocked)._
+- **Promptless —** runs on the **vLLM v2 fork** (real code churn + a real `docs/` tree), triggered
+  by a GitHub PR or a Slack `@mention`; output is a drafted doc-update PR with citations. _Capture
+  the PR + assess draft/citation quality._ **Finding: the maintenance layer can't be demoed on a
+  static spec — it needs a living codebase**, so it deliberately uses a different substrate than
+  the other four (which document the Open5e API).
 
 ## Test setup notes
 - **Three spec variants** drive the comparison: `openapi.json` (full, 69 paths), `openapi-subset.json`

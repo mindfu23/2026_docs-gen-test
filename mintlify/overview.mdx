@@ -1,0 +1,49 @@
+---
+title: "Overview"
+description: "Getting started with the Open5e D&D 5e API"
+---
+
+<img src="/favicon.svg" alt="d20" width="96" />
+
+<Info>
+This page is the Mintlify adaptation of the canonical `shared/content/overview.md`. Note the
+component flavor — `<Info>`, `<CodeGroup>`, `<Card>` — vs Docusaurus's `:::` admonitions. Same
+source content, different MDX dialect: the cross-tool format-portability finding, live.
+</Info>
+
+## What this is
+
+**Open5e** is an open REST API for 5th-edition d20 game content — the SRD plus other OGL/CC
+material: spells, creatures, classes, magic items, and more. It is **completely open: no API
+key, no auth.** The current surface is **v2**; responses are JSON, paginated, and filterable.
+
+## Base URL
+
+```
+https://api.open5e.com
+```
+
+## Your first request
+
+<CodeGroup>
+```bash cURL
+curl "https://api.open5e.com/v2/spells/?name=Fireball"
+```
+
+```python Python
+import requests
+r = requests.get("https://api.open5e.com/v2/spells/", params={"name": "Fireball"})
+spell = r.json()["results"][0]
+print(spell["name"], "— level", spell["level"])
+```
+</CodeGroup>
+
+## Where to go next
+
+<CardGroup cols={3}>
+  <Card title="Endpoints" href="/endpoints">The resource surface.</Card>
+  <Card title="Concepts" href="/concepts">Keys, pagination, filtering, search.</Card>
+  <Card title="API Reference" href="/api-reference">Generated from the spec.</Card>
+</CardGroup>
+
+<Note>Content derives from the D&D 5e SRD under **CC-BY-4.0** — see `NOTICE.md`.</Note>
