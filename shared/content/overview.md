@@ -1,60 +1,65 @@
 # Overview / Getting Started
 
-> Seed page authored from vLLM's standard OpenAI-compatible API. Reconcile against
-> your real `shared/openapi.json` after a Kaggle run (the `info.version`, `servers`
-> URL, and served model name are the fields most likely to differ).
+> Authored from the live **Open5e** OpenAPI spec (`shared/openapi.json`, OpenAPI 3.0.3,
+> 69 paths). Open5e serves Dungeons & Dragons 5e SRD content (spells, monsters, classes,
+> items, rules) over a clean REST API. This is the shared subject documented by all five tools.
 
 ## What this is
 
-vLLM exposes an **OpenAI-compatible inference server**. Once you run `vllm serve <model>`,
-you get a FastAPI application that speaks the same REST dialect as the OpenAI API — so
-existing OpenAI client libraries work against it by changing only the base URL. Because
-it is FastAPI, it auto-publishes an OpenAPI spec at `/openapi.json` and an interactive
-Swagger UI at `/docs`. That spec is the single shared input this whole demo is built on.
+**Open5e** is an open REST API for 5th-edition d20 game content — the SRD plus other
+OGL/CC-licensed material. You query it for spells, creatures, classes, magic items, weapons,
+conditions, and more. It is **completely open: no API key, no auth, no rate-limit signup.**
+
+The current surface is the **v2** API. Responses are JSON, paginated, and richly filterable.
 
 ## Base URL
 
 ```
-http://localhost:8000/v1
+https://api.open5e.com
 ```
 
-The server binds to `127.0.0.1:8000` in this demo (bind to `127.0.0.1`, not the default
-`0.0.0.0`, so the API is not exposed to your local network).
+| Server | URL | Use |
+|---|---|---|
+| Production | `https://api.open5e.com` | default |
+| Beta | `https://api-beta.open5e.com` | preview of upcoming changes |
+| Localhost | `http://localhost:8000` | a self-hosted Open5e instance |
 
 ## Authentication
 
-Auth is **optional** and off by default. If you start the server with `--api-key <key>`,
-clients must send `Authorization: Bearer <key>`. With no key set, requests are unauthenticated.
+**None.** Every endpoint is public and read-only — just issue GET requests.
 
 ## Your first request
 
-cURL:
+cURL — fetch the spell *Fireball*:
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "Qwen/Qwen2.5-0.5B-Instruct",
-    "messages": [{"role": "user", "content": "Say hi in three words."}]
-  }'
+curl "https://api.open5e.com/v2/spells/?name=Fireball"
 ```
 
-Python (official OpenAI SDK pointed at vLLM):
+Python (the standard `requests` library):
 
 ```python
-from openai import OpenAI
+import requests
 
-client = OpenAI(base_url="http://localhost:8000/v1", api_key="not-needed")
+r = requests.get("https://api.open5e.com/v2/spells/", params={"name": "Fireball"})
+spell = r.json()["results"][0]
+print(spell["name"], "— level", spell["level"], "—", spell["desc"][:80])
+```
 
-resp = client.chat.completions.create(
-    model="Qwen/Qwen2.5-0.5B-Instruct",
-    messages=[{"role": "user", "content": "Say hi in three words."}],
-)
-print(resp.choices[0].message.content)
+Every list response is a paginated envelope:
+
+```json
+{ "count": 1, "next": null, "previous": null, "results": [ { "key": "srd_fireball", "name": "Fireball", "level": 3, "...": "..." } ] }
 ```
 
 ## Where to go next
 
-- **[Endpoints](./endpoints.md)** — the request/response surface, generated from the spec.
-- **[Concepts](./concepts.md)** — sampling parameters, chat vs. completion vs. embeddings,
-  streaming, and tokenization.
+- **[Endpoints](./endpoints.md)** — the resource surface (spells, creatures, classes, …),
+  generated from the spec.
+- **[Concepts](./concepts.md)** — the data model: keys/slugs, pagination, filtering, ordering,
+  search (including semantic vector search), and how `documents` carry licensing.
+
+## Attribution
+
+Content derives from the D&D 5e SRD under **CC-BY-4.0** — see [`../../NOTICE.md`](../../NOTICE.md).
+The required attribution must appear in anything you publish from this data.

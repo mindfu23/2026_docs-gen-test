@@ -1,55 +1,80 @@
 # Concepts
 
-> Synthesized from the spec's schemas into prose. More interpretive than
-> [Endpoints](./endpoints.md), but every term below is anchored to a parameter or schema
-> in `shared/openapi.json`. Because the API is OpenAI-compatible, the semantics are
-> well-known conventions, so this layer is easy to keep accurate.
+> Synthesized from the spec's schemas and shared query parameters into prose. More interpretive
+> than [Endpoints](./endpoints.md), but every term is anchored to the Open5e v2 API.
 
-## Chat vs. completion vs. embeddings
+## Keys (slugs) identify everything
 
-- **Chat** (`/v1/chat/completions`) takes a structured `messages` array of
-  `{role, content}` turns (`system`, `user`, `assistant`) and returns the next assistant
-  message. This is the modern default and what instruction-tuned models expect.
-- **Completion** (`/v1/completions`) takes a single raw `prompt` string and continues it.
-  Lower-level; useful for base models or templating you control yourself.
-- **Embeddings** (`/v1/embeddings`) returns a numeric vector representing the input text,
-  for search/similarity/clustering — not generation. Requires an embedding model.
+Every object has a stable string **`key`** (e.g. `srd_fireball`, `wizard`, `red-dragon`).
+Detail endpoints address objects by key: `/v2/spells/srd_fireball/`. Relationships between
+objects are expressed by key too (a spell's `classes` reference class keys), which makes the
+data graph easy to traverse without numeric IDs.
 
-## Sampling parameters
+## Pagination
 
-These control *how* tokens are chosen and apply to both chat and completion requests:
+List endpoints return a **page-number paginated envelope**:
 
-- **`temperature`** — randomness. `0` is greedy/deterministic; higher (e.g. `0.7–1.0`)
-  is more varied.
-- **`top_p`** — nucleus sampling. Restrict choices to the smallest set of tokens whose
-  cumulative probability reaches `p`. Usually tune `temperature` *or* `top_p`, not both.
-- **`max_tokens`** — upper bound on tokens generated in the response.
-- **`stop`** — string(s) that halt generation when produced.
-- **`n`** — number of independent completions to return.
-- **`stream`** — see below.
+```json
+{ "count": 320, "next": "https://api.open5e.com/v2/spells/?page=2", "previous": null, "results": [ ... ] }
+```
 
-## Streaming
+Control it with **`page`** and **`limit`** (results per page). Follow `next` until it's `null`
+to walk the full set.
 
-With `stream: true`, the server returns **Server-Sent Events (SSE)** — incremental
-`data:` chunks each carrying a token delta — instead of one buffered JSON response,
-terminated by `data: [DONE]`. This lets a UI render text as it is produced.
+## Filtering (Django-style lookups)
 
-> **Demo relevance:** SSE streaming is exactly the kind of surface that spec-driven tools
-> handle unevenly. An OpenAPI spec describes the request and the non-streaming response
-> well, but the streaming event shape is harder to model — worth noting when you compare
-> how Stainless (SDK), Mintlify/GitBook ("Try It" consoles), and Docusaurus render it.
+Open5e is built on Django REST Framework, so filters use **field + lookup** query params:
 
-## Tokenization
+| Pattern | Example | Meaning |
+|---|---|---|
+| exact | `?level=3` | field equals value |
+| `__icontains` | `?name__icontains=fire` | case-insensitive substring |
+| `__iexact` | `?name__iexact=fireball` | case-insensitive exact |
+| `__in` | `?key__in=a,b,c` | any of (comma-separated) |
+| related `__key` | `?classes__key=wizard` | filter by a linked object's key |
 
-Models operate on **tokens**, not characters. `max_tokens`, context limits, and billing
-(on commercial APIs) are all counted in tokens. vLLM exposes `/tokenize` and `/detokenize`
-as extensions so you can inspect this mapping directly — handy when explaining why a prompt
-"costs" more than its character count suggests.
+Filters combine (AND) across params: `?level=3&classes__key=wizard&ritual=false`.
 
-## Request/response model (async on real vLLM, sync here)
+## Ordering
 
-For this demo the chat/completion calls are **synchronous request/response**: you POST and
-block for the result (or stream it). This contrasts with batch/async-generation APIs (e.g.
-Luma's video API, where you POST to create a job, get a `state`, then poll or receive a
-webhook). Calling out that contrast — synchronous token streaming vs. async job polling —
-is a strong analytical point for the write-up.
+**`?ordering=<field>`** sorts ascending; prefix `-` for descending: `?ordering=-level`.
+
+## Search — including semantic (vector) search
+
+Two layers:
+
+- **Per-list `search`** — `?search=<term>` does a text search within that resource.
+- **Cross-resource `/v2/search/`** — `?query=<term>` across content types, with `object_model`
+  to scope, plus `strict`, `fuzzy`, and **`vector=true`** for embedding-based semantic search
+  over name + description.
+
+> The API ships its own retrieval (`vector=true`). When you build the Docusaurus RAG chatbot
+> (see `../MODEL_LAYER.md`), you can either lean on Open5e's vector search or index the content
+> yourself — a useful contrast to document.
+
+## Documents, licensing & provenance
+
+Content is organized into **`documents`** (source books/SRDs), each tied to a **`license`**,
+**`publisher`**, and **`gamesystem`**. A spell from the SRD and a spell from a third-party OGL
+book are distinguished by their `document`. Filter to SRD-only content with
+`?document__key=<srd-key>`, and read `/v2/licenses/` to produce correct attribution. This is
+why the SRD attribution in [`../../NOTICE.md`](../../NOTICE.md) is required: the API mixes
+sources, and you must preserve each.
+
+## v1 vs v2
+
+The spec's `info.version` reads *"development (v1)"* but the documented surface is **v2**
+(`/v2/...`), the current, more-structured API. Prefer v2 for new work; an older v1 surface
+exists for backward compatibility.
+
+## Object relationships (the mental model)
+
+```
+document ──< spell        document ──< creature ──< actions
+   │            └─ classes     │            └─ type, size
+ license                    (cr, hp, ...)
+ publisher
+```
+
+Resources are interlinked by key; reference vocabularies (`/v2/conditions/`, `/v2/damagetypes/`,
+`/v2/sizes/`, …) are the shared lookups the richer objects point at.

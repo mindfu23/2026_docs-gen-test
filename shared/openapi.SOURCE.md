@@ -42,7 +42,7 @@ reproduce descriptions.
 
 ## Note on the seed pages
 
-The three pages in `shared/content/` were seeded for a *vLLM* API (chat/completions, etc.).
-Now that the theme is the **Open5e D&D API**, they need reworking to its surface (spells,
-creatures, classes, magic items). Treat them as format/structure templates, not content —
-see the checklist in `../PLAN.md`.
+The three pages in `shared/content/` are authored on the **Open5e D&D surface** (spells,
+creatures, classes, items; pagination, Django-style filters, vector search, documents/
+licensing) — real content, not placeholders. They are the canonical guides each site tool
+adapts to its own MDX/Markdown flavor.

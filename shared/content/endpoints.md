@@ -1,81 +1,88 @@
 # Endpoints
 
-> The most directly spec-derived page — each section maps to a `path` in
-> `shared/openapi.json`. After your Kaggle run, regenerate this from the real spec
-> (e.g. `npx @mintlify/scraping openapi-file ./shared/openapi.json`) and keep only the
-> endpoints your build actually exposes. The set below is vLLM's standard surface.
+> The most directly spec-derived page — each section maps to a `path` in `shared/openapi.json`.
+> Open5e v2 exposes **35 list resources**; the highlights are below. Every list endpoint shares
+> the same pagination, filtering, ordering, and search conventions — see [Concepts](./concepts.md).
 
-## POST /v1/chat/completions
+All endpoints are GET, under the base `https://api.open5e.com`. A list endpoint
+(`/v2/<resource>/`) returns a paginated envelope; a detail endpoint (`/v2/<resource>/{key}/`)
+returns one object by its `key` (slug).
 
-Generate a chat completion from a list of messages. The primary endpoint.
+## GET /v2/spells/
 
-**Key parameters:** `model` (string), `messages` (array of `{role, content}`),
-`temperature` (number), `top_p` (number), `max_tokens` (integer), `stop` (string | array),
-`stream` (boolean), `n` (integer).
+The spell list. The single richest resource.
 
-```bash
-curl http://localhost:8000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{"model":"Qwen/Qwen2.5-0.5B-Instruct","messages":[{"role":"user","content":"Hi"}]}'
-```
-
-## POST /v1/completions
-
-Legacy text completion from a raw `prompt` string (no chat roles).
-
-**Key parameters:** `model` (string), `prompt` (string | array), `max_tokens` (integer),
-`temperature` (number), `top_p` (number), `stop`, `stream` (boolean).
+**Key filters:** `name`, `name__icontains`, `level` (integer), `ritual` (boolean),
+`school__key`, `classes__key` (e.g. `wizard`), `document__key`. **Common:** `search`,
+`ordering`, `page`, `limit`.
 
 ```bash
-curl http://localhost:8000/v1/completions \
-  -H "Content-Type: application/json" \
-  -d '{"model":"Qwen/Qwen2.5-0.5B-Instruct","prompt":"Once upon a time","max_tokens":32}'
+# All 3rd-level wizard spells, ordered by name
+curl "https://api.open5e.com/v2/spells/?level=3&classes__key=wizard&ordering=name"
 ```
 
-## POST /v1/embeddings
+Notable spell fields: `key`, `name`, `desc`, `level`, `school`, `classes`, `range`,
+`range_text`, `casting_time`, `ritual`, `verbal`, `somatic`, `material`, `higher_level`,
+`casting_options`.
 
-Return embedding vectors for input text. Only available when serving an embedding model.
+## GET /v2/creatures/
 
-**Key parameters:** `model` (string), `input` (string | array), `encoding_format` (`float` | `base64`).
+Monsters and NPCs (statblocks).
+
+**Key filters:** `name__icontains`, `cr` (challenge rating), `type__key`, `size__key`,
+`document__key`. Sub-resources include `/v2/creaturetypes/`, `/v2/creaturesets/`.
 
 ```bash
-curl http://localhost:8000/v1/embeddings \
-  -H "Content-Type: application/json" \
-  -d '{"model":"<embedding-model>","input":"hello world"}'
+curl "https://api.open5e.com/v2/creatures/?name__icontains=dragon&ordering=cr"
 ```
 
-## GET /v1/models
+## GET /v2/classes/
 
-List the model(s) currently served. Useful as a liveness check.
+Character classes, with nested class features.
 
 ```bash
-curl http://localhost:8000/v1/models
+curl "https://api.open5e.com/v2/classes/wizard/"
 ```
 
-## POST /tokenize
+## GET /v2/magicitems/  ·  /v2/items/  ·  /v2/weapons/  ·  /v2/armor/
 
-vLLM extension (not in the OpenAI API). Convert text into token IDs for the served model.
-
-**Key parameters:** `model` (string), `prompt` (string).
-
-## POST /detokenize
-
-vLLM extension. Convert token IDs back into text.
-
-**Key parameters:** `model` (string), `tokens` (array of integers).
-
-## GET /health
-
-Liveness probe. Returns HTTP 200 with no body when the server is ready.
+Equipment, split by kind. `/v2/items/` is general gear; `/v2/magicitems/` carries rarity and
+attunement; `/v2/weapons/` and `/v2/armor/` carry combat stats. Related: `/v2/itemcategories/`,
+`/v2/itemrarities/`, `/v2/itemsets/`, `/v2/weaponproperties/`.
 
 ```bash
-curl -i http://localhost:8000/health
+curl "https://api.open5e.com/v2/magicitems/?rarity__key=rare"
 ```
 
----
+## GET /v2/backgrounds/  ·  /v2/feats/  ·  /v2/species/
 
-**Note for the demo:** `/v1/chat/completions`, `/v1/completions`, `/v1/embeddings`, and
-`/v1/models` are the OpenAI-compatible core that Stainless will turn into typed SDK methods
-and that Mintlify/GitBook/Docusaurus will render as interactive reference pages. `/tokenize`,
-`/detokenize`, and `/health` are vLLM-specific — a good thing to point out in the write-up,
-since they show how a tool handles non-standard endpoints in a spec.
+Character-build options (species = ancestries/races).
+
+## GET /v2/conditions/  ·  /v2/damagetypes/  ·  /v2/languages/  ·  /v2/alignments/  ·  /v2/sizes/  ·  /v2/abilities/  ·  /v2/skills/
+
+The reference vocabularies the other resources link to.
+
+## GET /v2/rules/  ·  /v2/rulesets/
+
+Prose rules content — the closest thing to "documentation" already inside the API.
+
+## GET /v2/documents/  ·  /v2/licenses/  ·  /v2/publishers/  ·  /v2/gamesystems/
+
+**Provenance and licensing.** Every content object links to a `document`, which links to a
+`license` and `publisher`. This is how you attribute SRD vs. third-party content — see
+[Concepts → Documents & licensing](./concepts.md).
+
+## GET /v2/search/
+
+A dedicated cross-resource search endpoint (distinct from per-list `search`).
+
+**Key params:** `query` (required), `object_model` (filter to a content type), `strict`,
+`fuzzy`, and **`vector`** — semantic search over name + description.
+
+```bash
+curl "https://api.open5e.com/v2/search/?query=fire%20damage&vector=true"
+```
+
+> **Demo + RAG relevance:** the built-in `vector=true` semantic search is a notable hook — the
+> API *itself* ships retrieval, which is a clean talking point when you contrast it with the
+> Docusaurus RAG chatbot you build on top (see `../MODEL_LAYER.md`).

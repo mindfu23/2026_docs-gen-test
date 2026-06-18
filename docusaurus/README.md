@@ -30,3 +30,14 @@ chatbot** grounded in the Open5e content, answered by a **base LLM + your LoRA**
 **swappable by config** (vLLM ↔ Hugging Face ↔ Cloudflare; Llama ↔ Mistral ↔ Qwen) — see
 [`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md). Start base-only; attach the HF LoRA
 once it clears the safety screen.
+
+## Staging / deployment (pre-staged)
+This is the one tool that rides the standard **GitHub → Netlify** pipeline. Ready stubs, live
+once Docusaurus is scaffolded here in Phase 1:
+- [`netlify.toml`](netlify.toml) — build (`npm run build` → `build/`), Node 20, functions dir,
+  `/api/chat` redirect. Set Netlify **base directory = `docusaurus/`** (or move this to repo root).
+- [`netlify/functions/chat.ts`](netlify/functions/chat.ts) — the RAG-chatbot LLM proxy that
+  keeps the endpoint/token server-side (no `VITE_` secrets) and makes provider swaps env-only.
+- [`.env.example`](.env.example) — the `LLM_*` vars the function reads.
+
+See `../PLAN.md` → "Staging / deployment" for the full per-tool breakdown.

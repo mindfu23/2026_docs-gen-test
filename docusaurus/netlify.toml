@@ -1,0 +1,24 @@
+# Pre-staged Netlify config for the Docusaurus site (the one self-hosted tool in this project).
+# Activates once Docusaurus is scaffolded into this folder (Phase 1).
+#
+# If this repo's root is the Netlify base, set base = "docusaurus" in the Netlify UI or move
+# this file to the repo root and uncomment the `base` line below.
+
+[build]
+  # base    = "docusaurus"        # uncomment if netlify.toml lives at the repo root
+  command = "npm run build"
+  publish = "build"               # Docusaurus outputs to ./build
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# The RAG chatbot's serverless proxy. Keeps the model endpoint + token server-side
+# (no VITE_-prefixed secrets in client JS). Set the LLM_* vars in the Netlify dashboard.
+[functions]
+  directory = "netlify/functions"
+
+# Optional clean path for the chat proxy.
+[[redirects]]
+  from = "/api/chat"
+  to = "/.netlify/functions/chat"
+  status = 200

@@ -87,11 +87,12 @@ Full design + the env-var seam + provider table: **`shared/MODEL_LAYER.md`**.
 
 ### Phase 0 — Hub + inputs  ✅ mostly done
 - [x] `git init` hub (pre-existing repo)
-- [x] Author 3 seed pages (format/structure templates) (`shared/content/`)
 - [x] Obtain real `shared/openapi.json` — **Open5e**, OpenAPI 3.0.3, 69 paths (no GPU needed)
 - [x] Add CC-BY-4.0 attribution (`NOTICE.md`)
-- [ ] **Rework the 3 seed pages to the D&D surface** (spells / creatures / classes / magic
-      items) — they're currently written for vLLM's chat API
+- [x] Author the 3 seed pages on the **Open5e D&D surface** (spells / creatures / classes /
+      items; pagination, Django-style filters, vector search, documents/licensing)
+
+**Phase 0 complete.** Next: fan out to the five tools (Phase 1).
 
 ### Phase 1 — Fan out (per-tool steps in each folder's README)
 - [ ] **Stainless** (~20–30 min): upload spec → generate Python/TS SDK → screenshot a
@@ -139,6 +140,33 @@ lock-in / portability · primary audience
 - Whether Mintlify now bundles its own SDK generation (would overlap Stainless)
 - GitBook Git-Sync + OpenAPI specifics and OSS pricing
 - Promptless OSS / trial access (the likely blocker)
+
+## Staging / deployment
+
+Staging splits by tool — and **who owns hosting is itself a comparison finding**. The standard
+**GitHub → Netlify** pipeline covers the one site that's yours to host (Docusaurus); the SaaS
+tools deploy themselves.
+
+| Tool | Produces | Staging path | GitHub → Netlify? |
+|---|---|---|---|
+| **Docusaurus** | static site *you* build | `npm run build` → static output | ✅ **yes — standard pipeline** |
+| **Mintlify** | hosted docs site | GitHub App → Mintlify infra → own URL | ❌ SaaS-hosted |
+| **GitBook** | hosted docs site | Git Sync → GitBook infra → own URL | ❌ SaaS-hosted |
+| **Stainless** | SDK package (code) | npm / PyPI / repo | ❌ not a site |
+| **Promptless** | doc-update PRs | merge into repo | ❌ not a site |
+
+### Docusaurus on Netlify — two specifics
+1. **Monorepo:** set Netlify **base directory = `docusaurus/`** (root `netlify.toml` does this:
+   `[build] base="docusaurus"`, build `npm run build`, publish `docusaurus/build`). Node 20 ok.
+   A ready `netlify.toml` and proxy stub live in `docusaurus/` (see that folder's README).
+2. **RAG chatbot needs a backend.** The site is static, so the chatbot calls the LLM through a
+   **Netlify Function** (`client → /.netlify/functions/chat → model API`) — never client-side,
+   per the no-`VITE_`-secrets rule. The function's env holds `LLM_BASE_URL` / `LLM_API_KEY` /
+   `LLM_MODEL` / `LLM_LORA` (see `shared/MODEL_LAYER.md`), which is what makes the provider swap
+   config-only.
+
+> The `netlify.toml` + `netlify/functions/chat.ts` in `docusaurus/` are **pre-staged stubs** —
+> they activate once Docusaurus is scaffolded in Phase 1.
 
 ## Related projects
 - **LoRA content-safety screen** *(separate, linked)* — the humor LoRAs must be tested on a
