@@ -5,6 +5,9 @@
   "description": "The Open5e D&D 5e API, documented with Mintlify (one of five tools compared).",
   "colors": { "primary": "#7c3aed", "light": "#a78bfa", "dark": "#4f46e5" },
   "favicon": "/favicon.svg",
+  "redirects": [
+    { "source": "/", "destination": "/overview" }
+  ],
   "navigation": {
     "tabs": [
       { "tab": "← Docs Hub", "href": "https://REPLACE-WITH-HUB-URL" },

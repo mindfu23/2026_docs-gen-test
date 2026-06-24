@@ -51,7 +51,13 @@ They are **not competitors — they are three layers of the docs toolchain:**
   the layer-① thesis made literal: **same spec → OSS ships it verbose; Speakeasy curates + extends.**
 - **Stainless (①) —** documented from public output (anthropic/openai SDKs): ergonomic
   `client.resource.method()`, `Literal` params, full docstrings, typed pagination — the quality bar.
-- **Mintlify —** _live URL; how the "Try It" playground rendered the spec._
+- **Mintlify —** ✅ previewed (`mint dev`). Polished SaaS default, near-zero config; **live "Try It"**
+  playground returned a real `200` from `api.open5e.com` (CORS `*`) + multi-language samples + ⌘K
+  search. Mintlify MDX (`<Info>`/`<Card>`) = 2nd callout dialect. Renders the param noise as
+  interactive input fields (uncurated, like Docusaurus). **Naming quirk:** auto-titled ops
+  `Get v2spells` from method+path (ignored operationId) → list+retrieve collide into duplicate
+  sidebar labels, where Docusaurus's `spells_list`/`spells_retrieve` was clearer — the polished tool
+  wasn't strictly better. Hosted deploy optional (point the GitHub App at `mintlify/`).
 - **GitBook —** _live URL; WYSIWYG + git-sync fidelity vs the raw Markdown._
 - **Docusaurus —** ✅ built locally. Most wiring of the five (admonition syntax, gen-api-docs
   ordering, sidebar/navbar wiring, + it surfaced the upstream spec bug). Pays off: full self-hosted

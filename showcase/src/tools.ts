@@ -119,7 +119,23 @@ export const tools: Tool[] = [
     hosting: "SaaS (self-deploys via GitHub App)",
     artifact: { kind: "link", note: "Externally hosted — link out + screenshot of the Try-It playground." },
     operations: "Full CRUD via MDX files + docs.json nav; web editor with live preview.",
-    ...pending({}),
+    ...pending({
+      status: "done",
+      setupNotes:
+        "Previewed via `mint dev` on the prepped mintlify/ folder. Near-zero config — docs.json " +
+        "wires the Guides + the spec-driven API Reference. Gotchas: mint dev defaults to :3000 " +
+        "(collides with Docusaurus — stop one), root needed a `/` → /overview redirect, and the " +
+        "hosted dashboard shows Mintlify's starter (deploy = optional, point the GitHub App at the " +
+        "mintlify/ subdir). Onboarding nudges toward a separate repo — declined.",
+      findings:
+        "Polished SaaS dev-docs default; fastest spec→site of the publishers. The 'Try It' playground " +
+        "makes LIVE calls (real 200 from api.open5e.com, CORS *), with multi-language samples + ⌘K " +
+        "search. Mintlify MDX dialect (<Info>/<Card>) = 2nd of 3 callout flavors. Renders the ~30 " +
+        "drf-spectacular filter params as interactive input fields (verbose, uncurated — like " +
+        "Docusaurus). Naming quirk: it auto-titled operations 'Get v2spells' from method+path, NOT " +
+        "the operationId — so list AND retrieve collide into duplicate 'Get v2spells' labels, where " +
+        "Docusaurus's spells_list/spells_retrieve was clearer. The '← Docs Hub' cross-link renders.",
+    }),
   },
   {
     id: "gitbook",
