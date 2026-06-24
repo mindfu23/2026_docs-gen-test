@@ -1,0 +1,2424 @@
+openapi: "3.0.3"
+info:
+  title: "Open5e — demo subset"
+  version: "development (v1)"
+  description: "The Open5e API. See [https://github.com/open5e/open5e-api] for more information.\n\nDEMO SUBSET: trimmed to spells, creatures, and classes to keep the docs-tooling comparison clean and within free-tier limits. The full spec is shared/openapi.json."
+paths:
+  /v2/spells/:
+    get:
+      operationId: "spells_list"
+      description: "list: API endpoint for returning a list of spells.\nretrieve: API endpoint for returning a particular spell."
+      parameters:
+        - in: "query"
+          name: "key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__contains"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__icontains"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__gamesystem__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "classes__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "classes__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "classes__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "classes__name__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "level"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "level__range"
+          schema:
+            type: "array"
+            items:
+              type: "integer"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "level__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "level__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "level__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "level__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "range"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "range__range"
+          schema:
+            type: "array"
+            items:
+              type: "integer"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "range__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "range__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "range__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "range__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "school__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "school__name__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "school__name__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "school__name"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "duration__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "duration__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "duration"
+          schema:
+            type: "string"
+            x-spec-enum-id: "423a48fe5b2eed66"
+            enum:
+              - "1 day"
+              - "1 hour"
+              - "1 hour or until triggered"
+              - "1 hour/caster level"
+              - "1 minute"
+              - "1 minute"
+              - "1 minute or 1 hour"
+              - "1 minute, or until expended"
+              - "1 minute, until expended"
+              - "1 round"
+              - "1 turn"
+              - "1 year"
+              - "10 days"
+              - "10 hours"
+              - "10 minutes"
+              - "10 rounds"
+              - "12 hours"
+              - "13 days"
+              - "1d10 hours"
+              - "1d4+2 rounds"
+              - "2 hours"
+              - "2 rounds"
+              - "2-12 hours"
+              - "24 hours"
+              - "24 hours or until the target attempts a third death saving throw"
+              - "3 days"
+              - "3 hours"
+              - "3 rounds"
+              - "30 days"
+              - "4 rounds"
+              - "5 days"
+              - "5 minutes"
+              - "5 rounds"
+              - "6 hours"
+              - "6 rounds"
+              - "7 days"
+              - "8 hours"
+              - "concentration + 1 round"
+              - "instantaneous"
+              - "instantaneous or special"
+              - "permanent"
+              - "permanent until discharged"
+              - "permanent; one generation"
+              - "special"
+              - "until cured or dispelled"
+              - "until destroyed"
+              - "until dispelled"
+              - "until dispelled or destroyed"
+              - "until dispelled or triggered"
+              - "up to 1 hour"
+              - "up to 1 minute"
+              - "up to 8 hours"
+          description: "Description of the duration of the effect such as \"instantaneous\" or \"1 minute\"\n\n* `instantaneous` - instantaneous\n* `instantaneous or special` - instantaneous or special\n* `1 turn` - 1 turn\n* `1 round` - 1 round\n* `concentration + 1 round` - concentration + 1 round\n* `2 rounds` - 2 rounds\n* `3 rounds` - 3 rounds\n* `4 rounds` - 4 rounds\n* `1d4+2 rounds` - 1d4+2 rounds\n* `5 rounds` - 5 rounds\n* `6 rounds` - 6 rounds\n* `10 rounds` - 10 rounds\n* `up to 1 minute` - up to 1 minute\n* `1 minute` - 1 minute\n* `1 minute, or until expended` - 1 minute, or until expended\n* `1 minute, until expended` - 1 minute, until expended\n* `1 minute` - 1 minute\n* `5 minutes` - 5 minutes\n* `10 minutes` - 10 minutes\n* `1 minute or 1 hour` - 1 minute or 1 hour\n* `up to 1 hour` - up to 1 hour\n* `1 hour` - 1 hour\n* `1 hour or until triggered` - 1 hour or until triggered\n* `2 hours` - 2 hours\n* `3 hours` - 3 hours\n* `1d10 hours` - 1d10 hours\n* `6 hours` - 6 hours\n* `2-12 hours` - 2-12 hours\n* `up to 8 hours` - up to 8 hours\n* `8 hours` - 8 hours\n* `1 hour/caster level` - 1 hour/caster level\n* `10 hours` - 10 hours\n* `12 hours` - 12 hours\n* `24 hours or until the target attempts a third death saving throw` - 24 hours or until the target attempts a third death saving throw\n* `24 hours` - 24 hours\n* `1 day` - 1 day\n* `3 days` - 3 days\n* `5 days` - 5 days\n* `7 days` - 7 days\n* `10 days` - 10 days\n* `13 days` - 13 days\n* `30 days` - 30 days\n* `1 year` - 1 year\n* `special` - special\n* `until dispelled or destroyed` - until dispelled or destroyed\n* `until destroyed` - until destroyed\n* `until dispelled` - until dispelled\n* `until cured or dispelled` - until cured or dispelled\n* `until dispelled or triggered` - until dispelled or triggered\n* `permanent until discharged` - permanent until discharged\n* `permanent; one generation` - permanent; one generation\n* `permanent` - permanent"
+        - in: "query"
+          name: "concentration"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "verbal"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "somatic"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "material"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "material_consumed"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "casting_time__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "casting_time__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "casting_time"
+          schema:
+            type: "string"
+            x-spec-enum-id: "dc42ed916ae87f90"
+            enum:
+              - "10minutes"
+              - "12hours"
+              - "1hour"
+              - "1minute"
+              - "1week"
+              - "24hours"
+              - "4hours"
+              - "5minutes"
+              - "7hours"
+              - "8hours"
+              - "9hours"
+              - "action"
+              - "bonus-action"
+              - "reaction"
+              - "round"
+              - "turn"
+          description: "Casting time key, such as 'action'\n\n* `reaction` - Reaction\n* `bonus-action` - 1 Bonus Action\n* `action` - 1 Action\n* `turn` - 1 Turn\n* `round` - 1 Round\n* `1minute` - 1 Minute\n* `5minutes` - 5 Minutes\n* `10minutes` - 10 Minutes\n* `1hour` - 1 Hour\n* `4hours` - 4 Hours\n* `7hours` - 7 Hours\n* `8hours` - 8 Hours\n* `9hours` - 9 Hours\n* `12hours` - 12 Hours\n* `24hours` - 24 Hours\n* `1week` - 1 Week"
+        - name: "ordering"
+          required: false
+          in: "query"
+          description: "Which field to use when ordering the results."
+          schema:
+            type: "string"
+        - name: "search"
+          required: false
+          in: "query"
+          description: "A search term."
+          schema:
+            type: "string"
+        - name: "page"
+          required: false
+          in: "query"
+          description: "A page number within the paginated result set."
+          schema:
+            type: "integer"
+        - name: "limit"
+          required: false
+          in: "query"
+          description: "Number of results to return per page."
+          schema:
+            type: "integer"
+      tags:
+        - "spells"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedSpellList"
+          description: ""
+      x-speakeasy-name-override: list
+  /v2/spells/{key}/:
+    get:
+      operationId: "spells_retrieve"
+      description: "list: API endpoint for returning a list of spells.\nretrieve: API endpoint for returning a particular spell."
+      parameters:
+        - in: "path"
+          name: "key"
+          schema:
+            type: "string"
+            description: "Unique key for the Item."
+          required: true
+      tags:
+        - "spells"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Spell"
+          description: ""
+      x-speakeasy-name-override: get
+  /v2/creatures/:
+    get:
+      operationId: "creatures_list"
+      description: "list: API endpoint for returning a list of creatures.\nretrieve: API endpoint for returning a particular creature."
+      parameters:
+        - in: "query"
+          name: "key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__icontains"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__gamesystem__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "size"
+          schema:
+            type: "string"
+          description: "Unique key for the Item."
+        - in: "query"
+          name: "category"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "category__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "subcategory"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "subcategory__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "type"
+          schema:
+            type: "string"
+          description: "Unique key for the Item."
+        - in: "query"
+          name: "challenge_rating"
+          schema:
+            type: "number"
+            format: "float"
+        - in: "query"
+          name: "challenge_rating__lt"
+          schema:
+            type: "number"
+            format: "float"
+        - in: "query"
+          name: "challenge_rating__lte"
+          schema:
+            type: "number"
+            format: "float"
+        - in: "query"
+          name: "challenge_rating__gt"
+          schema:
+            type: "number"
+            format: "float"
+        - in: "query"
+          name: "challenge_rating__gte"
+          schema:
+            type: "number"
+            format: "float"
+        - in: "query"
+          name: "armor_class"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "armor_class__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "armor_class__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "armor_class__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "armor_class__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_strength"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_strength__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_strength__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_strength__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_strength__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_dexterity"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_dexterity__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_dexterity__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_dexterity__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_dexterity__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_constitution"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_constitution__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_constitution__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_constitution__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_constitution__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_intelligence"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_intelligence__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_intelligence__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_intelligence__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_intelligence__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_wisdom"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_wisdom__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_wisdom__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_wisdom__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_wisdom__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_charisma"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_charisma__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_charisma__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_charisma__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "ability_score_charisma__gte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "saving_throw_strength__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "saving_throw_dexterity__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "saving_throw_constitution__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "saving_throw_intelligence__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "saving_throw_wisdom__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "saving_throw_charisma__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_acrobatics__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_animal_handling__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_arcana__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_athletics__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_deception__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_history__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_insight__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_intimidation__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_investigation__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_medicine__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_nature__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_perception__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_performance__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_persuasion__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_religion__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_sleight_of_hand__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_stealth__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "skill_bonus_survival__isnull"
+          schema:
+            type: "boolean"
+        - in: "query"
+          name: "passive_perception"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "passive_perception__lt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "passive_perception__lte"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "passive_perception__gt"
+          schema:
+            type: "integer"
+        - in: "query"
+          name: "passive_perception__gte"
+          schema:
+            type: "integer"
+        - name: "ordering"
+          required: false
+          in: "query"
+          description: "Which field to use when ordering the results."
+          schema:
+            type: "string"
+        - name: "search"
+          required: false
+          in: "query"
+          description: "A search term."
+          schema:
+            type: "string"
+        - name: "page"
+          required: false
+          in: "query"
+          description: "A page number within the paginated result set."
+          schema:
+            type: "integer"
+        - name: "limit"
+          required: false
+          in: "query"
+          description: "Number of results to return per page."
+          schema:
+            type: "integer"
+      tags:
+        - "creatures"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCreatureList"
+          description: ""
+      x-speakeasy-name-override: list
+  /v2/creatures/{key}/:
+    get:
+      operationId: "creatures_retrieve"
+      description: "list: API endpoint for returning a list of creatures.\nretrieve: API endpoint for returning a particular creature."
+      parameters:
+        - in: "path"
+          name: "key"
+          schema:
+            type: "string"
+            description: "Unique key for the Item."
+          required: true
+      tags:
+        - "creatures"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Creature"
+          description: ""
+      x-speakeasy-name-override: get
+  /v2/classes/:
+    get:
+      operationId: "classes_list"
+      description: "list: API endpoint for returning a list of classes.\nretrieve: API endpoint for returning a particular class."
+      parameters:
+        - in: "query"
+          name: "key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "name__contains"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key__in"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+          description: "Multiple values may be separated by commas."
+          explode: false
+          style: "form"
+        - in: "query"
+          name: "document__gamesystem__key__iexact"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "document__gamesystem__key"
+          schema:
+            type: "string"
+        - in: "query"
+          name: "subclass_of"
+          schema:
+            type: "string"
+          description: "Unique key for the Item."
+        - in: "query"
+          name: "is_subclass"
+          schema:
+            type: "boolean"
+        - name: "ordering"
+          required: false
+          in: "query"
+          description: "Which field to use when ordering the results."
+          schema:
+            type: "string"
+        - name: "search"
+          required: false
+          in: "query"
+          description: "A search term."
+          schema:
+            type: "string"
+        - name: "page"
+          required: false
+          in: "query"
+          description: "A page number within the paginated result set."
+          schema:
+            type: "integer"
+        - name: "limit"
+          required: false
+          in: "query"
+          description: "Number of results to return per page."
+          schema:
+            type: "integer"
+      tags:
+        - "classes"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCharacterClassList"
+          description: ""
+      x-speakeasy-name-override: list
+  /v2/classes/{key}/:
+    get:
+      operationId: "classes_retrieve"
+      description: "list: API endpoint for returning a list of classes.\nretrieve: API endpoint for returning a particular class."
+      parameters:
+        - in: "path"
+          name: "key"
+          schema:
+            type: "string"
+            description: "Unique key for the Item."
+          required: true
+      tags:
+        - "classes"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterClass"
+          description: ""
+      x-speakeasy-name-override: get
+components:
+  schemas:
+    AbilitySummary:
+      type: "object"
+      description: "A slimmer AbilitySerializer, designed to serialize Ability FKs on other\nserializers. ie. The `saving_throws` field on CharacterClassSerializer. Not\nintended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+      required:
+        - "name"
+    CharacterClass:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          readOnly: true
+        features:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ClassFeature"
+          readOnly: true
+        hit_points:
+          allOf:
+            - $ref: "#/components/schemas/hit_points"
+          readOnly: true
+        document:
+          $ref: "#/components/schemas/DocumentSummary"
+        saving_throws:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AbilitySummary"
+        subclass_of:
+          $ref: "#/components/schemas/CharacterClassSummary"
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+        hit_dice:
+          enum:
+            - "D3"
+            - "D4"
+            - "D6"
+            - "D8"
+            - "D10"
+            - "D12"
+            - "D20"
+            - "d3"
+            - "d4"
+            - "d6"
+            - "d8"
+            - "d10"
+            - "d12"
+            - "d20"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "bb0fe9622e26103d"
+          nullable: true
+          description: "Dice notation hit dice option.\n\n* `D3` - d3\n* `D4` - d4\n* `D6` - d6\n* `D8` - d8\n* `D10` - d10\n* `D12` - d12\n* `D20` - d20\n* `d3` - d3\n* `d4` - d4\n* `d6` - d6\n* `d8` - d8\n* `d10` - d10\n* `d12` - d12\n* `d20` - d20"
+        caster_type:
+          enum:
+            - "FULL"
+            - "HALF"
+            - "PACT"
+            - "NONE"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "0bd312ada128cc51"
+          nullable: true
+          description: "Type of caster. Options are full, half, none.\n\n* `FULL` - Full\n* `HALF` - Half\n* `PACT` - Pact\n* `NONE` - None"
+        primary_abilities:
+          type: "array"
+          items:
+            type: "string"
+          description: "Primary abilities for thie class"
+        crossreferences:
+          allOf:
+            - $ref: "#/components/schemas/CrossReferences"
+          readOnly: true
+      required:
+        - "crossreferences"
+        - "document"
+        - "features"
+        - "hit_points"
+        - "key"
+        - "name"
+        - "primary_abilities"
+        - "saving_throws"
+        - "subclass_of"
+    CharacterClassSummary:
+      type: "object"
+      description: "A slimmer CharacterClassSerializer, designed to serialize Class FKs on\nother serializers. ie. The `subclass_of` field on the\nCharacterClassSerializer serializer. Not intended to be used directly in a\nModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    ClassFeature:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          readOnly: true
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+        feature_type:
+          enum:
+            - "CORE_TRAITS_TABLE"
+            - "CLASS_LEVEL_FEATURE"
+            - "CLASS_FEATURE_OPTION_LIST"
+            - "CLASS_TABLE_DATA"
+            - "PROFICIENCIES"
+            - "PROFICIENCY_BONUS"
+            - "STARTING_EQUIPMENT"
+            - "SPELL_SLOTS"
+          type: "string"
+          x-spec-enum-id: "b61e497ab02b41bf"
+          description: "The type that best represents this Class Feature\n\n* `CORE_TRAITS_TABLE` - CORE_TRAITS_TABLE\n* `CLASS_LEVEL_FEATURE` - CLASS_LEVEL_FEATURE\n* `CLASS_FEATURE_OPTION_LIST` - CLASS_FEATURE_OPTION_LIST\n* `CLASS_TABLE_DATA` - CLASS_TABLE_DATA\n* `PROFICIENCIES` - PROFICIENCIES\n* `PROFICIENCY_BONUS` - PROFICIENCY_BONUS\n* `STARTING_EQUIPMENT` - STARTING_EQUIPMENT\n* `SPELL_SLOTS` - SPELL_SLOTS"
+        feature_items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ClassFeaturePrefetch"
+          readOnly: true
+      required:
+        - "feature_items"
+        - "key"
+        - "name"
+    ClassFeaturePrefetch:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        level:
+          type: "integer"
+          maximum: 20
+          minimum: 0
+        detail:
+          type: "string"
+          nullable: true
+          maxLength: 100
+        column_value:
+          type: "string"
+          nullable: true
+          description: "The value that should be displayed in the table column (where applicable)."
+          maxLength: 20
+      required:
+        - "level"
+    ConditionSummary:
+      type: "object"
+      description: "A slimmer ConditionSerializer, designed to serialize Condition FKs on\nother serializers. ie. The `condition_immunities` field on the Creature\nserializer. Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    Creature:
+      type: "object"
+      description: "The serializer for the Creature object."
+      properties:
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          readOnly: true
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        document:
+          $ref: "#/components/schemas/DocumentSummary"
+        type:
+          $ref: "#/components/schemas/CreatureTypeSummary"
+        size:
+          $ref: "#/components/schemas/SizeSummary"
+        challenge_rating:
+          type: "number"
+          format: "double"
+          maximum: 30
+          minimum: 0
+          description: "Challenge Rating field as a decimal number."
+        proficiency_bonus:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: "int64"
+          nullable: true
+          description: "The Creauture's Proficiency Bonus"
+        speed:
+          allOf:
+            - $ref: "#/components/schemas/speed"
+          readOnly: true
+        speed_all:
+          allOf:
+            - $ref: "#/components/schemas/speed_all"
+          readOnly: true
+        category:
+          type: "string"
+          description: "What category this creature belongs to."
+          maxLength: 100
+        subcategory:
+          type: "string"
+          nullable: true
+          description: "What subcategory this creature belongs to."
+          maxLength: 100
+        alignment:
+          type: "string"
+          description: "The creature's allowed alignments."
+          maxLength: 100
+        languages:
+          $ref: "#/components/schemas/CreatureLanguage"
+        armor_class:
+          type: "integer"
+          maximum: 100
+          minimum: 0
+          description: "Integer representing the armor class of the object."
+        armor_detail:
+          type: "string"
+          nullable: true
+          description: "Represents parathetical text that follows an objects AC"
+          maxLength: 64
+        hit_points:
+          type: "integer"
+          maximum: 10000
+          minimum: 0
+          description: "Integer representing the hit points of the object."
+        hit_dice:
+          type: "string"
+          nullable: true
+          description: "Dice string representing a way to calculate hit points."
+        experience_points:
+          type: "integer"
+          readOnly: true
+        ability_scores:
+          allOf:
+            - $ref: "#/components/schemas/ability_scores"
+          readOnly: true
+        modifiers:
+          allOf:
+            - $ref: "#/components/schemas/ability_modifiers"
+          readOnly: true
+        initiative_bonus:
+          type: "integer"
+          readOnly: true
+        saving_throws:
+          allOf:
+            - $ref: "#/components/schemas/saving_throws"
+          readOnly: true
+        saving_throws_all:
+          allOf:
+            - $ref: "#/components/schemas/saving_throws_all"
+          readOnly: true
+        skill_bonuses:
+          allOf:
+            - $ref: "#/components/schemas/skill_bonuses"
+          readOnly: true
+        skill_bonuses_all:
+          allOf:
+            - $ref: "#/components/schemas/skill_bonuses_all"
+          readOnly: true
+        passive_perception:
+          type: "integer"
+          maximum: 40
+          minimum: 0
+          description: "Integer representing the passive perception ability."
+        resistances_and_immunities:
+          $ref: "#/components/schemas/CreatureResistancesAndImmunities"
+        normal_sight_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        darkvision_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        blindsight_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        tremorsense_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        truesight_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        actions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CreatureAction"
+        traits:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CreatureTrait"
+          readOnly: true
+        creaturesets:
+          type: "array"
+          items:
+            type: "string"
+            description: "Unique key for the Item."
+        environments:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/EnvironmentSummary"
+        illustration:
+          $ref: "#/components/schemas/ImageSummary"
+        crossreferences:
+          allOf:
+            - $ref: "#/components/schemas/CrossReferences"
+          readOnly: true
+      required:
+        - "ability_scores"
+        - "actions"
+        - "alignment"
+        - "category"
+        - "challenge_rating"
+        - "creaturesets"
+        - "crossreferences"
+        - "document"
+        - "environments"
+        - "experience_points"
+        - "illustration"
+        - "initiative_bonus"
+        - "key"
+        - "languages"
+        - "modifiers"
+        - "name"
+        - "resistances_and_immunities"
+        - "saving_throws"
+        - "saving_throws_all"
+        - "size"
+        - "skill_bonuses"
+        - "skill_bonuses_all"
+        - "speed"
+        - "speed_all"
+        - "traits"
+        - "type"
+    CreatureAction:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+        attacks:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CreatureActionAttack"
+          readOnly: true
+        action_type:
+          enum:
+            - "ACTION"
+            - "REACTION"
+            - "BONUS_ACTION"
+            - "LEGENDARY_ACTION"
+            - "LAIR_ACTION"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "6a4d09c1d9077429"
+          nullable: true
+          description: "The type of action used.\n\n* `ACTION` - Action\n* `REACTION` - Reaction\n* `BONUS_ACTION` - Bonus Action\n* `LEGENDARY_ACTION` - Legendary Action\n* `LAIR_ACTION` - Lair Action"
+        order_in_statblock:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: "int64"
+          nullable: true
+          description: "The position in the list of features that a feature appears in its source statblock"
+        legendary_action_cost:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: "int64"
+          nullable: true
+          description: "null if not legendary, else, the number of legendary actions this costs."
+        limited_to_form:
+          type: "string"
+          nullable: true
+          description: "Description of form-based conditions for this action."
+          maxLength: 100
+        usage_limits:
+          type: "object"
+          additionalProperties: {}
+          readOnly: true
+      required:
+        - "attacks"
+        - "name"
+        - "usage_limits"
+    CreatureActionAttack:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        attack_type:
+          enum:
+            - "SPELL"
+            - "WEAPON"
+          type: "string"
+          x-spec-enum-id: "bdba17d813adb52a"
+          description: "Whether this is a Weapon or Spell attack.\n\n* `SPELL` - Spell\n* `WEAPON` - Weapon"
+        to_hit_mod:
+          type: "integer"
+          maximum: 20
+          minimum: -5
+          description: "Attack roll modifier."
+        reach:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        long_range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        target_creature_only:
+          type: "boolean"
+          description: "If an attack can target creatures only and not objects."
+        damage_die_count:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "The number of dice to roll for damage."
+        damage_die_type:
+          enum:
+            - "D3"
+            - "D4"
+            - "D6"
+            - "D8"
+            - "D10"
+            - "D12"
+            - "D20"
+            - "d3"
+            - "d4"
+            - "d6"
+            - "d8"
+            - "d10"
+            - "d12"
+            - "d20"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "bb0fe9622e26103d"
+          nullable: true
+          description: "What kind of die to roll for damage.\n\n* `D3` - d3\n* `D4` - d4\n* `D6` - d6\n* `D8` - d8\n* `D10` - d10\n* `D12` - d12\n* `D20` - d20\n* `d3` - d3\n* `d4` - d4\n* `d6` - d6\n* `d8` - d8\n* `d10` - d10\n* `d12` - d12\n* `d20` - d20"
+        damage_bonus:
+          type: "integer"
+          maximum: 20
+          minimum: -5
+          nullable: true
+          description: "Damage roll modifier."
+        damage_type:
+          $ref: "#/components/schemas/DamageTypeSummary"
+        extra_damage_die_count:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "The number of dice to roll for damage."
+        extra_damage_die_type:
+          enum:
+            - "D3"
+            - "D4"
+            - "D6"
+            - "D8"
+            - "D10"
+            - "D12"
+            - "D20"
+            - "d3"
+            - "d4"
+            - "d6"
+            - "d8"
+            - "d10"
+            - "d12"
+            - "d20"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "bb0fe9622e26103d"
+          nullable: true
+          description: "What kind of die to roll for damage.\n\n* `D3` - d3\n* `D4` - d4\n* `D6` - d6\n* `D8` - d8\n* `D10` - d10\n* `D12` - d12\n* `D20` - d20\n* `d3` - d3\n* `d4` - d4\n* `d6` - d6\n* `d8` - d8\n* `d10` - d10\n* `d12` - d12\n* `d20` - d20"
+        extra_damage_bonus:
+          type: "integer"
+          maximum: 20
+          minimum: -5
+          nullable: true
+          description: "Damage roll modifier."
+        extra_damage_type:
+          $ref: "#/components/schemas/DamageTypeSummary"
+        distance_unit:
+          type: "string"
+          readOnly: true
+      required:
+        - "attack_type"
+        - "damage_type"
+        - "distance_unit"
+        - "extra_damage_type"
+        - "name"
+        - "target_creature_only"
+        - "to_hit_mod"
+    CreatureLanguage:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        as_string:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/LanguageSummary"
+      required:
+        - "as_string"
+        - "data"
+    CreatureResistancesAndImmunities:
+      type: "object"
+      description: "This serializer formats a Creature's damage modifier as a single obj"
+      properties:
+        damage_immunities_display:
+          type: "string"
+        damage_immunities:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DamageTypeSummary"
+        damage_resistances_display:
+          type: "string"
+        damage_resistances:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DamageTypeSummary"
+        damage_vulnerabilities_display:
+          type: "string"
+        damage_vulnerabilities:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/DamageTypeSummary"
+        condition_immunities_display:
+          type: "string"
+        condition_immunities:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ConditionSummary"
+      required:
+        - "condition_immunities"
+        - "condition_immunities_display"
+        - "damage_immunities"
+        - "damage_immunities_display"
+        - "damage_resistances"
+        - "damage_resistances_display"
+        - "damage_vulnerabilities"
+        - "damage_vulnerabilities_display"
+    CreatureTrait:
+      type: "object"
+      description: "Serializer for the Creature Trait object"
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+      required:
+        - "name"
+    CreatureTypeSummary:
+      type: "object"
+      description: "A slimmer CreatureTypeSerializer, designed to serialize CreatureType FKs on\nother serializers . Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    CrossReferences:
+      type: "object"
+      properties:
+        to:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/_CrossReferenceLink"
+      required:
+        - "to"
+    DamageTypeSummary:
+      type: "object"
+      description: "A slimmer DamageTypeSerializer, designed to serialize DamageType FKs on\nother serializers. Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    DocumentSummary:
+      type: "object"
+      description: "A slimmer DocumentSerializer, designed to serialize Documents FKs on other\nserializers. Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Document."
+          maxLength: 100
+        type:
+          enum:
+            - "SOURCE"
+            - "MISC"
+          type: "string"
+          x-spec-enum-id: "995afaa0b151df94"
+          description: "Whether this Document is a published data source, or general resources\n\n* `SOURCE` - Source\n* `MISC` - Miscellaneous"
+        display_name:
+          type: "string"
+          readOnly: true
+        publisher:
+          $ref: "#/components/schemas/PublisherSummary"
+        gamesystem:
+          $ref: "#/components/schemas/GameSystemSummary"
+        permalink:
+          type: "string"
+          format: "uri"
+          description: "Link to the document."
+          maxLength: 200
+      required:
+        - "display_name"
+        - "gamesystem"
+        - "key"
+        - "name"
+        - "permalink"
+        - "publisher"
+    EnvironmentSummary:
+      type: "object"
+      description: "A slimmer EnvironmentSerializer, designed to serialize Enviroment FKs on\nother serializers. ie. The `environments` field on the CreatureSerializer.\nNot intended to be used directly in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    GameSystemSummary:
+      type: "object"
+      description: "A slimmer GameSystemSerializer, designed to serialize GameSystem FKs on\nother serializers. Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the gamesystem the document was published for."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    ImageSummary:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+        file_url:
+          type: "string"
+          description: "Returns a relative path to the related file."
+          readOnly: true
+        alt_text:
+          type: "string"
+          description: "A short textual description of the image. Important for accessibility"
+        attribution:
+          type: "string"
+          description: "Attribution information for this image. Who drew it and where we can find more of thier work?"
+      required:
+        - "alt_text"
+        - "attribution"
+        - "file_url"
+        - "key"
+        - "name"
+    LanguageSummary:
+      type: "object"
+      description: "This serializer is used for FKs to the Language model from other\nserializers. ie. for the languages spoken by creatures on the\nCreatureSerializer."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          readOnly: true
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+      required:
+        - "key"
+        - "name"
+    PaginatedCharacterClassList:
+      type: "object"
+      required:
+        - "count"
+        - "results"
+      properties:
+        count:
+          type: "integer"
+          example: 123
+        next:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=4"
+        previous:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=2"
+        results:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CharacterClass"
+    PaginatedCreatureList:
+      type: "object"
+      required:
+        - "count"
+        - "results"
+      properties:
+        count:
+          type: "integer"
+          example: 123
+        next:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=4"
+        previous:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=2"
+        results:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Creature"
+    PaginatedSpellList:
+      type: "object"
+      required:
+        - "count"
+        - "results"
+      properties:
+        count:
+          type: "integer"
+          example: 123
+        next:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=4"
+        previous:
+          type: "string"
+          nullable: true
+          format: "uri"
+          example: "http://api.example.org/accounts/?page=2"
+        results:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Spell"
+    PublisherSummary:
+      type: "object"
+      description: "A slimmer PublisherSerializer, designed to serialize Publisher FKs on other\nserializers. Not intended to be used directly with in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the publishing organization."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    SizeSummary:
+      type: "object"
+      description: "A slimmer SizeSerializer, designed to serialize Size FKs on other\nserializers. ie. The `size` field on the CreatureSerializer. Not intended\nto be used directly in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    Spell:
+      type: "object"
+      description: "Much of the logic included in the GameContentSerializer is intended to\nsupport manipulating data returned by the serializer via query parameters."
+      properties:
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          readOnly: true
+        document:
+          $ref: "#/components/schemas/DocumentSummary"
+        casting_options:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SpellCastingOption"
+        school:
+          $ref: "#/components/schemas/SpellSchoolSummary"
+        classes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CharacterClassSummary"
+        range_unit:
+          type: "string"
+          readOnly: true
+        shape_size_unit:
+          type: "string"
+          readOnly: true
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        desc:
+          type: "string"
+          description: "Description of the game content item. Markdown."
+        level:
+          type: "integer"
+          maximum: 9
+          minimum: 0
+          description: "Integer representing the default slot level required by the spell."
+        higher_level:
+          type: "string"
+          description: "Description of casting the spell at a different level."
+        target_type:
+          enum:
+            - "creature"
+            - "object"
+            - "point"
+            - "area"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "571010a8aa19b0e0"
+          nullable: true
+          description: "Spell target type key.\n\n* `creature` - Creature\n* `object` - Object\n* `point` - Point\n* `area` - Area"
+        range_text:
+          type: "string"
+          description: "Spell target range."
+        range:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        ritual:
+          type: "boolean"
+          description: "Whether or not the spell can be cast as a ritual."
+        casting_time:
+          enum:
+            - "reaction"
+            - "bonus-action"
+            - "action"
+            - "turn"
+            - "round"
+            - "1minute"
+            - "5minutes"
+            - "10minutes"
+            - "1hour"
+            - "4hours"
+            - "7hours"
+            - "8hours"
+            - "9hours"
+            - "12hours"
+            - "24hours"
+            - "1week"
+          type: "string"
+          x-spec-enum-id: "dc42ed916ae87f90"
+          description: "Casting time key, such as 'action'\n\n* `reaction` - Reaction\n* `bonus-action` - 1 Bonus Action\n* `action` - 1 Action\n* `turn` - 1 Turn\n* `round` - 1 Round\n* `1minute` - 1 Minute\n* `5minutes` - 5 Minutes\n* `10minutes` - 10 Minutes\n* `1hour` - 1 Hour\n* `4hours` - 4 Hours\n* `7hours` - 7 Hours\n* `8hours` - 8 Hours\n* `9hours` - 9 Hours\n* `12hours` - 12 Hours\n* `24hours` - 24 Hours\n* `1week` - 1 Week"
+        reaction_condition:
+          type: "string"
+          nullable: true
+          description: "The conditions describing when a reaction spell can be cast"
+        verbal:
+          type: "boolean"
+          description: "Whether or not casting the spell requires a verbal component."
+        somatic:
+          type: "boolean"
+          description: "Whether or not casting the spell requires a verbal component."
+        material:
+          type: "boolean"
+          description: "Whether or not casting the spell requires a verbal component."
+        material_specified:
+          type: "string"
+          description: "Description of the material specified for the spell."
+        material_cost:
+          type: "string"
+          format: "decimal"
+          pattern: "^-?\\d{0,8}(?:\\.\\d{0,2})?$"
+          nullable: true
+          description: "Number representing the cost of the materials of the spell."
+        material_consumed:
+          type: "boolean"
+          description: "Whether or the material component is consumed during the casting."
+        target_count:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Integer representing the count of targets."
+        saving_throw_ability:
+          type: "string"
+          description: "Given the spell requires a saving throw, which ability is targeted. Empty string if no saving throw."
+        attack_roll:
+          type: "boolean"
+          description: "Whether or not the spell effect requires an attack roll."
+        damage_roll:
+          type: "string"
+          description: "The damage roll for the field in dice notation. Empty string if no roll."
+        damage_types:
+          description: "The types of damage done by the spell in a list."
+        duration:
+          enum:
+            - "instantaneous"
+            - "instantaneous or special"
+            - "1 turn"
+            - "1 round"
+            - "concentration + 1 round"
+            - "2 rounds"
+            - "3 rounds"
+            - "4 rounds"
+            - "1d4+2 rounds"
+            - "5 rounds"
+            - "6 rounds"
+            - "10 rounds"
+            - "up to 1 minute"
+            - "1 minute"
+            - "1 minute, or until expended"
+            - "1 minute, until expended"
+            - "5 minutes"
+            - "10 minutes"
+            - "1 minute or 1 hour"
+            - "up to 1 hour"
+            - "1 hour"
+            - "1 hour or until triggered"
+            - "2 hours"
+            - "3 hours"
+            - "1d10 hours"
+            - "6 hours"
+            - "2-12 hours"
+            - "up to 8 hours"
+            - "8 hours"
+            - "1 hour/caster level"
+            - "10 hours"
+            - "12 hours"
+            - "24 hours or until the target attempts a third death saving throw"
+            - "24 hours"
+            - "1 day"
+            - "3 days"
+            - "5 days"
+            - "7 days"
+            - "10 days"
+            - "13 days"
+            - "30 days"
+            - "1 year"
+            - "special"
+            - "until dispelled or destroyed"
+            - "until destroyed"
+            - "until dispelled"
+            - "until cured or dispelled"
+            - "until dispelled or triggered"
+            - "permanent until discharged"
+            - "permanent; one generation"
+            - "permanent"
+          type: "string"
+          x-spec-enum-id: "423a48fe5b2eed66"
+          description: "Description of the duration of the effect such as \"instantaneous\" or \"1 minute\"\n\n* `instantaneous` - instantaneous\n* `instantaneous or special` - instantaneous or special\n* `1 turn` - 1 turn\n* `1 round` - 1 round\n* `concentration + 1 round` - concentration + 1 round\n* `2 rounds` - 2 rounds\n* `3 rounds` - 3 rounds\n* `4 rounds` - 4 rounds\n* `1d4+2 rounds` - 1d4+2 rounds\n* `5 rounds` - 5 rounds\n* `6 rounds` - 6 rounds\n* `10 rounds` - 10 rounds\n* `up to 1 minute` - up to 1 minute\n* `1 minute` - 1 minute\n* `1 minute, or until expended` - 1 minute, or until expended\n* `1 minute, until expended` - 1 minute, until expended\n* `5 minutes` - 5 minutes\n* `10 minutes` - 10 minutes\n* `1 minute or 1 hour` - 1 minute or 1 hour\n* `up to 1 hour` - up to 1 hour\n* `1 hour` - 1 hour\n* `1 hour or until triggered` - 1 hour or until triggered\n* `2 hours` - 2 hours\n* `3 hours` - 3 hours\n* `1d10 hours` - 1d10 hours\n* `6 hours` - 6 hours\n* `2-12 hours` - 2-12 hours\n* `up to 8 hours` - up to 8 hours\n* `8 hours` - 8 hours\n* `1 hour/caster level` - 1 hour/caster level\n* `10 hours` - 10 hours\n* `12 hours` - 12 hours\n* `24 hours or until the target attempts a third death saving throw` - 24 hours or until the target attempts a third death saving throw\n* `24 hours` - 24 hours\n* `1 day` - 1 day\n* `3 days` - 3 days\n* `5 days` - 5 days\n* `7 days` - 7 days\n* `10 days` - 10 days\n* `13 days` - 13 days\n* `30 days` - 30 days\n* `1 year` - 1 year\n* `special` - special\n* `until dispelled or destroyed` - until dispelled or destroyed\n* `until destroyed` - until destroyed\n* `until dispelled` - until dispelled\n* `until cured or dispelled` - until cured or dispelled\n* `until dispelled or triggered` - until dispelled or triggered\n* `permanent until discharged` - permanent until discharged\n* `permanent; one generation` - permanent; one generation\n* `permanent` - permanent"
+        shape_type:
+          enum:
+            - "cone"
+            - "cube"
+            - "cylinder"
+            - "line"
+            - "sphere"
+            - ""
+            - null
+          type: "string"
+          x-spec-enum-id: "a59b0a38f2674303"
+          nullable: true
+          description: "The shape of the area of effect.\n\n* `cone` - Cone\n* `cube` - Cube\n* `cylinder` - Cylinder\n* `line` - Line\n* `sphere` - sphere"
+        shape_size:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        concentration:
+          type: "boolean"
+          description: "Whether the effect requires concentration to be maintained."
+        crossreferences:
+          allOf:
+            - $ref: "#/components/schemas/CrossReferences"
+          readOnly: true
+      required:
+        - "casting_options"
+        - "casting_time"
+        - "classes"
+        - "crossreferences"
+        - "document"
+        - "duration"
+        - "key"
+        - "level"
+        - "name"
+        - "range_text"
+        - "range_unit"
+        - "school"
+        - "shape_size_unit"
+    SpellCastingOption:
+      type: "object"
+      properties:
+        type:
+          enum:
+            - "default"
+            - "ritual"
+            - "player_level_1"
+            - "player_level_2"
+            - "player_level_3"
+            - "player_level_4"
+            - "player_level_5"
+            - "player_level_6"
+            - "player_level_7"
+            - "player_level_8"
+            - "player_level_9"
+            - "player_level_10"
+            - "player_level_11"
+            - "player_level_12"
+            - "player_level_13"
+            - "player_level_14"
+            - "player_level_15"
+            - "player_level_16"
+            - "player_level_17"
+            - "player_level_18"
+            - "player_level_19"
+            - "player_level_20"
+            - "slot_level_1"
+            - "slot_level_2"
+            - "slot_level_3"
+            - "slot_level_4"
+            - "slot_level_5"
+            - "slot_level_6"
+            - "slot_level_7"
+            - "slot_level_8"
+            - "slot_level_9"
+          type: "string"
+          description: "* `default` - Default\n* `ritual` - Ritual\n* `player_level_1` - Player Level 1\n* `player_level_2` - Player Level 2\n* `player_level_3` - Player Level 3\n* `player_level_4` - Player Level 4\n* `player_level_5` - Player Level 5\n* `player_level_6` - Player Level 6\n* `player_level_7` - Player Level 7\n* `player_level_8` - Player Level 8\n* `player_level_9` - Player Level 9\n* `player_level_10` - Player Level 10\n* `player_level_11` - Player Level 11\n* `player_level_12` - Player Level 12\n* `player_level_13` - Player Level 13\n* `player_level_14` - Player Level 14\n* `player_level_15` - Player Level 15\n* `player_level_16` - Player Level 16\n* `player_level_17` - Player Level 17\n* `player_level_18` - Player Level 18\n* `player_level_19` - Player Level 19\n* `player_level_20` - Player Level 20\n* `slot_level_1` - Spell Slot Level 1\n* `slot_level_2` - Spell SlotLevel 2\n* `slot_level_3` - Spell Slot Level 3\n* `slot_level_4` - Spell Slot Level 4\n* `slot_level_5` - Spell Slot Level 5\n* `slot_level_6` - Spell Slot Level 6\n* `slot_level_7` - Spell Slot Level 7\n* `slot_level_8` - Spell Slot Level 8\n* `slot_level_9` - Spell Slot Level 9"
+          x-spec-enum-id: "710c2d36661f4916"
+        damage_roll:
+          type: "string"
+          nullable: true
+          description: "The damage roll for the field in dice notation. Empty string if no roll."
+        target_count:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Integer representing the count of targets."
+        duration:
+          type: "string"
+          nullable: true
+          description: "Description of the duration of the effect such as \"instantaneous\" or \"Up to 1 minute\""
+        range:
+          type: "string"
+          nullable: true
+          description: "Description of the range of the spell."
+        concentration:
+          type: "boolean"
+          nullable: true
+          description: "Whether the effect requires concentration to be maintained."
+        shape_size:
+          type: "integer"
+          maximum: 9223372036854775807
+          minimum: 0
+          format: "int64"
+          nullable: true
+          description: "Used to measure distance."
+        desc:
+          type: "string"
+          nullable: true
+          description: "Description of complex casting option effects that cannot be captured in other fields."
+      required:
+        - "type"
+    SpellSchoolSummary:
+      type: "object"
+      description: "A slimmer SpellSchoolSerializer, designed to serialize Spell School FKs on\nother serializers. ie. The `school` field on the SpellSerializer. Not\nintended to be used directly in a ModelViewset."
+      properties:
+        name:
+          type: "string"
+          description: "Name of the item."
+          maxLength: 100
+        key:
+          type: "string"
+          description: "Unique key for the Item."
+          maxLength: 100
+      required:
+        - "key"
+        - "name"
+    _CrossReferenceLink:
+      type: "object"
+      description: "One link in crossreferences.to; defines API shape and serialization."
+      properties:
+        anchor:
+          type: "string"
+        url:
+          type: "string"
+          format: "uri"
+      required:
+        - "anchor"
+        - "url"
+    ability_modifiers:
+      type: "object"
+      properties:
+        strength:
+          type: "integer"
+        dexterity:
+          type: "integer"
+        constitution:
+          type: "integer"
+        intelligence:
+          type: "integer"
+        wisdom:
+          type: "integer"
+        charisma:
+          type: "integer"
+      required:
+        - "charisma"
+        - "constitution"
+        - "dexterity"
+        - "intelligence"
+        - "strength"
+        - "wisdom"
+    ability_scores:
+      type: "object"
+      properties:
+        strength:
+          type: "integer"
+        dexterity:
+          type: "integer"
+        constitution:
+          type: "integer"
+        intelligence:
+          type: "integer"
+        wisdom:
+          type: "integer"
+        charisma:
+          type: "integer"
+      required:
+        - "charisma"
+        - "constitution"
+        - "dexterity"
+        - "intelligence"
+        - "strength"
+        - "wisdom"
+    hit_points:
+      type: "object"
+      properties:
+        hit_dice:
+          type: "integer"
+        hit_dice_name:
+          type: "string"
+          readOnly: true
+        hit_points_at_1st_level:
+          type: "integer"
+        hit_points_at_higher_levels:
+          type: "integer"
+      required:
+        - "hit_dice"
+        - "hit_dice_name"
+        - "hit_points_at_1st_level"
+        - "hit_points_at_higher_levels"
+    saving_throws:
+      type: "object"
+      properties:
+        strength:
+          type: "integer"
+        dexterity:
+          type: "integer"
+        constitution:
+          type: "integer"
+        intelligence:
+          type: "integer"
+        wisdom:
+          type: "integer"
+        charisma:
+          type: "integer"
+      required:
+        - "charisma"
+        - "constitution"
+        - "dexterity"
+        - "intelligence"
+        - "strength"
+        - "wisdom"
+    saving_throws_all:
+      type: "object"
+      properties:
+        strength:
+          type: "integer"
+        dexterity:
+          type: "integer"
+        constitution:
+          type: "integer"
+        intelligence:
+          type: "integer"
+        wisdom:
+          type: "integer"
+        charisma:
+          type: "integer"
+      required:
+        - "charisma"
+        - "constitution"
+        - "dexterity"
+        - "intelligence"
+        - "strength"
+        - "wisdom"
+    skill_bonuses:
+      type: "object"
+      properties:
+        acrobatics:
+          type: "integer"
+        animal_handling:
+          type: "integer"
+        arcana:
+          type: "integer"
+        athletics:
+          type: "integer"
+        deception:
+          type: "integer"
+        history:
+          type: "integer"
+        insight:
+          type: "integer"
+        intimidation:
+          type: "integer"
+        investigation:
+          type: "integer"
+        medicine:
+          type: "integer"
+        nature:
+          type: "integer"
+        perception:
+          type: "integer"
+        performance:
+          type: "integer"
+        persuasion:
+          type: "integer"
+        religion:
+          type: "integer"
+        sleight_of_hand:
+          type: "integer"
+        stealth:
+          type: "integer"
+        survival:
+          type: "integer"
+      required:
+        - "acrobatics"
+        - "animal_handling"
+        - "arcana"
+        - "athletics"
+        - "deception"
+        - "history"
+        - "insight"
+        - "intimidation"
+        - "investigation"
+        - "medicine"
+        - "nature"
+        - "perception"
+        - "performance"
+        - "persuasion"
+        - "religion"
+        - "sleight_of_hand"
+        - "stealth"
+        - "survival"
+    skill_bonuses_all:
+      type: "object"
+      properties:
+        acrobatics:
+          type: "integer"
+        animal_handling:
+          type: "integer"
+        arcana:
+          type: "integer"
+        athletics:
+          type: "integer"
+        deception:
+          type: "integer"
+        history:
+          type: "integer"
+        insight:
+          type: "integer"
+        intimidation:
+          type: "integer"
+        investigation:
+          type: "integer"
+        medicine:
+          type: "integer"
+        nature:
+          type: "integer"
+        perception:
+          type: "integer"
+        performance:
+          type: "integer"
+        persuasion:
+          type: "integer"
+        religion:
+          type: "integer"
+        sleight_of_hand:
+          type: "integer"
+        stealth:
+          type: "integer"
+        survival:
+          type: "integer"
+      required:
+        - "acrobatics"
+        - "animal_handling"
+        - "arcana"
+        - "athletics"
+        - "deception"
+        - "history"
+        - "insight"
+        - "intimidation"
+        - "investigation"
+        - "medicine"
+        - "nature"
+        - "perception"
+        - "performance"
+        - "persuasion"
+        - "religion"
+        - "sleight_of_hand"
+        - "stealth"
+        - "survival"
+    speed:
+      type: "object"
+      properties:
+        walk:
+          type: "string"
+          readOnly: true
+        fly:
+          type: "string"
+          readOnly: true
+        swim:
+          type: "string"
+          readOnly: true
+        climb:
+          type: "string"
+          readOnly: true
+        burrow:
+          type: "string"
+          readOnly: true
+        hover:
+          type: "boolean"
+      required:
+        - "burrow"
+        - "climb"
+        - "fly"
+        - "hover"
+        - "swim"
+        - "walk"
+    speed_all:
+      type: "object"
+      properties:
+        unit:
+          type: "string"
+          readOnly: true
+        walk:
+          type: "integer"
+        crawl:
+          type: "integer"
+        hover:
+          type: "boolean"
+        fly:
+          type: "integer"
+          nullable: true
+        burrow:
+          type: "integer"
+          nullable: true
+        climb:
+          type: "integer"
+          nullable: true
+        swim:
+          type: "integer"
+          nullable: true
+      required:
+        - "burrow"
+        - "climb"
+        - "crawl"
+        - "fly"
+        - "hover"
+        - "swim"
+        - "unit"
+        - "walk"
+servers:
+  - url: "https://api.open5e.com"
+    description: "Production server"
+  - url: "https://api-beta.open5e.com"
+    description: "Beta server"
+  - url: "http://localhost:8000"
+    description: "Localhost"

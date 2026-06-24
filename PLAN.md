@@ -19,7 +19,13 @@ These tools do **not** compete — they sit at different layers of the docs tool
 
 | Tool | Layer | Primary input | Primary output | Hosting |
 |------|-------|---------------|----------------|---------|
-| **Stainless**  | ① Generate client | OpenAPI spec | Typed multi-lang SDKs + inline docstrings | CI tool (no site) |
+| **SDK generators**  | ① Generate client | OpenAPI spec | Typed multi-lang SDKs + inline docstrings | mixed — see below |
+
+> **Layer ① update (2026-06):** **Stainless was acquired by Anthropic and its hosted generator shut
+> down** — no signups, no workaround. The slot is now a richer comparison: **Speakeasy** (commercial
+> successor, open signup) + **OpenAPI Generator** (free/OSS, runs locally — already generated into
+> `openapi-generator/python`). Stainless stays in the writeup, **documented from its public SDKs**
+> (anthropic/openai). See `speakeasy/`, `openapi-generator/`, `stainless/`.
 | **Mintlify**   | ② Publish site | OpenAPI spec + MDX | Hosted interactive reference + guides | SaaS |
 | **GitBook**    | ② Publish site | OpenAPI spec + Markdown (git-sync) | Hosted docs/KB + API ref | SaaS |
 | **Docusaurus** | ② Publish site | MDX + OpenAPI (plugin) | Self-hosted static site (you deploy) | Self-host |
@@ -66,7 +72,9 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 │   ├── content/               # input B — overview / endpoints / concepts (D&D) ✅
 │   ├── AUTHORING_OPS.md        # the create/edit/move/image battery
 │   └── MODEL_LAYER.md         # swappable base+RAG+LoRA serving design
-├── stainless/                 # spec → typed SDK
+├── stainless/                 # ① documented from public output (service shut down)
+├── speakeasy/                 # ① spec → idiomatic SDK (commercial; your signup)
+├── openapi-generator/         # ① spec → SDK, free/OSS — Python client GENERATED ✅
 ├── mintlify/                  # docs.json + adapted MDX → hosted site
 ├── docusaurus/                # openapi plugin → self-hosted static site (+ RAG chatbot, netlify stubs)
 ├── gitbook/                   # git-sync target + adapted Markdown → hosted site
@@ -150,9 +158,11 @@ and compare full-vs-subset and read-only-vs-auth.
 > published output** — each docs site, the SDK, and the showcase — not just this repo.
 
 ### Phase 1 — Fan out (per-tool steps in each folder's README)
-- [~] **Stainless** — **config prepped ✅** (`stainless/stainless.yml`: clean spells/creatures/
-      classes resources). *Your run:* log in → upload `openapi-subset.json` + the config → generate
-      Python/TS SDK → capture a typed method + docstring.
+- [x] **OpenAPI Generator** (① free/OSS) — **DONE ✅**: real Python client generated locally into
+      `openapi-generator/python` (148 files). No account.
+- [~] **Speakeasy** (① commercial) — prepped (`speakeasy/README.md`). *Your run:* sign up / CLI →
+      `speakeasy quickstart` on `openapi-subset.json` → capture a method; diff vs the OSS SDK.
+- [x] **Stainless** (①) — **documented from public output** (service shut down; `stainless/`).
 - [~] **Mintlify** — **config prepped ✅** (`mintlify/` is a ready docs root: `docs.json`, copied
       spec, 3 Mintlify-flavored MDX guides). *Your run:* GitHub SSO → install the App on this repo,
       point it at `mintlify/` → live site + "Try It" → capture URL/screenshot.

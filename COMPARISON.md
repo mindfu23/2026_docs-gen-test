@@ -35,7 +35,22 @@ They are **not competitors — they are three layers of the docs toolchain:**
 
 ## Findings  *(write as you go)*
 
-- **Stainless —** _what the generated SDK/docstrings looked like; screenshot link._
+- **Layer ① (SDK generation) — now a 3-way.** Stainless was acquired by Anthropic and shut down
+  mid-project; the slot became Speakeasy (commercial) + OpenAPI Generator (OSS), with Stainless as a
+  documented benchmark. A real-world finding in itself: the leading SDK tool left the market.
+- **OpenAPI Generator (① OSS) —** ✅ generated locally (7.23.0, Python, `openapi-generator/python`).
+  Complete installable package, but faithful-and-verbose: every drf-spectacular param → a typed
+  kwarg, so `spells_list` has a ~30-arg signature; `SpellsApi.spells_list()` naming. The free tier.
+- **Speakeasy (① commercial) —** ✅ generated (Python, from `openapi-subset.json`). Its **Studio
+  diagnosed 6 spec-quality categories (~29 instances)** the OSS generator shipped silently:
+  **method-name curation** (`sdk.spells.spells_list()` → `sdk.spells.list()` — vs OpenAPI Generator's
+  `SpellsApi.spells_list()`), `response.description` required (12), missing error responses (6),
+  pagination via `x-speakeasy-pagination` (3), retries via `x-speakeasy-retries` (1), duplicate
+  schemas (1). **Key mechanism:** fixes apply via **`speakeasy-modifications-overlay.yaml`** — an
+  overlay, *not* a source-spec edit — so curation happens without touching the shared input. This is
+  the layer-① thesis made literal: **same spec → OSS ships it verbose; Speakeasy curates + extends.**
+- **Stainless (①) —** documented from public output (anthropic/openai SDKs): ergonomic
+  `client.resource.method()`, `Literal` params, full docstrings, typed pagination — the quality bar.
 - **Mintlify —** _live URL; how the "Try It" playground rendered the spec._
 - **GitBook —** _live URL; WYSIWYG + git-sync fidelity vs the raw Markdown._
 - **Docusaurus —** ✅ built locally. Most wiring of the five (admonition syntax, gen-api-docs

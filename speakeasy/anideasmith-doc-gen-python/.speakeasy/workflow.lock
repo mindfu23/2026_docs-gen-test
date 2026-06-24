@@ -1,0 +1,27 @@
+speakeasyVersion: 1.785.0
+sources: {}
+targets:
+    anideasmith-doc-gen:
+        source: Open5e — demo subset
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Open5e — demo subset:
+            inputs:
+                - location: ../../shared/openapi-subset.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/anideasmith/mindfu/open-5-e-—-demo-subset
+    targets:
+        anideasmith-doc-gen:
+            target: python
+            source: Open5e — demo subset
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/anideasmith/mindfu/open-5-e-—-demo-subset-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

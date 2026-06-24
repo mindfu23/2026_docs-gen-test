@@ -44,13 +44,70 @@ export const tools: Tool[] = [
     id: "stainless",
     name: "Stainless",
     layer: "① Generate client",
-    tagline: "Spec → typed SDKs with inline docstrings.",
+    tagline: "Spec → idiomatic SDK (⚠️ service shut down — Anthropic acquisition).",
     input: "OpenAPI spec",
-    output: "Python / TypeScript SDK (code)",
-    hosting: "CI tool (no site)",
-    artifact: { kind: "code", note: "A generated method showing typed params + an Args docstring." },
-    operations: "No page CRUD — configure SDK (package, languages, method naming) + regenerate.",
-    ...pending({}),
+    output: "Polished SDK (code)",
+    hosting: "SaaS (discontinued 2026)",
+    artifact: { kind: "code", note: "Documented from public Stainless-generated SDKs (anthropic/openai)." },
+    operations: "n/a — hosted generator wound down; documented from public output.",
+    ...pending({
+      status: "done",
+      setupNotes:
+        "Not runnable: Anthropic acquired Stainless (~2026-05) and shut the hosted generator. " +
+        "Represented from public output; its slot is filled by Speakeasy + OpenAPI Generator.",
+      findings:
+        "The layer-① quality benchmark (powered OpenAI/Anthropic/Cloudflare SDKs): ergonomic " +
+        "client.resource.method(), Literal-typed params, full Args docstrings, typed pagination. " +
+        "Now off-market — a fitting footnote for a docs-tooling project.",
+    }),
+  },
+  {
+    id: "speakeasy",
+    name: "Speakeasy",
+    layer: "① Generate client",
+    tagline: "Spec → idiomatic SDK + inline docs (commercial; the Stainless successor).",
+    input: "OpenAPI spec",
+    output: "Polished multi-language SDK (code)",
+    hosting: "SaaS + standalone CLI",
+    artifact: { kind: "code", note: "Idiomatic SDK — capture a method + docstring; diff vs the OSS SDK." },
+    operations: "No page CRUD — OpenAPI-as-source (+ overlays); regenerate.",
+    ...pending({
+      status: "done",
+      setupNotes:
+        "speakeasy quickstart → Python SDK from openapi-subset.json (free tier). Registry-push 422 " +
+        "(free-tier, non-fatal). Studio flagged 6 spec-quality improvements; auto-fixes land in " +
+        "speakeasy-modifications-overlay.yaml — an OVERLAY, so the shared spec is untouched.",
+      findings:
+        "The commercial tool DIAGNOSES what the OSS generator ships silently. Studio surfaced 6 " +
+        "categories (~29 instances): method-name curation (6) — sdk.spells.spells_list() → " +
+        "sdk.spells.list() vs OpenAPI Generator's SpellsApi.spells_list(); response.description " +
+        "required (12); missing error responses (6); pagination via x-speakeasy-pagination (3); " +
+        "retries via x-speakeasy-retries (1); duplicate schemas (1). Headline: same spec, but " +
+        "Speakeasy curates ergonomic naming + adds retry/pagination the OSS tool can't — applied " +
+        "via overlay without editing the source spec. That IS the curated-vs-verbose thesis, proven.",
+    }),
+  },
+  {
+    id: "openapi-generator",
+    name: "OpenAPI Generator",
+    layer: "① Generate client",
+    tagline: "Spec → typed SDK (free, self-hosted, no account).",
+    input: "OpenAPI spec",
+    output: "Multi-language SDK (code)",
+    hosting: "Local CLI (free OSS)",
+    artifact: { kind: "code", note: "Real Python package generated; browse openapi-generator/python/open5e/api/spells_api.py." },
+    operations: "No page CRUD — config flags + regenerate (local CLI).",
+    ...pending({
+      status: "done",
+      setupNotes:
+        "Generated locally with OpenAPI Generator 7.23.0 (Java) from openapi-subset.json → " +
+        "openapi-generator/python (148 files). No account, no SaaS.",
+      findings:
+        "Free/OSS tier: a complete installable package (client + models + per-model docs + tests + " +
+        "pyproject), but faithful-and-verbose — every drf-spectacular query param becomes a typed " +
+        "kwarg, so spells_list has a ~30-arg signature. API-class-scoped naming (SpellsApi.spells_list) " +
+        "is less ergonomic than client.spells.list. Shows exactly what curation buys in the paid tools.",
+    }),
   },
   {
     id: "mintlify",

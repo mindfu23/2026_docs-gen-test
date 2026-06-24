@@ -21,10 +21,11 @@ export function App() {
     <div className="min-h-screen bg-slate-50 text-slate-800">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-5xl px-6 py-6">
-          <h1 className="text-2xl font-bold">One Spec, Five Tools</h1>
+          <h1 className="text-2xl font-bold">One Spec, Three Layers</h1>
           <p className="mt-1 text-slate-500">
-            The Open5e D&amp;D 5e API run through five documentation tools — what each layer of
-            the docs toolchain actually produces.
+            The Open5e D&amp;D 5e API run through documentation &amp; SDK tools — what each layer of
+            the toolchain actually produces. Layer ① (generate client) is itself a comparison:
+            Speakeasy vs OpenAPI Generator (Stainless documented from public output).
           </p>
         </div>
         <nav className="mx-auto flex max-w-5xl flex-wrap gap-1 px-4">
@@ -82,7 +83,8 @@ function Summary() {
       <div className="rounded-xl border border-slate-200 bg-white p-6">
         <h2 className="text-lg font-semibold">They aren&apos;t competitors — they&apos;re three layers</h2>
         <p className="mt-2 text-slate-600">
-          One OpenAPI spec → <strong>Stainless</strong> makes the SDK, three tools{" "}
+          One OpenAPI spec → the <strong>SDK generators</strong> (Speakeasy / OpenAPI Generator;
+          Stainless, now defunct, as benchmark) make the client, three tools{" "}
           (<strong>Mintlify · GitBook · Docusaurus</strong>) publish the site three different ways,
           and <strong>Promptless</strong> keeps it current. This page is the deliverable; the other
           tabs feed it.

@@ -1,0 +1,669 @@
+lockVersion: 2.0.0
+id: ff91e333-5f9f-48b3-a905-fb76f39cb18b
+management:
+  docChecksum: b2c29ccc97ec1b86a0a8bdf0cb4c006c
+  docVersion: development (v1)
+  speakeasyVersion: 1.785.0
+  generationVersion: 2.912.1
+  releaseVersion: 0.1.0
+  configChecksum: 149dccf80f68d29718d668a8be320693
+persistentEdits:
+  generation_id: 8edd1608-688c-44d6-9c8c-062bf02206aa
+  pristine_commit_hash: 905d2ac70552d4474fc3574d7c3cc5f1b9cc5794
+  pristine_tree_hash: a8c8a0cce69841a1e6fa769df1b33a0ad294e281
+features:
+  python:
+    additionalDependencies: 1.1.0
+    core: 6.0.31
+    decimal: 1.0.0
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.1
+    envVarSecurityUsage: 0.3.3
+    flattening: 3.1.1
+    globalSecurityCallbacks: 1.0.0
+    globalServerURLs: 3.2.1
+    methodArguments: 1.1.1
+    nameOverrides: 3.0.3
+    nullables: 1.0.2
+    responseFormat: 1.1.0
+    retries: 3.0.7
+    sdkHooks: 1.2.2
+trackedFiles:
+  .devcontainer/README.md:
+    id: b170c0f184ac
+    last_write_checksum: sha1:3c63dfd4dcea8df0d4add09e975a6887e6da4aab
+    pristine_git_object: 396929ab2e57cf09dd25ec83bd4496f733b95701
+  .devcontainer/devcontainer.json:
+    id: b34062a34eb1
+    last_write_checksum: sha1:94309e8c8eab5ab063986bf625f513a59825e947
+    pristine_git_object: 75edff51e68d2934c825764459ba3071044ce2ab
+  .devcontainer/setup.sh:
+    id: 5f1dfbfeb8eb
+    last_write_checksum: sha1:234faaf21a8a7028346590d1eb3fac0429f4991c
+    pristine_git_object: b39c28c38cf46135982ab5576b4723ea777bf510
+  .gitattributes:
+    id: 24139dae6567
+    last_write_checksum: sha1:53134de3ada576f37c22276901e1b5b6d85cd2da
+    pristine_git_object: 4d75d59008e4d8609876d263419a9dc56c8d6f3a
+  .vscode/settings.json:
+    id: 89aa447020cd
+    last_write_checksum: sha1:f84632c81029fcdda8c3b0c768d02b836fc80526
+    pristine_git_object: 8d79f0abb72526f1fb34a4c03e5bba612c6ba2ae
+  USAGE.md:
+    id: 3aed33ce6e6f
+    last_write_checksum: sha1:7413ce1a6b947a995a2c1555180372cdaafb4dbe
+    pristine_git_object: b3ba636f30af13054d87feda8a783dc415d136f8
+  docs/models/abilityscores.md:
+    id: 815680f652b9
+    last_write_checksum: sha1:36b877eed042036a5bd0bf5c215de476b8096620
+    pristine_git_object: 3b9eea389c2cf4e154354f251bd1551bf4a3eb84
+  docs/models/abilitysummary.md:
+    id: b8e0a6eccabe
+    last_write_checksum: sha1:fe0573b36fb20d9916d6a3a769477e42280e7be3
+    pristine_git_object: d1c0236b4da8703e7752ff68d9631bc03c587747
+  docs/models/actiontype.md:
+    id: 58270f8c9597
+    last_write_checksum: sha1:96d8bfee34c97fcf14fc32fe9cea649b58029cf7
+    pristine_git_object: 4eddb6799b68285060ce367263539994f48a5738
+  docs/models/attacktype.md:
+    id: 55ad4401d554
+    last_write_checksum: sha1:20e66b156ee17bcada45c02531106276aae228a8
+    pristine_git_object: d53e33c2d8c4803a94768723cd69f962fb2966ab
+  docs/models/castertype.md:
+    id: 20d0acee2704
+    last_write_checksum: sha1:82bde6e9e24a9fc9f8cc7077f99a13405951b375
+    pristine_git_object: 4fbf937e305e8fd47e7a999d0e4efb67824e620f
+  docs/models/castingtime.md:
+    id: 7653c199e749
+    last_write_checksum: sha1:ad58b6bf80af32aae97f6c4b624e451861161776
+    pristine_git_object: 4ae0a20469a843220078bae53c8774192908ca34
+  docs/models/characterclass.md:
+    id: 4e794458c3e1
+    last_write_checksum: sha1:1435ba848386b710789776b54bf2451cdfdf307b
+    pristine_git_object: d0a7da13b74da14f60e24e2a40e92fc1e298bfb4
+  docs/models/characterclasscrossreferences.md:
+    id: 31b76d6ea275
+    last_write_checksum: sha1:853df6e41c4003192b2ff14ff502d6baed1fdae6
+    pristine_git_object: 3eaf6bde433234f480fcc5773539034a92ae3d17
+  docs/models/characterclasssummary.md:
+    id: da5f4ff4900f
+    last_write_checksum: sha1:9a8512c99b4d95f3e2a95fc34fa9b584c6e0e559
+    pristine_git_object: 06ec00c5ff64ab05544e833b93184f336df67459
+  docs/models/classeslistrequest.md:
+    id: e07688dd5192
+    last_write_checksum: sha1:6ff1368c40534753f8366199f58d06fb094ecb54
+    pristine_git_object: eea60af135e1cac7563884f16e21bc24b4190732
+  docs/models/classesretrieverequest.md:
+    id: cb1e279cc9ce
+    last_write_checksum: sha1:771d207bf39a34bdf84edcfa18eec751ce0cc287
+    pristine_git_object: 9d5f17930e302e183f37a7bf2350cbe8ecaac961
+  docs/models/classfeature.md:
+    id: 6d4587ffaac7
+    last_write_checksum: sha1:2e713e5dd51eab8046f7b2d1c10ef82df3f41c62
+    pristine_git_object: 0c9445390331a9c4f34a4360343c1cba1654cf11
+  docs/models/classfeatureprefetch.md:
+    id: 229a5281e1cf
+    last_write_checksum: sha1:1ee933688b260a61c06837c35a3ace5149c3ae9c
+    pristine_git_object: 9e32d6b91f990e5f70a1d91b835bc46dbefe28cf
+  docs/models/conditionsummary.md:
+    id: 90000e054c91
+    last_write_checksum: sha1:3683389491a72cf86c64e4cc5e488498f96c0ffd
+    pristine_git_object: 70c3df00b85fd10ba6f9a2aa7ebe08d25e71dfc1
+  docs/models/creature.md:
+    id: c144ea0b9683
+    last_write_checksum: sha1:56d7b3ef8e2973b393f71d918ce7079d94bc3856
+    pristine_git_object: 893910cacc90eb680123bf871b0217407e280309
+  docs/models/creatureaction.md:
+    id: 771e4ab93043
+    last_write_checksum: sha1:fb5a0cb58f3adbf07ba3c3c1d9b2ec814a1f467e
+    pristine_git_object: 39b9ef129c9a29d805e774912dcdd10bba2a8b5e
+  docs/models/creatureactionattack.md:
+    id: ad9a77ba8fe1
+    last_write_checksum: sha1:e57b32047b379c4bef50f6470b2bde6c0218bae9
+    pristine_git_object: 001ae8e8f10cb9f43d0f2ce6c7305b14607e5087
+  docs/models/creaturecrossreferences.md:
+    id: 175ec4a568ab
+    last_write_checksum: sha1:cbba5eed9a0862d7edf40e0d6f993e1fd9b6c133
+    pristine_git_object: f0b46c5bc759da5d33295bd412342447a83fdb7d
+  docs/models/creaturelanguage.md:
+    id: bfcff9672aef
+    last_write_checksum: sha1:f778c58b135883404e34f80f1a736d997ae74156
+    pristine_git_object: 7bf5daba8b75eee59a40671706d948ba46aa3e0d
+  docs/models/creatureresistancesandimmunities.md:
+    id: 04bc90b0a8be
+    last_write_checksum: sha1:4804918adcca4e9ec35841242b047047379ae561
+    pristine_git_object: db5b5d9399720d9d6d10ae0f416d6da4fee13a8a
+  docs/models/creatureslistrequest.md:
+    id: 8492cc855ddc
+    last_write_checksum: sha1:2aa4307e5a3a221e4a12214cf0fd32e794edb5f4
+    pristine_git_object: 837023a4f6c41939121abe8829fe19af0eccab4a
+  docs/models/creaturesretrieverequest.md:
+    id: 181561cfa3b0
+    last_write_checksum: sha1:d1bc75d602ace74ac5299e1946697127bdf46201
+    pristine_git_object: 37628309b3fbbff8db482059bbe7af1f1479a86d
+  docs/models/creaturetrait.md:
+    id: 3b07733bcbb8
+    last_write_checksum: sha1:b1cc46f8e52c0d243236d5cf7f1a19330f5dde59
+    pristine_git_object: 3b846c0fbecd6de60bcba01219fa12bf7a6c1e37
+  docs/models/creaturetypesummary.md:
+    id: c68ef0108581
+    last_write_checksum: sha1:4bda82f789180236bacb5bf1efa8ee87f775beef
+    pristine_git_object: 49b98f5ba39ac66c157e5bcbdc0768f58f2dde28
+  docs/models/crossreferencelink.md:
+    id: d9401a54bc21
+    last_write_checksum: sha1:4ccd061e4671594f002af33f393e841c14ae59b5
+    pristine_git_object: 92b8e7a75411137eb705b67723f306b73c1ac841
+  docs/models/damagedietype.md:
+    id: 0d3a1221b8d7
+    last_write_checksum: sha1:f931a0c7942f536660a744e55567e8b1e0a9a29f
+    pristine_git_object: b2e7e597877085ffc586d0c829e55912acf504ae
+  docs/models/damagetypesummary.md:
+    id: 5dfeeec3f166
+    last_write_checksum: sha1:9ca0b82b099a8302888d901c6ca7c92279f6af44
+    pristine_git_object: 81dcd53e681d34e5b10cb92b8dc5848c72b06b21
+  docs/models/documentsummary.md:
+    id: 3b0b3fd24d97
+    last_write_checksum: sha1:859fb0f6a5105f49e87a0426401f5b5f987e8f30
+    pristine_git_object: 66dbe0507930f1694b373eab37f60d8523a85698
+  docs/models/documentsummarytype.md:
+    id: 2e1e4cd86b46
+    last_write_checksum: sha1:c3e5b8a277b0d6430f39b00159c98c830239e856
+    pristine_git_object: f6b78b17734c3d2b0c42df7685f511862fd8923e
+  docs/models/duration.md:
+    id: e63d42c932a8
+    last_write_checksum: sha1:632fa6f89f3b27e89998d788dd81b44cbac74059
+    pristine_git_object: 11819471a33ceb9f40db984e937fab951a117749
+  docs/models/environmentsummary.md:
+    id: 3ff41d5250ae
+    last_write_checksum: sha1:4f2960f8c64187aa76fb802dcf5a63fefee73747
+    pristine_git_object: 23b407ac5264e139438e8c0c493641be322a5559
+  docs/models/extradamagedietype.md:
+    id: 04060c1e9600
+    last_write_checksum: sha1:f5382513e1cf302976b8e94923b1c07a0aa64364
+    pristine_git_object: 7dfc51faf70222b520a40adf1b9982da095cbfd2
+  docs/models/featuretype.md:
+    id: 9fd6a7ea7659
+    last_write_checksum: sha1:9205a4e7cb9784b49f23e8dd4f00a1c6ecd8f86d
+    pristine_git_object: 5a0e513226c94b2c16f61c13ac203be62dca6ddf
+  docs/models/gamesystemsummary.md:
+    id: d400b85e8c02
+    last_write_checksum: sha1:626b1b97f669660d0b8ab24cc36d46269eca676b
+    pristine_git_object: 3c552ef880ccfffaf6ac4369c15f09c4f956a40c
+  docs/models/hitdice.md:
+    id: 26107a17b120
+    last_write_checksum: sha1:081e83221ee1d7eff47a3438eee03cdc3d4c3cf8
+    pristine_git_object: 7280c413a1f10e55086000e040052103e53c8b3f
+  docs/models/hitpoints.md:
+    id: d7e95d5342df
+    last_write_checksum: sha1:bbb520a1512d8a937637559e9d14d9a2854465c1
+    pristine_git_object: 646c017feedd93ed71b64ccf95cdc6bee05f591c
+  docs/models/imagesummary.md:
+    id: 402dabf82e5b
+    last_write_checksum: sha1:1356a5789261e7c96b8a6bee5b4d72cf6687b787
+    pristine_git_object: b7312e4db919069f339a129810be26e52fbdb7ce
+  docs/models/languagesummary.md:
+    id: d2fbde426e05
+    last_write_checksum: sha1:3eeeca75b21b482a1ecc22a95c09504b7dcb0d5d
+    pristine_git_object: cd0fcebe6edcea8a325f2a199ca2eb814f034b0a
+  docs/models/modifiers.md:
+    id: e37497e9ff07
+    last_write_checksum: sha1:8ed4ccec833545b0bf2ba4bc2657bb888e571217
+    pristine_git_object: 571e32809755a1eb3de96aad535f8a3f88aeb727
+  docs/models/paginatedcharacterclasslist.md:
+    id: 66479be8e270
+    last_write_checksum: sha1:e4f66ded880101c34b25959fb7aa1ea565775ca4
+    pristine_git_object: cf8094daab927aca47e69d44457a72da54b14740
+  docs/models/paginatedcreaturelist.md:
+    id: 7684ebcb23bc
+    last_write_checksum: sha1:6ca104832b72f3b6b9843ec0f4351055a18a773e
+    pristine_git_object: 56956cc812bbd1c7632a14d12d405b6771bc6ace
+  docs/models/paginatedspelllist.md:
+    id: 2c916fced592
+    last_write_checksum: sha1:629ea09d9fa0586d5fa9f37809f4d8618ad6e95b
+    pristine_git_object: a403f8efdfbffe1a3734c22475e4e318763ff16c
+  docs/models/publishersummary.md:
+    id: 4f2f74ae131a
+    last_write_checksum: sha1:0ae12d37be6e7c01a6fdf0fd0767814510740ee0
+    pristine_git_object: 9315b3b25a707a4105ad0e5b73c620dde82841bc
+  docs/models/savingthrows.md:
+    id: b3416139aef4
+    last_write_checksum: sha1:35fee28865b158644d7547e7044d82e6ee6a9312
+    pristine_git_object: 9a5bbb99d6108c0d01ec2777355c2dd070bcd7b2
+  docs/models/savingthrowsall.md:
+    id: 6cac379ebeb0
+    last_write_checksum: sha1:a2e322d53e9a7712204f837f845ef0bf065ded04
+    pristine_git_object: 40134ded928e7ba52050d93125f975c5f3c0bff0
+  docs/models/shapetype.md:
+    id: 73eb28994d54
+    last_write_checksum: sha1:fc20b84ac3d4e7e512e58edc2e2b559ec8615354
+    pristine_git_object: 3c2f0bcfe46bd469fb4a43c7784d5f546a27f59f
+  docs/models/sizesummary.md:
+    id: 0ba1a558f018
+    last_write_checksum: sha1:135d114b6f2dbcc3cdfe657efd8e9533b190fd11
+    pristine_git_object: b3da606cdb940793344bb0fbd4ed6052e6382797
+  docs/models/skillbonuses.md:
+    id: a67f68148679
+    last_write_checksum: sha1:a9f644e1032a8ade648a68ebcdf32af46be6cfa6
+    pristine_git_object: 91e9dbde6fa231132f1f544d97d5a2eae1e915ee
+  docs/models/skillbonusesall.md:
+    id: cb91e02c1cc3
+    last_write_checksum: sha1:c79f62420280fc5dbb56c505715d42f611083804
+    pristine_git_object: 496ae1e7d66deb8e857193b982f8682fae58b224
+  docs/models/speed.md:
+    id: bb9f84c89a03
+    last_write_checksum: sha1:1a76b81b2121f1c4eb97899b2b341e1f53f37208
+    pristine_git_object: 0c583ac7665db375de938ada0e99a14650095301
+  docs/models/speedall.md:
+    id: 1c0d73287f6b
+    last_write_checksum: sha1:0a4e260dd0edcc98186f5ebf083413ddacb71b2a
+    pristine_git_object: 7de795010e64012344143a0a1cb59e9715c32986
+  docs/models/spell.md:
+    id: 2fb35d487294
+    last_write_checksum: sha1:5d9ff162e2c92f692443f9fed0e3e55c468c3f77
+    pristine_git_object: 083501ecb02bf9218b7a69155648628eaf164bd4
+  docs/models/spellcastingoption.md:
+    id: 34df09f4c985
+    last_write_checksum: sha1:62f94ae18f0b10bb5b6dea677d8997c2b5beafbd
+    pristine_git_object: ec1ac14c8dff201b30800e204d7069f1a4f61ca2
+  docs/models/spellcastingoptiontype.md:
+    id: d0935cabcfa0
+    last_write_checksum: sha1:ef87c935a957b58e7ebce8367cd5b873ff243a44
+    pristine_git_object: 5b6cff64afb950ecb67d2beef292c1380da622c1
+  docs/models/spellcrossreferences.md:
+    id: 3efedb6a2794
+    last_write_checksum: sha1:660f888e7264637bd694cf911a99c04b69222449
+    pristine_git_object: dd7c6789cd1b724ea346dd697bfbfeeedecdaa6c
+  docs/models/spellschoolsummary.md:
+    id: 3eb7b180be61
+    last_write_checksum: sha1:76d7286c1c781b49695b37aac03d96d08e4400b6
+    pristine_git_object: 5b2e98bffbf025552d7279583da56d8e43646fba
+  docs/models/spellslistcastingtime.md:
+    id: 9b31fc76a013
+    last_write_checksum: sha1:776f74cebdeb4bc1dea7f9de7949f3157fa1dfbc
+    pristine_git_object: ea4a0bc2ddee91206d55ecde69379f4c4bfc4bd4
+  docs/models/spellslistduration.md:
+    id: 2b5ccb82e3e5
+    last_write_checksum: sha1:1ed4268fe931ca41ae72d5834aaa9f9dc8b84d2d
+    pristine_git_object: 16e1aa0668c32a5e6796680807c5a1c273ce5428
+  docs/models/spellslistrequest.md:
+    id: dab9b35a3b4b
+    last_write_checksum: sha1:f7ee079249faa525d957391049bd8eabfa6f664f
+    pristine_git_object: 2f283caf5524dd804036a26fa0235928d3979d43
+  docs/models/spellsretrieverequest.md:
+    id: 97484e18d5d9
+    last_write_checksum: sha1:ee9e3ced4a6d88e2c75bdbc9e34b5c2fd7907982
+    pristine_git_object: ab9d8c22b2abe13e7749076cd9acf01f4d3155e9
+  docs/models/targettype.md:
+    id: 038bd0f41e14
+    last_write_checksum: sha1:28b00d61964e33b4d5a7b8fc0eca5e20327408f0
+    pristine_git_object: c6d42775549bf3131ae47eda4a64f4ca9bbd08a2
+  docs/models/utils/retryconfig.md:
+    id: 4343ac43161c
+    last_write_checksum: sha1:562c0f21e308ad10c27f85f75704c15592c6929d
+    pristine_git_object: 69dd549ec7f5f885101d08dd502e25748183aebf
+  docs/sdks/classes/README.md:
+    id: 8ea3c03dced4
+    last_write_checksum: sha1:c4f6aee81ccb90388e7b1774d5bdeaff10534f80
+    pristine_git_object: 8bf55ced01d6cd6e261318320e5bc9960a272bf1
+  docs/sdks/creatures/README.md:
+    id: 3c9cf19bd35c
+    last_write_checksum: sha1:e2512878dec6b37629c9433e1cb4e3a7f2591668
+    pristine_git_object: 3c80a1410929cebaf3f240b4eb83f9a48a6cde02
+  docs/sdks/spells/README.md:
+    id: 3419d9fff18f
+    last_write_checksum: sha1:73e4a10d34fd49506cf1934819b1d3dd673175df
+    pristine_git_object: 4e475ebf8e8b928bbc22192bdd26c35ee7ec7b5a
+  py.typed:
+    id: 258c3ed47ae4
+    last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
+    pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  pylintrc:
+    id: 7ce8b9f946e6
+    last_write_checksum: sha1:875c2fb4534fcddbd5b28d8fda9eab99c334cfce
+    pristine_git_object: 83461389aab436ff6101b65dd168efe9cd7a4e4d
+  pyproject.toml:
+    id: 5d07e7d72637
+    last_write_checksum: sha1:6e1bb7a5b77f3455562ac1326caf37dd7185a80a
+    pristine_git_object: 39d73846021954aac6383adda24ace916ed081f6
+  scripts/publish.sh:
+    id: fe273b08f514
+    last_write_checksum: sha1:adc9b741c12ad1591ab4870eabe20f0d0a86cd1a
+    pristine_git_object: ef28dc10c60d7d6a4bac0c6a1e9caba36b471861
+  src/open5e/__init__.py:
+    id: ef30cb4fae0d
+    last_write_checksum: sha1:da077c0bdfcef64a4a5aea91a17292f72fa2b088
+    pristine_git_object: 833c68cd526fe34aab2b7e7c45f974f7f4b9e120
+  src/open5e/_hooks/__init__.py:
+    id: 90f5f3c4fa7f
+    last_write_checksum: sha1:45a380490e968d8d95994dd97554ac60eeb6ae60
+    pristine_git_object: e763be4b171bbcf9c16caeaf381f8c92ce8d8e6e
+  src/open5e/_hooks/sdkhooks.py:
+    id: c5c3a2e68de3
+    last_write_checksum: sha1:6867eeccc687c22ec5cfd6f3a88e846de0273e83
+    pristine_git_object: c3e906a42bf5df7caa273fed3a4ab82b703cf4fb
+  src/open5e/_hooks/types.py:
+    id: 9b1d4f3b2974
+    last_write_checksum: sha1:b26b017efea2714a87e52dabb13b43b44ee97c1b
+    pristine_git_object: 8d3773e80e38a9eb4486f9a6c96c2920623e3976
+  src/open5e/_version.py:
+    id: efa7b87a20a5
+    last_write_checksum: sha1:9c7f0d9230f9d6699494891d30810876de2b926a
+    pristine_git_object: 352f6c08c42603538777b4fe459e66e7ee119713
+  src/open5e/basesdk.py:
+    id: 0826aa22bb1f
+    last_write_checksum: sha1:f55b8ab8caa9f91e28129b80d8d21dd979ace1fa
+    pristine_git_object: f29056e88b0824863420cc14d8e72c08681fadb1
+  src/open5e/classes.py:
+    id: 774d5bbe2f1e
+    last_write_checksum: sha1:ddca13221f9ca18006a8f82eabfcad5f797a66f5
+    pristine_git_object: a9f123f4a9e572e66f4bca1f99e483fe27824f57
+  src/open5e/creatures.py:
+    id: 4d1101b67eb1
+    last_write_checksum: sha1:3984e3aec8d6118c0be837cae0d1aa344a5f3d47
+    pristine_git_object: b551ddeb4a679c64be77d109d0831e6a53def9c5
+  src/open5e/errors/__init__.py:
+    id: 6206930ec5d8
+    last_write_checksum: sha1:2d7735291ef4495b1e2f5063cbd76cf594df2566
+    pristine_git_object: d844a80484dd184ec0c13ff42048cc9bd335e9c7
+  src/open5e/errors/anideasmithdocgendefaulterror.py:
+    id: a9cc7332e3c9
+    last_write_checksum: sha1:28353553e11194ce91bc76e8cbb6f53ca53a554c
+    pristine_git_object: a68db177c211184f67b548b6beaa7a658fc40ebf
+  src/open5e/errors/anideasmithdocgenerror.py:
+    id: b607f68ef9d8
+    last_write_checksum: sha1:09d44b2dd754423602c2c8ec7d8612fac17d67a5
+    pristine_git_object: 72cee06d9b5d27de385123d9473134c6e1214e04
+  src/open5e/errors/no_response_error.py:
+    id: 00adf4909604
+    last_write_checksum: sha1:7f326424a7d5ae1bcd5c89a0d6b3dbda9138942f
+    pristine_git_object: 1deab64bc43e1e65bf3c412d326a4032ce342366
+  src/open5e/errors/responsevalidationerror.py:
+    id: 3c3e82e012e0
+    last_write_checksum: sha1:6a6b13d92e9b6e268354820c71aab1f41e733090
+    pristine_git_object: f61b115445fc4a848ad1a6930536a522cef43cc9
+  src/open5e/httpclient.py:
+    id: 812f97a2e0f6
+    last_write_checksum: sha1:5e55338d6ee9f01ab648cad4380201a8a3da7dd7
+    pristine_git_object: 89560b566073785535643e694c112bedbd3db13d
+  src/open5e/models/__init__.py:
+    id: 6191e1e91f2b
+    last_write_checksum: sha1:9e71e48d86c0add8019809e2838b1ceb3ddf8d17
+    pristine_git_object: f16f65f1e376a95772f117a24677bd2971e46d6f
+  src/open5e/models/_crossreferencelink.py:
+    id: 637db1ea289e
+    last_write_checksum: sha1:992b3007c58da16244a815641615a05e9835fe0e
+    pristine_git_object: 6b5bc1f8a126082781efbf46d5cea1134113949d
+  src/open5e/models/abilitysummary.py:
+    id: 6db2fc46433f
+    last_write_checksum: sha1:5d439f43d915437d7de5dfbd1a4b536e7039ea3c
+    pristine_git_object: e97835024f28b38f56ad6cb7225feb9053a1ce59
+  src/open5e/models/characterclass.py:
+    id: ce7f56228f96
+    last_write_checksum: sha1:2509fbb516312df14b6ead52cb0b3e49566938a3
+    pristine_git_object: c11f395a2f57890653b8889c6e35eceee55ce143
+  src/open5e/models/characterclasssummary.py:
+    id: 99986cad5886
+    last_write_checksum: sha1:8257eb725d1168688dff8e325243a754e2cc7565
+    pristine_git_object: 58e2648681ed2269a6ff1d76b0fedda14752c47b
+  src/open5e/models/classes_listop.py:
+    id: bf2a1258b0a1
+    last_write_checksum: sha1:6c720dd893eae93908a116ea2e9d8c38583c9174
+    pristine_git_object: 8488236b798e6900b14ac0e8c5fee9929f6105d9
+  src/open5e/models/classes_retrieveop.py:
+    id: 92217cb22fdf
+    last_write_checksum: sha1:e4b7f50af0a339b7a57e9127f58f593c9393cf14
+    pristine_git_object: f7f5f9d4746761004cadb0844cf2fcd71f6f6997
+  src/open5e/models/classfeature.py:
+    id: c8f7d422cd15
+    last_write_checksum: sha1:b40a5a3ce224c430b331e8bc66d30bb851e4f9aa
+    pristine_git_object: 1642f705c4f73a8a46518b3b5f8b5bcfd1c8b76f
+  src/open5e/models/classfeatureprefetch.py:
+    id: fa5b104f1f17
+    last_write_checksum: sha1:d5b4325bd5523a169361e86cd362363d84d0aaa2
+    pristine_git_object: 230d4f817a2d0858eef292eb9de5b38dc022c2a5
+  src/open5e/models/conditionsummary.py:
+    id: 6050421967df
+    last_write_checksum: sha1:6ae1edc037a86c144c39e5c803704d04faab845f
+    pristine_git_object: 403e36de7fc3e469f1c3fd402dd9c363700aefa6
+  src/open5e/models/creature.py:
+    id: b19333242116
+    last_write_checksum: sha1:06993a06171c2743e3d972c998aaf550687747bc
+    pristine_git_object: d4db2e03f5e8636538a839be71c47f45de051712
+  src/open5e/models/creatureaction.py:
+    id: e896280b8b9a
+    last_write_checksum: sha1:e72c39be4cdfbba5d3667d2d6a384bacb795540d
+    pristine_git_object: df071616604da258b5774946b80f2f243b8c5b1c
+  src/open5e/models/creatureactionattack.py:
+    id: 9a840923d7be
+    last_write_checksum: sha1:f7c008cdeb223ce56b7b46667672c12af0c03dc8
+    pristine_git_object: 34a56f880ae8fe2903b397b96a9d91ef183625a7
+  src/open5e/models/creaturelanguage.py:
+    id: 69c9f18e6d64
+    last_write_checksum: sha1:d80ab337488161237007a2ac7d4466128812a8be
+    pristine_git_object: 6b12551cd5131695c9de77f653026827119344ae
+  src/open5e/models/creatureresistancesandimmunities.py:
+    id: 366d2c923188
+    last_write_checksum: sha1:586d75dcb1ba5adb47d599ad81478473161d960b
+    pristine_git_object: 53f2c47d25604fe84e9d04233b6259bc726b49ef
+  src/open5e/models/creatures_listop.py:
+    id: 6a64dad2d1ac
+    last_write_checksum: sha1:6a4e40f167dd390e505423e456d51862c36485cb
+    pristine_git_object: a6c27b2ce643dd5d0286c82de9679ceeb9890a2b
+  src/open5e/models/creatures_retrieveop.py:
+    id: c67bfc997ceb
+    last_write_checksum: sha1:dfc819832ea7c99c741b11da0bb6efc0f8add0f9
+    pristine_git_object: 174389545796e9199b729d68bfb423e1949a02c0
+  src/open5e/models/creaturetrait.py:
+    id: 491d8a399d4e
+    last_write_checksum: sha1:573daf20dd677dea57ebc8685527755488cd1fd5
+    pristine_git_object: 4f064f61ff20a0f6050b58fb59aba007824c1134
+  src/open5e/models/creaturetypesummary.py:
+    id: 2abd615bd260
+    last_write_checksum: sha1:8800101e1877c71b51a23aef092e6e5f4bde0421
+    pristine_git_object: 38adb751fe70c40af8040ae7fd44f6132a0d21bc
+  src/open5e/models/damagetypesummary.py:
+    id: ad81c607724d
+    last_write_checksum: sha1:fce2aa4b8c30e86c210d45cb7b1fda2f65d373f6
+    pristine_git_object: e56ca35ff7a5727f7761d0b9049b39c926e28878
+  src/open5e/models/documentsummary.py:
+    id: 58d9a46724c4
+    last_write_checksum: sha1:24bc3094705d6e2883aaab5b482b6397f3b20c53
+    pristine_git_object: f3cc0e166a16c389a31de0bdda03e65b01e0c941
+  src/open5e/models/environmentsummary.py:
+    id: 0ed6957eedce
+    last_write_checksum: sha1:06c794e263db32c752105345d99510cb6d84b80d
+    pristine_git_object: 06b47cb3ad3fb485c2304df5b5214951f8a97084
+  src/open5e/models/gamesystemsummary.py:
+    id: 167217c6e5e5
+    last_write_checksum: sha1:dd1ddd5804fa78e372a3f453bace6a66dd3388f1
+    pristine_git_object: 46abb71c7748dcacfcf15fd672e799b230db68b8
+  src/open5e/models/imagesummary.py:
+    id: 7e59f16320e8
+    last_write_checksum: sha1:2d763941cf886df2f00b15ce4e350ee1d967a612
+    pristine_git_object: b1ae04db1ac3b686e1cab8c6392022ed2b3ed68f
+  src/open5e/models/languagesummary.py:
+    id: ec92cee683e7
+    last_write_checksum: sha1:bc31a126099c84bbee7b0571771e188e28e39c93
+    pristine_git_object: 636e1cdb228e2daa5e6388f72b8d5c7ad8d9a8a9
+  src/open5e/models/paginatedcharacterclasslist.py:
+    id: e4be5a661c49
+    last_write_checksum: sha1:4fab6725132113f1925c8ba56bc59623cba9f981
+    pristine_git_object: 3ecc0004b5cfbca80dae342a2710612024959da3
+  src/open5e/models/paginatedcreaturelist.py:
+    id: c391d9078fda
+    last_write_checksum: sha1:101d2508e148fe2ca6231a366e5855cf8c79fd2c
+    pristine_git_object: 452f6759b01668b3a2e38b37069cb151a4773d76
+  src/open5e/models/paginatedspelllist.py:
+    id: 65b8a99d64ca
+    last_write_checksum: sha1:4622261b25778b31ac11a90c0c05f5aaae07633c
+    pristine_git_object: ab91405f661c003195150022101f3822c586e625
+  src/open5e/models/publishersummary.py:
+    id: 20d8c296db0c
+    last_write_checksum: sha1:b2dbc93e51d3c2d9f3679e72b0b1b79d68071cb0
+    pristine_git_object: e8851acc503d7f33cfe6bbc16a794ddff7adf6ce
+  src/open5e/models/sizesummary.py:
+    id: 1b9be1bcebd8
+    last_write_checksum: sha1:0bad8c69988cb2e1d16d2fb79ae9d409cf3a30cd
+    pristine_git_object: 8d65c92b9143c6349a9ca4a01dbe72f93d5fdf23
+  src/open5e/models/spell.py:
+    id: b0fd0391c4e3
+    last_write_checksum: sha1:32b0e908555c762ce65754e6e4492492a29ae74c
+    pristine_git_object: 7fcd50a52a4c0fe4a7796c044c61cd45e1c3047a
+  src/open5e/models/spellcastingoption.py:
+    id: 9b28b4bbc7b4
+    last_write_checksum: sha1:da72009c18579dfc9c2995a2b26968147cee0a83
+    pristine_git_object: 5ba57f1f7bb38c61f77be649740f1cda93099aad
+  src/open5e/models/spells_listop.py:
+    id: 639c0df42b68
+    last_write_checksum: sha1:b47b6e355f09be04962812bd5e2dc927461b6c00
+    pristine_git_object: ed8a410e9a178797471e96bf2fa7606b28791ee2
+  src/open5e/models/spells_retrieveop.py:
+    id: 4cdf47de6f20
+    last_write_checksum: sha1:72dc2831878860d4c063cf02c0aebde3e26dcad5
+    pristine_git_object: 98c0c393c8486de7fd8fa8af3c138aa71d486b7b
+  src/open5e/models/spellschoolsummary.py:
+    id: 2aef33f608a1
+    last_write_checksum: sha1:a8560559190b3e061a80b7c61328c7a294f34d66
+    pristine_git_object: 4629eb956b8648ef6478d49af40fe39acb1ac53b
+  src/open5e/py.typed:
+    id: 0ba9a5c4da85
+    last_write_checksum: sha1:8efc425ffe830805ffcc0f3055871bdcdc542c60
+    pristine_git_object: 3e38f1a929f7d6b1d6de74604aa87e3d8f010544
+  src/open5e/sdk.py:
+    id: e1ff5c97e9fc
+    last_write_checksum: sha1:13e6a4a9bd83b89134c993431a6d8bf49b1497e6
+    pristine_git_object: d8214c1720269580a058e7a72d4c0583e50a9f8e
+  src/open5e/sdkconfiguration.py:
+    id: 542fbcbf6cb2
+    last_write_checksum: sha1:329b1333eaba1177ab438b5c8ffffc511a55be1c
+    pristine_git_object: 242124c1062fb4b700b0eae4d9da1aa3f6372301
+  src/open5e/spells.py:
+    id: a52ec729163d
+    last_write_checksum: sha1:57ea52d52d4db5ea0ed53ed3585a639ca81245da
+    pristine_git_object: aa5355a021f9c3ce26211197d3ce00092a9993fb
+  src/open5e/types/__init__.py:
+    id: adbcfc89be12
+    last_write_checksum: sha1:f9ad14217f832e74f594285960125add50324be9
+    pristine_git_object: faa268137bc01c9d08cfadc4797017db48747a96
+  src/open5e/types/base64fileinput.py:
+    id: cf094bbeac14
+    last_write_checksum: sha1:1522687ae3398374c35710cad993a6e82b5ab99d
+    pristine_git_object: 862566fe2b1db830276b390e136e65090e5963d2
+  src/open5e/types/basemodel.py:
+    id: 48c5347294c4
+    last_write_checksum: sha1:10d84aedeb9d35edfdadf2c3020caa1d24d8b584
+    pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
+  src/open5e/utils/__init__.py:
+    id: 112e444d5067
+    last_write_checksum: sha1:1970816f2234ecb8785798240b0edced961de971
+    pristine_git_object: 0498cb8dabf249b39609f81fb10cddc30f1b78b5
+  src/open5e/utils/annotations.py:
+    id: cee12cc45612
+    last_write_checksum: sha1:a4824ad65f730303e4e1e3ec1febf87b4eb46dbc
+    pristine_git_object: 12e0aa4f1151bb52474cc02e88397329b90703f6
+  src/open5e/utils/datetimes.py:
+    id: 906e8b04f75a
+    last_write_checksum: sha1:c721e4123000e7dc61ec52b28a739439d9e17341
+    pristine_git_object: a6c52cd61bbe2d459046c940ce5e8c469f2f0664
+  src/open5e/utils/dynamic_imports.py:
+    id: a6cb7e95ee97
+    last_write_checksum: sha1:a1940c63feb8eddfd8026de53384baf5056d5dcc
+    pristine_git_object: 673edf82a97d0fea7295625d3e092ea369a36b79
+  src/open5e/utils/enums.py:
+    id: b7a0cb8e0724
+    last_write_checksum: sha1:bc8c3c1285ae09ba8a094ee5c3d9c7f41fa1284d
+    pristine_git_object: 3324e1bc2668c54c4d5f5a1a845675319757a828
+  src/open5e/utils/eventstreaming.py:
+    id: a01f59b6ccd3
+    last_write_checksum: sha1:7d1dc68f8b48486ab646653aa05cc38752e1f912
+    pristine_git_object: a8d4fe5cc88d3c7337339e1b36a61bbf7ca8c4eb
+  src/open5e/utils/forms.py:
+    id: aa7ee8c432f6
+    last_write_checksum: sha1:dcf527960992b8baef3b21937c7e6c4e652630c0
+    pristine_git_object: 193f264960f3014c81d41543b9023c14c44c12e6
+  src/open5e/utils/headers.py:
+    id: 225e12b7b4eb
+    last_write_checksum: sha1:7c6df233ee006332b566a8afa9ce9a245941d935
+    pristine_git_object: 37864cbbbc40d1a47112bbfdd3ba79568fc8818a
+  src/open5e/utils/logger.py:
+    id: 017a4b7398ba
+    last_write_checksum: sha1:5158c79c372295cee9021921ac93e4b27d576993
+    pristine_git_object: 04e5e92e6d4c50280d1ffa0a9a05d58e7048d4c7
+  src/open5e/utils/metadata.py:
+    id: 3a1f74500344
+    last_write_checksum: sha1:e703e5cbb5255144aacf86898d1420529afaaff8
+    pristine_git_object: 5abddd588837ac297050ca3b543627faadb350a9
+  src/open5e/utils/queryparams.py:
+    id: a1c330118c3d
+    last_write_checksum: sha1:b94c3f314fd3da0d1d215afc2731f48748e2aa59
+    pristine_git_object: c04e0db82b68eca041f2cb2614d748fbac80fd41
+  src/open5e/utils/requestbodies.py:
+    id: 5843152513ea
+    last_write_checksum: sha1:e1fef575283b7fe7fe2ad392dbbb3fb105309124
+    pristine_git_object: 591415af8e64baa410627b507d2740afb5387d13
+  src/open5e/utils/retries.py:
+    id: 8fe23c22132c
+    last_write_checksum: sha1:3585b891142f30a597fbf7a2f0340700babef8e4
+    pristine_git_object: ca7b59efebbbd9545744d0207ef42725c4cc5143
+  src/open5e/utils/security.py:
+    id: 8b6249bad80c
+    last_write_checksum: sha1:c11eef495b6aaa249178c24c796940cc540b7a00
+    pristine_git_object: 42d8d78e9981eed7507670014d99588e27ab325a
+  src/open5e/utils/serializers.py:
+    id: edbe95b663ec
+    last_write_checksum: sha1:7485f1425b0661fd84836186570df90207eec6af
+    pristine_git_object: 1031ed930bad5ece220cf7416a56c29f40f0588b
+  src/open5e/utils/unmarshal_json_response.py:
+    id: 6f6359b05ff9
+    last_write_checksum: sha1:aaec76f70c91a5661c295dfa4ab30b94b4832e7d
+    pristine_git_object: 5a76b7a894ff63b7f0abf7082d30f4d4738c26ce
+  src/open5e/utils/url.py:
+    id: ca33b1db088c
+    last_write_checksum: sha1:6479961baa90432ca25626f8e40a7bbc32e73b41
+    pristine_git_object: c78ccbae426ce6d385709d97ce0b1c2813ea2418
+  src/open5e/utils/values.py:
+    id: 17cca9fd9123
+    last_write_checksum: sha1:acaa178a7c41ddd000f58cc691e4632d925b2553
+    pristine_git_object: dae01a44384ac3bc13ae07453a053bf6c898ebe3
+examples:
+  spells_list:
+    speakeasy-default-spells-list:
+      responses:
+        "200":
+          application/json: {"count": 123, "next": "http://api.example.org/accounts/?page=4", "previous": "http://api.example.org/accounts/?page=2", "results": []}
+  spells_retrieve:
+    speakeasy-default-spells-retrieve:
+      parameters:
+        path:
+          key: "<key>"
+      responses:
+        "200":
+          application/json: {"key": "<key>", "document": {"name": "<value>", "key": "<key>", "display_name": "Clair.Goodwin25", "publisher": {"name": "<value>", "key": "<key>"}, "gamesystem": {"name": "<value>", "key": "<key>"}, "permalink": "https://merry-goat.com/"}, "casting_options": [], "school": {"name": "<value>", "key": "<key>"}, "classes": [], "range_unit": "<value>", "shape_size_unit": "<value>", "name": "<value>", "level": 366915, "range_text": "<value>", "casting_time": "1hour", "duration": "24 hours or until the target attempts a third death saving throw", "crossreferences": {"to": []}}
+  creatures_list:
+    speakeasy-default-creatures-list:
+      responses:
+        "200":
+          application/json: {"count": 123, "next": "http://api.example.org/accounts/?page=4", "previous": "http://api.example.org/accounts/?page=2", "results": [{"key": "<key>", "name": "<value>", "document": {"name": "<value>", "key": "<key>", "display_name": "Morton.OReilly16", "publisher": {"name": "<value>", "key": "<key>"}, "gamesystem": {"name": "<value>", "key": "<key>"}, "permalink": "https://far-flung-replacement.net/"}, "type": {"name": "<value>", "key": "<key>"}, "size": {"name": "<value>", "key": "<key>"}, "challenge_rating": 3823.22, "speed": {"walk": "<value>", "fly": "<value>", "swim": "<value>", "climb": "<value>", "burrow": "<value>", "hover": true}, "speed_all": {"unit": "gray", "walk": 292290, "crawl": 996740, "hover": false, "fly": 166496, "burrow": 33487, "climb": 108043, "swim": 877274}, "category": "<value>", "alignment": "<value>", "languages": {"as_string": "<value>", "data": [{"name": "<value>", "key": "<key>"}]}, "experience_points": 322111, "ability_scores": {"strength": 805975, "dexterity": 588460, "constitution": 135110, "intelligence": 909811, "wisdom": 837473, "charisma": 26422}, "modifiers": {"strength": 788351, "dexterity": 680647, "constitution": 996338, "intelligence": 500132, "wisdom": 631723, "charisma": 253297}, "initiative_bonus": 374972, "saving_throws": {"strength": 938469, "dexterity": 705769, "constitution": 697975, "intelligence": 988683, "wisdom": 609715, "charisma": 338976}, "saving_throws_all": {"strength": 70779, "dexterity": 30463, "constitution": 491545, "intelligence": 845936, "wisdom": 244064, "charisma": 3568}, "skill_bonuses": {"acrobatics": 394186, "animal_handling": 282375, "arcana": 89835, "athletics": 875887, "deception": 502617, "history": 589116, "insight": 886129, "intimidation": 946450, "investigation": 543502, "medicine": 331425, "nature": 218414, "perception": 299099, "performance": 311731, "persuasion": 340208, "religion": 326551, "sleight_of_hand": 431650, "stealth": 866256, "survival": 817040}, "skill_bonuses_all": {"acrobatics": 191565, "animal_handling": 699748, "arcana": 560709, "athletics": 809921, "deception": 731494, "history": 113593, "insight": 936721, "intimidation": 43636, "investigation": 267791, "medicine": 512050, "nature": 739634, "perception": 658847, "performance": 705465, "persuasion": 394790, "religion": 282234, "sleight_of_hand": 248093, "stealth": 802760, "survival": 719834}, "resistances_and_immunities": {"damage_immunities_display": "<value>", "damage_immunities": [{"name": "<value>", "key": "<key>"}], "damage_resistances_display": "<value>", "damage_resistances": [{"name": "<value>", "key": "<key>"}], "damage_vulnerabilities_display": "<value>", "damage_vulnerabilities": [{"name": "<value>", "key": "<key>"}], "condition_immunities_display": "<value>", "condition_immunities": [{"name": "<value>", "key": "<key>"}]}, "actions": [{"name": "<value>", "attacks": [], "usage_limits": {"key": "<value>", "key1": "<value>"}}], "traits": [{"name": "<value>"}], "creaturesets": [], "environments": [], "illustration": {"name": "<value>", "key": "<key>", "file_url": "https://lumbering-feather.info", "alt_text": "<value>", "attribution": "<value>"}, "crossreferences": {"to": []}}]}
+  creatures_retrieve:
+    speakeasy-default-creatures-retrieve:
+      parameters:
+        path:
+          key: "<key>"
+      responses:
+        "200":
+          application/json: {"key": "<key>", "name": "<value>", "document": {"name": "<value>", "key": "<key>", "display_name": "Richmond_Padberg", "publisher": {"name": "<value>", "key": "<key>"}, "gamesystem": {"name": "<value>", "key": "<key>"}, "permalink": "https://avaricious-vein.biz/"}, "type": {"name": "<value>", "key": "<key>"}, "size": {"name": "<value>", "key": "<key>"}, "challenge_rating": 9401.01, "speed": {"walk": "<value>", "fly": "<value>", "swim": "<value>", "climb": "<value>", "burrow": "<value>", "hover": false}, "speed_all": {"unit": "sievert", "walk": 840570, "crawl": 339533, "hover": false, "fly": 202104, "burrow": 859014, "climb": 403668, "swim": 338959}, "category": "<value>", "alignment": "<value>", "languages": {"as_string": "<value>", "data": [{"name": "<value>", "key": "<key>"}]}, "experience_points": 430660, "ability_scores": {"strength": 260041, "dexterity": 840028, "constitution": 919315, "intelligence": 450958, "wisdom": 273323, "charisma": 612426}, "modifiers": {"strength": 628638, "dexterity": 557500, "constitution": 126782, "intelligence": 556429, "wisdom": 313857, "charisma": 773146}, "initiative_bonus": 235146, "saving_throws": {"strength": 67837, "dexterity": 132640, "constitution": 607246, "intelligence": 985286, "wisdom": 200060, "charisma": 905106}, "saving_throws_all": {"strength": 799377, "dexterity": 651911, "constitution": 957595, "intelligence": 534054, "wisdom": 590936, "charisma": 118500}, "skill_bonuses": {"acrobatics": 770617, "animal_handling": 828699, "arcana": 524528, "athletics": 894247, "deception": 956087, "history": 340093, "insight": 415720, "intimidation": 653681, "investigation": 930843, "medicine": 638530, "nature": 697370, "perception": 652370, "performance": 432659, "persuasion": 507566, "religion": 858033, "sleight_of_hand": 31679, "stealth": 998745, "survival": 302944}, "skill_bonuses_all": {"acrobatics": 297869, "animal_handling": 657001, "arcana": 892209, "athletics": 530563, "deception": 493890, "history": 356638, "insight": 643794, "intimidation": 48329, "investigation": 767231, "medicine": 240419, "nature": 234971, "perception": 42539, "performance": 764916, "persuasion": 623246, "religion": 565999, "sleight_of_hand": 588025, "stealth": 482353, "survival": 799862}, "resistances_and_immunities": {"damage_immunities_display": "<value>", "damage_immunities": [{"name": "<value>", "key": "<key>"}], "damage_resistances_display": "<value>", "damage_resistances": [{"name": "<value>", "key": "<key>"}], "damage_vulnerabilities_display": "<value>", "damage_vulnerabilities": [], "condition_immunities_display": "<value>", "condition_immunities": []}, "actions": [], "traits": [], "creaturesets": [], "environments": [{"name": "<value>", "key": "<key>"}], "illustration": {"name": "<value>", "key": "<key>", "file_url": "https://puny-fishery.net", "alt_text": "<value>", "attribution": "<value>"}, "crossreferences": {"to": [{"anchor": "<value>", "url": "https://sugary-printer.net/"}]}}
+  classes_list:
+    speakeasy-default-classes-list:
+      responses:
+        "200":
+          application/json: {"count": 123, "next": "http://api.example.org/accounts/?page=4", "previous": "http://api.example.org/accounts/?page=2", "results": []}
+  classes_retrieve:
+    speakeasy-default-classes-retrieve:
+      parameters:
+        path:
+          key: "<key>"
+      responses:
+        "200":
+          application/json: {"key": "<key>", "features": [], "hit_points": {"hit_dice": 9931, "hit_dice_name": "<value>", "hit_points_at_1st_level": 854226, "hit_points_at_higher_levels": 284699}, "document": {"name": "<value>", "key": "<key>", "display_name": "Hettie_Steuber", "publisher": {"name": "<value>", "key": "<key>"}, "gamesystem": {"name": "<value>", "key": "<key>"}, "permalink": "https://rapid-fen.com/"}, "saving_throws": [{"name": "<value>"}], "subclass_of": {"name": "<value>", "key": "<key>"}, "name": "<value>", "primary_abilities": ["<value 1>", "<value 2>", "<value 3>"], "crossreferences": {"to": []}}
+examplesVersion: 1.0.2

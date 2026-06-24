@@ -1,0 +1,15 @@
+# ImageSummary
+
+Much of the logic included in the GameContentSerializer is intended to
+support manipulating data returned by the serializer via query parameters.
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `name`                                                                                        | *str*                                                                                         | :heavy_check_mark:                                                                            | Name of the item.                                                                             |
+| `key`                                                                                         | *str*                                                                                         | :heavy_check_mark:                                                                            | Unique key for the Item.                                                                      |
+| `file_url`                                                                                    | *str*                                                                                         | :heavy_check_mark:                                                                            | Returns a relative path to the related file.                                                  |
+| `alt_text`                                                                                    | *str*                                                                                         | :heavy_check_mark:                                                                            | A short textual description of the image. Important for accessibility                         |
+| `attribution`                                                                                 | *str*                                                                                         | :heavy_check_mark:                                                                            | Attribution information for this image. Who drew it and where we can find more of thier work? |
