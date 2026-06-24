@@ -86,7 +86,20 @@ export const tools: Tool[] = [
     hosting: "Self-host (GitHub → Netlify)",
     artifact: { kind: "page", note: "Native — the one output you host; also hosts the LoRA/RAG chatbot." },
     operations: "Full CRUD file-based — .md in docs/, _category_.json, static/img/, sidebars.js.",
-    ...pending({}),
+    ...pending({
+      status: "done",
+      setupNotes:
+        "Built locally (Docusaurus 3.10.1 + openapi-docs v5). The most wiring of the five: " +
+        "Docusaurus 3 needs :::type[Title] bracket admonitions; gen-api-docs must run before start; " +
+        "navbar + sidebar must point at the generated apiSidebar; build = `gen-api-docs && build`. " +
+        "Also surfaced (and fixed) a dangling $ref in Open5e's published spec.",
+      findings:
+        "Self-host = most control + zero recurring cost, paid for in setup. Reference renders all 6 " +
+        "endpoints with an interactive, live Try-It (CORS *) and multi-language code samples. " +
+        "drf-spectacular param noise on full display (~15+ filter params per list endpoint); " +
+        "auto-descriptions are rough (combined list/retrieve text; 'subclass_of: Unique key for the Item'). " +
+        "i18n en/en-GB works — dev serves one locale, the build serves both with a working dropdown.",
+    }),
   },
   {
     id: "promptless",

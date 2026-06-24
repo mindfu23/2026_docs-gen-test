@@ -8,7 +8,7 @@ title: Overview
 
 ![A twenty-sided die](/img/sample-d20.svg)
 
-:::note 🇬🇧 British-voice edition (en-GB)
+:::note[🇬🇧 British-voice edition (en-GB)]
 This is the **English (British)** locale, served only at `/en-GB/`. It is a hand-seeded British
 copy for now — a placeholder for the **British-voice LoRA** output, which will replace this prose
 once the adapter clears the safety screen (see `shared/MODEL_LAYER.md`). If you can read this
@@ -47,7 +47,7 @@ print(spell["name"], "— level", spell["level"])
 - **[Concepts](./concepts.md)** — the data model: keys, pagination, filtering, search.
 - **[API Reference](/api)** — generated from the spec (run `npm run gen-api-docs` first).
 
-:::note Attribution
+:::note[Attribution]
 Content derives from the D&D 5e SRD under **CC-BY-4.0** — see `NOTICE.md`. (British spelling:
 "licence" as the noun; the API field is still spelled `license`.)
 :::

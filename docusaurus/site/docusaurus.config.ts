@@ -85,7 +85,7 @@ const config: Config = {
       },
       items: [
         {type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Guides'},
-        {to: '/api', label: 'API Reference', position: 'left'},
+        {type: 'docSidebar', sidebarId: 'apiSidebar', position: 'left', label: 'API Reference'},
         {type: 'localeDropdown', position: 'right'},
         {href: 'https://github.com/mindfu23/2026_docs-gen-test', label: 'GitHub', position: 'right'},
       ],

@@ -5,7 +5,7 @@ title: Concepts
 
 # Concepts
 
-:::note 🇬🇧 British-voice edition (en-GB) — hand-seeded placeholder for the British-voice LoRA.
+:::note[🇬🇧 British-voice edition (en-GB) — hand-seeded placeholder for the British-voice LoRA.]
 :::
 
 The Open5e v2 data model.
@@ -42,7 +42,7 @@ Content is organised into **`documents`** (source books/SRDs), each tied to a `l
 `publisher`, and `gamesystem`. Filter SRD-only content with `?document__key=<srd-key>`, and read
 `/v2/licenses/` for attribution.
 
-:::warning Licensing
+:::warning[Licensing]
 The API catalogues several sources (SRD plus third-party OGL/CC). Preserve per-item attribution —
 see `NOTICE.md`.
 :::

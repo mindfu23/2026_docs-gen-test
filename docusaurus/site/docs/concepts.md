@@ -39,6 +39,6 @@ Content is grouped into **`documents`** (source books/SRDs), each tied to a `lic
 `publisher`, and `gamesystem`. Filter SRD-only content with `?document__key=<srd-key>`, and read
 `/v2/licenses/` for attribution.
 
-:::warning Licensing
+:::warning[Licensing]
 The API mixes sources (SRD + third-party OGL/CC). Preserve per-item attribution — see `NOTICE.md`.
 :::

@@ -5,14 +5,14 @@ title: Endpoints
 
 # Endpoints
 
-:::note 🇬🇧 British-voice edition (en-GB) — hand-seeded placeholder for the British-voice LoRA.
+:::note[🇬🇧 British-voice edition (en-GB) — hand-seeded placeholder for the British-voice LoRA.]
 :::
 
 Open5e v2 exposes 35 list resources; the highlights are below. All are GET, under
 `https://api.open5e.com`. A list endpoint returns a paginated envelope; a detail endpoint returns
 one object by its `key` (slug).
 
-:::tip Full reference
+:::tip[Full reference]
 This page is the hand-written tour. The complete, spec-generated reference lives under
 **[API Reference](/api)** once you run `npm run gen-api-docs`.
 :::

@@ -8,7 +8,7 @@ title: Overview
 
 ![A twenty-sided die](/img/sample-d20.svg)
 
-:::info Authoring-test asset
+:::info[Authoring-test asset]
 The image above is the sample asset for the authoring-operations battery — each publishing tool
 is exercised by adding it to a page (see `shared/AUTHORING_OPS.md`). This page is also the
 Docusaurus adaptation of the canonical `shared/content/overview.md`: blockquote callouts become
@@ -47,6 +47,6 @@ print(spell["name"], "— level", spell["level"])
 - **[Concepts](./concepts.md)** — the data model: keys, pagination, filtering, search.
 - **[API Reference](/api)** — generated from the spec (run `npm run gen-api-docs` first).
 
-:::note Attribution
+:::note[Attribution]
 Content derives from the D&D 5e SRD under **CC-BY-4.0** — see `NOTICE.md`.
 :::

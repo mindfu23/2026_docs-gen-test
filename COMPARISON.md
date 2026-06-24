@@ -38,7 +38,11 @@ They are **not competitors — they are three layers of the docs toolchain:**
 - **Stainless —** _what the generated SDK/docstrings looked like; screenshot link._
 - **Mintlify —** _live URL; how the "Try It" playground rendered the spec._
 - **GitBook —** _live URL; WYSIWYG + git-sync fidelity vs the raw Markdown._
-- **Docusaurus —** _deployed URL; effort to wire the OpenAPI plugin + deploy._
+- **Docusaurus —** ✅ built locally. Most wiring of the five (admonition syntax, gen-api-docs
+  ordering, sidebar/navbar wiring, + it surfaced the upstream spec bug). Pays off: full self-hosted
+  control, all 6 endpoints with live Try-It + multi-language samples, i18n en/en-GB. Renders the
+  **drf-spectacular param noise** and rough auto-descriptions verbatim — a vivid "messy auto-spec"
+  data point. _Deploy URL + screenshot pending._
 - **Promptless —** runs on the **vLLM v2 fork** (real code churn + a real `docs/` tree), triggered
   by a GitHub PR or a Slack `@mention`; output is a drafted doc-update PR with citations. _Capture
   the PR + assess draft/citation quality._ **Finding: the maintenance layer can't be demoed on a
