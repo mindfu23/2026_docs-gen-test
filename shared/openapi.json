@@ -10975,9 +10975,6 @@
               },
               {
                 "$ref": "#/components/schemas/CharacterClass"
-              },
-              {
-                "$ref": "#/components/schemas/Race"
               }
             ]
           },
