@@ -8,7 +8,8 @@ Markdown in the repo.
 this folder is the planning wrapper.
 
 ## What's prepped
-- [`.gitbook.yaml`](.gitbook.yaml) — Git Sync config (`root: ./content/`, README + SUMMARY).
+- **`../.gitbook.yaml`** (at the **repo root** — GitBook requires it there) — Git Sync config
+  pointing `root: ./gitbook/content/`, with README + SUMMARY.
 - [`content/SUMMARY.md`](content/SUMMARY.md) — the table of contents (GitBook's nav model).
 - [`content/README.md`](content/README.md) · `endpoints.md` · `concepts.md` — the 3 guides using
   GitBook **`{% hint %}`** callouts (vs Mintlify `<Info>` vs Docusaurus `:::` — the format-

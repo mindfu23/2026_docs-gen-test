@@ -1,0 +1,7 @@
+# GitBook Git Sync config. MUST live at the repository root — GitBook reads it from there.
+# Points GitBook at the docs living in the gitbook/ tool folder.
+root: ./gitbook/content/
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
