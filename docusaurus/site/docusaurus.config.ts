@@ -4,6 +4,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// The shared docs hub (the `showcase/` index that links to every doc set). Set this to the
+// deployed showcase URL — or pass DOCS_HUB_URL in the build env. (grep token: REPLACE-WITH-HUB-URL)
+const DOCS_HUB_URL = process.env.DOCS_HUB_URL ?? 'https://REPLACE-WITH-HUB-URL';
+
 const config: Config = {
   title: 'Open5e Docs — Docusaurus',
   tagline: 'The Open5e D&D 5e API, documented with Docusaurus (one of five tools compared).',
@@ -84,6 +88,7 @@ const config: Config = {
         src: 'img/sample-d20.svg',
       },
       items: [
+        {href: DOCS_HUB_URL, label: '← Docs Hub', position: 'left'},
         {type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Guides'},
         {type: 'docSidebar', sidebarId: 'apiSidebar', position: 'left', label: 'API Reference'},
         {type: 'localeDropdown', position: 'right'},

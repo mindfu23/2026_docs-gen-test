@@ -89,6 +89,31 @@ function Summary() {
         </p>
       </div>
 
+      <div className="mt-6 rounded-xl border border-slate-200 bg-white p-6">
+        <h2 className="text-lg font-semibold">Published doc sets</h2>
+        <p className="mt-1 text-sm text-slate-600">
+          This page is the shared index. Each publisher's live doc set links back here (far-left
+          “Docs Hub” link). URLs fill in as you deploy each one.
+        </p>
+        <ul className="mt-3 space-y-2 text-sm">
+          {tools.filter((t) => t.layer === "② Publish site").map((t) => (
+            <li key={t.id} className="flex items-center gap-3">
+              <span className="w-28 shrink-0 font-medium">{t.name}</span>
+              {t.liveUrl ? (
+                <a className="text-sky-600 underline" href={t.liveUrl} target="_blank" rel="noreferrer">
+                  {t.liveUrl} ↗
+                </a>
+              ) : (
+                <span className="text-slate-400">deploy pending</span>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs text-slate-400">
+          Also produced: an SDK (Stainless) and maintenance PRs (Promptless) — see their tabs.
+        </p>
+      </div>
+
       <div className="mt-6 overflow-x-auto rounded-xl border border-slate-200 bg-white">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-slate-200 text-slate-500">

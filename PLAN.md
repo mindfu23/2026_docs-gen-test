@@ -248,6 +248,19 @@ tools deploy themselves.
 > The `netlify.toml` + `netlify/functions/chat.ts` in `docusaurus/` are **pre-staged stubs** —
 > they activate once Docusaurus is scaffolded in Phase 1.
 
+## Doc hub & cross-links
+
+The five doc sets are published separately but connected as one portal:
+- **Main index = the `showcase/` hub.** Its Summary tab has a **"Published doc sets"** block
+  linking to each publisher's live site (from `tools.ts` `liveUrl`).
+- **Each doc set has a far-left "← Docs Hub" back-link** to the index: Docusaurus navbar
+  (`DOCS_HUB_URL`), Mintlify first tab (`href`), GitBook top-of-README (+ a UI header-link note —
+  GitBook's header isn't Git-Synced). *Where the back-link lives differs per tool — a small finding.*
+- **On deploy:** set each doc set's URL in `showcase/src/tools.ts` `liveUrl`, and replace the hub
+  placeholder everywhere with one find/replace: **grep token `REPLACE-WITH-HUB-URL`** (Docusaurus
+  config, Mintlify `docs.json`, GitBook `content/README.md`), or pass `DOCS_HUB_URL` in Docusaurus's
+  build env. Stainless (SDK) / Promptless (PRs) aren't doc sites — link them from their tabs.
+
 ## Related projects
 - **LoRA content-safety screen** *(separate, linked)* — the humor LoRAs must be tested on a
   battery of text and judged "clean enough to be safe" before being wired into this pipeline.

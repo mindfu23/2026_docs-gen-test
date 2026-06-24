@@ -24,6 +24,10 @@ this folder is the planning wrapper.
    URL) — see `content/api-reference/README.md`.
 4. **Exercise the authoring battery** (`shared/AUTHORING_OPS.md`) here — this is the tool where
    create/drag-reorder/nest/inline-image-upload is the headline. Watch edits round-trip to the repo.
+5. **Docs Hub back-link:** a hub link sits at the top of `content/README.md`. For a proper
+   header/navbar link back to the hub, set it in GitBook's **site customization (UI)** — GitBook's
+   header links aren't driven by Git Sync. (This per-tool difference in where the back-link lives
+   is itself a small finding.)
 
 ## What to capture
 The hosted site **and** a screenshot of the WYSIWYG editor + Git Sync settings — that combo is

@@ -10,13 +10,21 @@ Not a docs site — an SDK generator. (Stainless powers the SDKs for OpenAI, Ant
 resources with `list` + `retrieve` methods, so the SDK reads `client.spells.retrieve(key)` instead
 of the drf-spectacular auto names (`spells_retrieve`). **That curation is the finding.**
 
+Config **verified against the fixed subset spec** (all 3 resources / 6 methods / 3 models resolve).
+
 ## Fast path (once logged in)
-1. Sign up / log in at **app.stainless.com** (free tier — *verify current limits*).
-2. New project → upload the spec **`shared/openapi-subset.json`** + the config **`stainless.yml`**.
-   (Swap to `openapi.json` for the noisy-full case, or `openapi-auth.json` to add a mutation
-   method — *try all & compare*.)
-3. Pick Python and/or TypeScript (config sets both, package name `open5e`, publish off).
-4. Generate → view/download the SDK, or let it open a PR to a repo.
+1. Sign in at **app.stainless.com** with **GitHub** → create an org. (Free tier — *verify limits*.)
+2. **New project → provide the spec:** upload **`shared/openapi-subset.json`** (or paste a hosted
+   URL). On first generation Stainless **auto-drafts a config with an LLM.**
+3. **Replace that draft with our hand-tuned [`stainless.yml`](stainless.yml)** in the Studio's
+   config editor (clean `spells`/`creatures`/`classes` resources, Python + TS, publish off).
+   → *Try-all-and-compare bonus:* keep Stainless's auto-drafted config too and diff it against
+   ours — "LLM-drafted vs hand-tuned SDK config" is a sharp finding.
+4. **Save & build main branch** → the Python + TS SDKs generate into a repo.
+5. (Alt) the **Stainless CLI** does the same headlessly with the spec + config.
+
+Swap the spec to `openapi.json` (noisy-full) or `openapi-auth.json` (adds a mutation method +
+request body) to compare — *try all & compare*.
 
 ## What to capture
 A generated method showing **typed params + an inline `Args` docstring** (e.g.
