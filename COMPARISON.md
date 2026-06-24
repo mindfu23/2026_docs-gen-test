@@ -59,6 +59,10 @@ They are **not competitors — they are three layers of the docs toolchain:**
 - **Content portability:** _how much the seed Markdown had to change per tool._
 - **Maintenance overlap:** _Promptless vs Mintlify's PR check vs GitBook AI._
 - **What a spec can't model well:** _SSE streaming surface (see `shared/content/concepts.md`)._
+- **Docs tooling as a correctness check:** running Docusaurus's `gen-api-docs` surfaced a live,
+  unreported **dangling `$ref`** in Open5e's published spec (`SearchResult.oneOf` → removed `Race`).
+  Fix drafted in `open5e-contribution/`. A spec that works in a browser can still be invalid to a
+  `$ref` resolver — a real finding about the value of running codegen/doc-gen against a spec.
 
 ## The hook
 

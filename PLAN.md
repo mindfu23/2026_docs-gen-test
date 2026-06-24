@@ -71,7 +71,8 @@ admonitions vs GitBook blocks). **That portability gap is itself a finding** —
 ├── docusaurus/                # openapi plugin → self-hosted static site (+ RAG chatbot, netlify stubs)
 ├── gitbook/                   # git-sync target + adapted Markdown → hosted site
 ├── promptless/                # reacts to repo changes → doc-update PRs
-└── showcase/                  # React+Vite+Tailwind hub — tabs per tool + Summary (PUBLIC ARTIFACT)
+├── showcase/                  # React+Vite+Tailwind hub — tabs per tool + Summary (PUBLIC ARTIFACT)
+└── open5e-contribution/       # upstream PR draft + discovery write-up (a spec bug Docusaurus surfaced)
 ```
 
 The **showcase/** hub is a curated presentation layer, not a co-host of the five live outputs
