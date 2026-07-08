@@ -10,7 +10,7 @@
   ],
   "navigation": {
     "tabs": [
-      { "tab": "← Docs Hub", "href": "https://REPLACE-WITH-HUB-URL" },
+      { "tab": "← Docs Hub", "href": "https://showcase-docs-gen.netlify.app" },
       {
         "tab": "Guides",
         "groups": [

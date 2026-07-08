@@ -1,6 +1,6 @@
 # Overview / Getting Started
 
-> **[← Docs Hub](https://REPLACE-WITH-HUB-URL)** — the shared index linking to every doc set.
+> **[← Docs Hub](https://showcase-docs-gen.netlify.app)** — the shared index linking to every doc set.
 
 <img src=".gitbook/assets/sample-d20.svg" alt="d20" data-size="line">
 

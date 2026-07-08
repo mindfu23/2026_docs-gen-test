@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // The shared docs hub (the `showcase/` index that links to every doc set). Set this to the
 // deployed showcase URL — or pass DOCS_HUB_URL in the build env. (grep token: REPLACE-WITH-HUB-URL)
-const DOCS_HUB_URL = process.env.DOCS_HUB_URL ?? 'https://REPLACE-WITH-HUB-URL';
+const DOCS_HUB_URL = process.env.DOCS_HUB_URL ?? 'https://showcase-docs-gen.netlify.app';
 
 const config: Config = {
   title: 'Open5e Docs — Docusaurus',
