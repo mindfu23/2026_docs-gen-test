@@ -161,6 +161,7 @@ export const tools: Tool[] = [
     operations: "Full CRUD file-based — .md in docs/, _category_.json, static/img/, sidebars.js.",
     ...pending({
       status: "done",
+      liveUrl: "https://docusaurus-test-docs.netlify.app/",
       setupNotes:
         "Built locally (Docusaurus 3.10.1 + openapi-docs v5). The most wiring of the five: " +
         "Docusaurus 3 needs :::type[Title] bracket admonitions; gen-api-docs must run before start; " +
