@@ -4,9 +4,8 @@
 documentation toolchain to see what each tool produces, where they overlap, and where the
 "obvious" winner isn't. The point isn't any single docs site — it's the comparison.
 
-> **Status:** 5 of 7 tools captured (OpenAPI Generator, Speakeasy, Stainless, Mintlify,
-> Docusaurus). GitBook and Promptless are wired up; their captures are in progress and marked
-> _pending_ below.
+> **Status:** 6 of 7 tools captured (OpenAPI Generator, Speakeasy, Stainless, Mintlify,
+> Docusaurus, GitBook). **Promptless** is wired up; its capture is in progress and marked _pending_ below.
 
 ## TL;DR thesis
 
@@ -98,11 +97,14 @@ polished tool wasn't strictly better:** it auto-titled operations `Get v2spells`
 ignoring the `operationId`, so `list` and `retrieve` **collide into duplicate sidebar labels** —
 where Docusaurus's `spells_list` / `spells_retrieve` was clearer.
 
-**GitBook (WYSIWYG + git-sync).** _Pending capture._ Connected via **bidirectional Git Sync** to
-the repo's `gitbook/content/` (repo-root `.gitbook.yaml` → `root: ./gitbook/content/`). The
-differentiator to capture: **GUI authoring (drag-reorder, inline image) that round-trips to a
-GitHub commit** — the only tool here where editing in the UI writes back to the repo. Its API
-reference is a separate OpenAPI-feature step (git-sync brings the guides, not auto-generated API pages).
+**GitBook (WYSIWYG + git-sync).** The mixed-audience / content-platform option. Connected via
+**bidirectional Git Sync** (repo-root `.gitbook.yaml` → `root: ./gitbook/content/`) — the fiddliest
+setup of the publishers, but then the **smoothest authoring**: the whole battery ran in the WYSIWYG
+editor (create page, nest, drag-drop an inline image) with no files or config. **The differentiator,
+confirmed:** a GUI edit became a change request, and merging it pushed a **Verified `gitbook-bot`
+commit back to `main`** (new page + image + auto-updated `SUMMARY.md`) — *GUI-edit → GitHub commit*,
+which no other tool here does. Markup is `{% hint %}` (the 3rd callout dialect). The API reference is
+a separate OpenAPI-import step (Git Sync brings the guides, not auto-generated API pages).
 
 ---
 

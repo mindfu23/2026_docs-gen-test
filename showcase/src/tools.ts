@@ -147,7 +147,22 @@ export const tools: Tool[] = [
     hosting: "SaaS (Git Sync)",
     artifact: { kind: "link", note: "Externally hosted — link out + screenshot of WYSIWYG + git-sync." },
     operations: "Full CRUD via WYSIWYG — create, drag-reorder, nest, inline image upload.",
-    ...pending({}),
+    ...pending({
+      status: "done",
+      setupNotes:
+        "Git Sync (GitHub → GitBook), driven by a repo-root .gitbook.yaml → root: ./gitbook/content/. " +
+        "Setup was the fiddliest of the publishers (Git Sync lives in the space's config, the GitBook " +
+        "GitHub app must be installed on the org, and the account list is stale until you refresh). " +
+        "Once connected, authoring is the smoothest — pure GUI. Publishing to a public URL is optional.",
+      findings:
+        "The mixed-audience / content-platform option — best when non-engineers co-author. Authoring " +
+        "battery ran entirely in the WYSIWYG: created a page, nested it, and drag-dropped an inline " +
+        "image — no files, no config. THE differentiator: edits round-trip to GitHub. A GUI edit " +
+        "became a change request, and merging it pushed a Verified `gitbook-bot` commit back to main " +
+        "(GITBOOK-3: new page + image + auto-updated SUMMARY.md) — GUI-edit → GitHub commit, which no " +
+        "other tool here does. GitBook markup is `{% hint %}` (3rd callout dialect). API reference is a " +
+        "separate OpenAPI-import step (Git Sync brings the guides, not auto-generated API pages).",
+    }),
   },
   {
     id: "docusaurus",
