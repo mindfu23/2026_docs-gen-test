@@ -46,11 +46,17 @@ in the navbar confirms the whole chain end to end.
 `openapi.json` (full/noisy) or `openapi-auth.json` (auth + POST) and re-run `gen-api-docs` to
 compare how the reference renders each. Keep all three — see `../PLAN.md` "preserve every option".
 
-## RAG chatbot (the LoRA / vLLM showcase)
-Docusaurus is your own React app, so it hosts a **RAG chatbot** grounded in the Open5e content,
-answered by a **base LLM + your LoRA**, served via the swappable config in
-[`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md) through `site/netlify/functions/chat.ts`.
-Start base-only; attach the HF LoRA once it clears the safety screen.
+## RAG chatbot (the LoRA / vLLM showcase) — scaffolded ✅
+Docusaurus is your own React app, so it hosts a **RAG chatbot** grounded in Open5e content. Built:
+- `site/netlify/functions/chat.ts` — **retrieves** from Open5e (`/v2/search/?vector=true`), builds a
+  grounded system prompt, and calls the configured base LLM (swappable per
+  [`../shared/MODEL_LAYER.md`](../shared/MODEL_LAYER.md)). Works retrieval-only before a model is wired.
+- `site/src/components/RagChat/` + `site/src/pages/chat.tsx` — the **"Ask the Docs"** page at `/chat`
+  (navbar link added).
+
+**Run it:** `netlify dev` from `site/` (plain `docusaurus start` won't run the function). Set
+`LLM_BASE_URL` / `LLM_MODEL` in the env for grounded answers; leave `LLM_LORA` empty for **base-only**
+(the default until the British-voice LoRA clears the safety screen).
 
 ## What to capture / for the write-up
 The self-hosted site + the fact that **you** wired the plugin, theme, i18n, and deploy — the

@@ -1,95 +1,155 @@
-# One spec, five tools — what each layer actually produces
+# One spec, three layers — what each documentation tool actually produces
 
-> **THE DELIVERABLE.** Fill this in as you complete each tool in Phase 1. The write-up — not
-> any single docs site — is the point. See `PLAN.md` for the full method.
+**The deliverable.** One OpenAPI spec (the open **Open5e** D&D 5e API), run through the modern
+documentation toolchain to see what each tool produces, where they overlap, and where the
+"obvious" winner isn't. The point isn't any single docs site — it's the comparison.
 
-**Setup:** one shared `openapi.json` from an open-source vLLM server, run through five
-documentation/SDK tools to see what each produces and where they overlap.
+> **Status:** 5 of 7 tools captured (OpenAPI Generator, Speakeasy, Stainless, Mintlify,
+> Docusaurus). GitBook and Promptless are wired up; their captures are in progress and marked
+> _pending_ below.
 
 ## TL;DR thesis
 
-They are **not competitors — they are three layers of the docs toolchain:**
+These tools **aren't competitors — they're three layers of one toolchain:**
 
-1. **Generate the client** — Stainless turns the spec into typed SDKs.
-2. **Publish the docs** — Mintlify, GitBook, and Docusaurus each render the spec + guides
-   into a site, three different ways.
-3. **Maintain the docs** — Promptless drafts update PRs as the code changes.
+1. **Generate the client** — turn the spec into a typed SDK. *(OpenAPI Generator · Speakeasy · Stainless)*
+2. **Publish the site** — render the spec + guides into docs, three different ways. *(Docusaurus · Mintlify · GitBook)*
+3. **Maintain the docs** — draft doc updates as the code changes. *(Promptless)*
 
-## Comparison matrix  *(fill as you test)*
+The sharpest through-line: **the same messy auto-generated spec is treated completely
+differently at each layer** — and the free/OSS tools ship it verbatim while the commercial tools
+*curate* it.
 
-| Dimension | Stainless | Mintlify | GitBook | Docusaurus | Promptless |
-|---|---|---|---|---|---|
-| Layer | ① generate client | ② publish | ② publish | ② publish | ③ maintain |
-| Primary input | OpenAPI spec | spec + MDX | spec + Markdown | MDX + spec (plugin) | repo changes |
-| Primary output | typed SDKs | hosted reference | hosted docs/KB | self-hosted static site | doc-update PRs |
-| Hosting | CI tool | SaaS | SaaS | self-host | PR bot |
-| Content format | n/a | MDX (components) | GitBook blocks | MDX (admonitions) | n/a |
-| OpenAPI ingestion | _TBD_ | _TBD_ | _TBD_ | _TBD_ | n/a |
-| Git model | PR to repo | git-as-source | bidirectional sync | git-is-the-repo | reacts to commits |
-| AI features | _TBD_ | AI search | GitBook AI | _community_ | core (drafting) |
-| Pricing / OSS-free | _TBD_ | _TBD_ | _TBD_ | free / OSS | _TBD_ |
-| Setup time (actual) | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
-| Lock-in / portability | _TBD_ | _TBD_ | _TBD_ | none | _TBD_ |
-| Primary audience | SDK consumers | developers | mixed technical/non-tech | engineering teams | doc maintainers |
-| Authoring ops (CRUD) | n/a — config + regen | files + nav (web editor) | WYSIWYG drag-and-drop | files + sidebar config | n/a — drafts edits via PR |
+## Setup
 
-## Findings  *(write as you go)*
+- **Subject:** the **Open5e** API (`api.open5e.com`) — an open, CC-BY-4.0 D&D 5e content API with
+  a real, publicly published OpenAPI 3.0.3 spec. Chosen because one open spec can feed every tool.
+- **Three spec variants** drive the comparison:
+  - `openapi.json` — full (69 paths) — the scale/noise case.
+  - `openapi-subset.json` — spells + creatures + classes (6 paths) — the clean demo (dodges free-tier caps).
+  - `openapi-auth.json` — subset + one fake authenticated `POST` — to exercise request-body/auth rendering the read-only API lacks.
+- **The spec is auto-generated** by drf-spectacular (Django) — so it's realistic and *noisy*:
+  every endpoint carries ~30 Django-style filter params (`name__icontains`, `level__gte`, …).
+  How each tool handles that noise is a recurring finding.
 
-- **Layer ① (SDK generation) — now a 3-way.** Stainless was acquired by Anthropic and shut down
-  mid-project; the slot became Speakeasy (commercial) + OpenAPI Generator (OSS), with Stainless as a
-  documented benchmark. A real-world finding in itself: the leading SDK tool left the market.
-- **OpenAPI Generator (① OSS) —** ✅ generated locally (7.23.0, Python, `openapi-generator/python`).
-  Complete installable package, but faithful-and-verbose: every drf-spectacular param → a typed
-  kwarg, so `spells_list` has a ~30-arg signature; `SpellsApi.spells_list()` naming. The free tier.
-- **Speakeasy (① commercial) —** ✅ generated (Python, from `openapi-subset.json`). Its **Studio
-  diagnosed 6 spec-quality categories (~29 instances)** the OSS generator shipped silently:
-  **method-name curation** (`sdk.spells.spells_list()` → `sdk.spells.list()` — vs OpenAPI Generator's
-  `SpellsApi.spells_list()`), `response.description` required (12), missing error responses (6),
-  pagination via `x-speakeasy-pagination` (3), retries via `x-speakeasy-retries` (1), duplicate
-  schemas (1). **Key mechanism:** fixes apply via **`speakeasy-modifications-overlay.yaml`** — an
-  overlay, *not* a source-spec edit — so curation happens without touching the shared input. This is
-  the layer-① thesis made literal: **same spec → OSS ships it verbose; Speakeasy curates + extends.**
-- **Stainless (①) —** documented from public output (anthropic/openai SDKs): ergonomic
-  `client.resource.method()`, `Literal` params, full docstrings, typed pagination — the quality bar.
-- **Mintlify —** ✅ previewed (`mint dev`). Polished SaaS default, near-zero config; **live "Try It"**
-  playground returned a real `200` from `api.open5e.com` (CORS `*`) + multi-language samples + ⌘K
-  search. Mintlify MDX (`<Info>`/`<Card>`) = 2nd callout dialect. Renders the param noise as
-  interactive input fields (uncurated, like Docusaurus). **Naming quirk:** auto-titled ops
-  `Get v2spells` from method+path (ignored operationId) → list+retrieve collide into duplicate
-  sidebar labels, where Docusaurus's `spells_list`/`spells_retrieve` was clearer — the polished tool
-  wasn't strictly better. Hosted deploy optional (point the GitHub App at `mintlify/`).
-- **GitBook —** _live URL; WYSIWYG + git-sync fidelity vs the raw Markdown._
-- **Docusaurus —** ✅ built locally. Most wiring of the five (admonition syntax, gen-api-docs
-  ordering, sidebar/navbar wiring, + it surfaced the upstream spec bug). Pays off: full self-hosted
-  control, all 6 endpoints with live Try-It + multi-language samples, i18n en/en-GB. Renders the
-  **drf-spectacular param noise** and rough auto-descriptions verbatim — a vivid "messy auto-spec"
-  data point. _Deploy URL + screenshot pending._
-- **Promptless —** runs on the **vLLM v2 fork** (real code churn + a real `docs/` tree), triggered
-  by a GitHub PR or a Slack `@mention`; output is a drafted doc-update PR with citations. _Capture
-  the PR + assess draft/citation quality._ **Finding: the maintenance layer can't be demoed on a
-  static spec — it needs a living codebase**, so it deliberately uses a different substrate than
-  the other four (which document the Open5e API).
+---
 
-## Test setup notes
-- **Three spec variants** drive the comparison: `openapi.json` (full, 69 paths), `openapi-subset.json`
-  (6), `openapi-auth.json` (7, +fake auth POST). Compare full-vs-subset (scale/noise) and
-  read-only-vs-auth (request-body/security rendering).
-- **Live "Try It" works:** `api.open5e.com` sends `access-control-allow-origin: *`, so interactive
-  consoles can make real in-browser GETs.
+## Layer ① — Generate the client (SDK)
+
+| | **OpenAPI Generator** | **Speakeasy** | **Stainless** |
+|---|---|---|---|
+| Kind | free / OSS CLI (Java) | commercial SaaS + CLI | commercial *(discontinued)* |
+| Output | full installable package | idiomatic SDK | idiomatic SDK (benchmark) |
+| Method naming | `SpellsApi.spells_list()` | `sdk.spells.list()` (via overlay) | `client.spells.list()` |
+| The param noise | **exploded into a ~30-arg signature** | **curated** (overlay) | curated |
+| Config | CLI flags | OpenAPI-as-source + overlays | `stainless.yml` (LLM-drafted) |
+| Cost | $0, no account | free tier (1 lang / 250 endpoints) | n/a — service shut down |
+| Languages here | **Python + TypeScript** generated | Python generated | documented from public SDKs |
+
+**OpenAPI Generator (the OSS baseline).** Produced a *complete* installable package — client,
+models, per-model docs, tests, `pyproject.toml`, `tox.ini` — for both Python and TypeScript. But
+it's **faithful-and-verbose**: it turned every drf-spectacular query param into a typed kwarg, so
+`spells_list` has a ~30-argument signature, and names are API-class-scoped (`SpellsApi.spells_list()`).
+Zero cost, zero curation — you get exactly what the spec says, noise included.
+
+**Speakeasy (the commercial replacement).** Generated an idiomatic SDK, and its **Studio
+*diagnosed* what the OSS generator shipped silently** — 6 spec-quality categories (~29 instances):
+method-name curation, `response.description` required (12), missing error responses (6), pagination
+via `x-speakeasy-pagination` (3), retries via `x-speakeasy-retries` (1), duplicate schemas (1). The
+headline: `sdk.spells.spells_list()` → **`sdk.spells.list()`**, applied via a
+**`speakeasy-modifications-overlay.yaml`** — an overlay that leaves the shared source spec
+untouched. This *is* the layer-① thesis, made literal: **same spec → OSS ships it verbose;
+Speakeasy curates and extends.**
+
+**Stainless (the benchmark that left the market).** A real-world plot twist: mid-project,
+**Anthropic acquired Stainless and shut down the hosted generator** — no signups, no workaround.
+Since it powered the official OpenAI/Anthropic/Cloudflare SDKs, it's documented here **from its
+public output** (ergonomic `client.resource.method()`, `Literal`-typed params, full docstrings,
+typed pagination) as the quality bar the others are measured against. *(Finding in itself: the
+leading SDK tool being absorbed by an LLM company.)*
+
+---
+
+## Layer ② — Publish the site
+
+| | **Docusaurus** | **Mintlify** | **GitBook** |
+|---|---|---|---|
+| Hosting | self-host (Netlify) | SaaS | SaaS |
+| Input | MDX + spec (plugin) | spec + MDX | Markdown (git-sync) + spec |
+| Callout dialect | `:::note` admonitions | `<Info>` / `<Card>` | `{% hint %}` |
+| API reference | plugin — uses `operationId` | auto — uses method+path | via OpenAPI feature (separate step) |
+| Live "Try It" | ✅ | ✅ (verified live 200) | via OpenAPI feature |
+| Authoring | files + sidebar config | files + web editor | **WYSIWYG drag-drop + bidirectional git-sync** |
+| i18n | ✅ en / en-GB built-in | localization | variants |
+| Setup effort | **highest** (most wiring) | **lowest** | medium (git-sync plumbing) |
+
+**The same 3 guide pages exist in all three, in three callout dialects** — a concrete demonstration
+that the "same MDX" doesn't port cleanly (Docusaurus `:::`, Mintlify components, GitBook blocks).
+
+**Docusaurus (own-your-stack).** The most wiring of the three — Docusaurus-3 bracket admonitions,
+`gen-api-docs` ordering, sidebar/navbar wiring — but it pays off in total control, zero recurring
+cost, and no lock-in. All 6 endpoints render with a live Try-It + multi-language samples, and
+en/en-GB i18n works. It renders the param noise and rough auto-descriptions **verbatim** — a vivid
+"messy auto-spec" data point. It also **surfaced the upstream spec bug** (below).
+
+**Mintlify (polished SaaS default).** Fastest to a site, near-zero config via `docs.json`, live
+Try-It (a real `200` from `api.open5e.com`), multi-language samples, ⌘K + AI search. **But the
+polished tool wasn't strictly better:** it auto-titled operations `Get v2spells` from *method+path*,
+ignoring the `operationId`, so `list` and `retrieve` **collide into duplicate sidebar labels** —
+where Docusaurus's `spells_list` / `spells_retrieve` was clearer.
+
+**GitBook (WYSIWYG + git-sync).** _Pending capture._ Connected via **bidirectional Git Sync** to
+the repo's `gitbook/content/` (repo-root `.gitbook.yaml` → `root: ./gitbook/content/`). The
+differentiator to capture: **GUI authoring (drag-reorder, inline image) that round-trips to a
+GitHub commit** — the only tool here where editing in the UI writes back to the repo. Its API
+reference is a separate OpenAPI-feature step (git-sync brings the guides, not auto-generated API pages).
+
+---
+
+## Layer ③ — Maintain the docs
+
+**Promptless.** _Pending capture._ The maintenance layer — it watches a repo and **drafts
+doc-update PRs** (with citations) in response to code changes, via a GitHub PR or a Slack
+`@mention`. **Key finding: this layer can't be demoed on a static spec** — it needs a *living
+codebase*, so it deliberately runs on a different substrate (the **vLLM v2 fork**, with real churn
+and a real Sphinx `docs/` tree) rather than the Open5e API the other tools document. Overlaps, but
+isn't replaced by, Mintlify's "outdated docs" PR check and GitBook AI — Promptless is the dedicated,
+PR-first version.
+
+---
 
 ## Cross-cutting observations
 
-- **Same spec, different artifacts:** _Stainless code vs three reference sites._
-- **Publishing trio tradeoffs:** _polish (Mintlify) vs mixed-author (GitBook) vs control (Docusaurus)._
-- **Content portability:** _how much the seed Markdown had to change per tool._
-- **Maintenance overlap:** _Promptless vs Mintlify's PR check vs GitBook AI._
-- **What a spec can't model well:** _SSE streaming surface (see `shared/content/concepts.md`)._
-- **Docs tooling as a correctness check:** running Docusaurus's `gen-api-docs` surfaced a live,
-  unreported **dangling `$ref`** in Open5e's published spec (`SearchResult.oneOf` → removed `Race`).
-  Fix drafted in `open5e-contribution/`. A spec that works in a browser can still be invalid to a
-  `$ref` resolver — a real finding about the value of running codegen/doc-gen against a spec.
+- **Same spec, radically different artifacts.** Layer ① emits *code you import*; layer ② emits
+  *sites you read*; layer ③ emits *PRs that maintain them*. Calling these "competitors" misses the point.
+- **Free ships the mess; paid curates it.** The clearest axis: OpenAPI Generator's ~30-arg
+  signatures and `Get v2spells` collisions are what the raw spec produces. Speakeasy (overlay) and
+  Stainless (config) *earn their price* precisely by cleaning that up — and Speakeasy does it
+  **without touching the source spec** (overlays), so the shared input stays intact for every other tool.
+- **"Polished" ≠ "correct."** Mintlify (paid) produced *worse* API-reference naming than the
+  Docusaurus OSS plugin, because it derived names from paths instead of `operationId`. A good
+  reminder that curation quality is per-feature, not per-price-tier.
+- **Callout-format portability is a myth.** The same three pages needed three different markup
+  dialects across the publishers — a real cost when "just move the Markdown" is assumed.
+- **Who owns hosting is a first-class trade.** Docusaurus (you host, Netlify) vs Mintlify/GitBook
+  (they host, their URL) — the SaaS tools take deployment off your plate *and* out of your control.
+- **Docs tooling is a correctness check on the API.** Running Docusaurus's `gen-api-docs` surfaced
+  a **live, unreported dangling `$ref`** in Open5e's published spec (`SearchResult.oneOf` → a `Race`
+  schema removed in a v2 rename). A spec that "works" in a browser can still be invalid to a `$ref`
+  resolver. Fix drafted in `open5e-contribution/` (a one-line source change; PR-ready).
+- **What a spec can't model well.** Auth/mutation (the read-only Open5e API needed a fabricated
+  `POST` variant to exercise it) and streaming surfaces — the boundaries of the OpenAPI model itself.
 
 ## The hook
 
-> "I ran one open-source inference API through Stainless, Mintlify, GitBook, Docusaurus, and
-> Promptless to see what each layer of the docs toolchain actually produces."
+> "I ran one open API through the whole documentation toolchain — three SDK generators, three
+> docs-site publishers, and an AI maintenance bot — to see what each layer actually produces. It
+> found a bug in the API's own spec, proved the free tools ship the mess the paid ones curate, and
+> caught the 'polished' SaaS tool naming things *worse* than the open-source plugin."
+
+---
+
+### Provenance
+Full method + per-tool setup: `PLAN.md`. Per-tool next steps: `NEXT_STEPS.md`. Live artifacts:
+`openapi-generator/` (Python + TS SDKs), `speakeasy/` (SDK + overlay), `docusaurus/site/`,
+`mintlify/`, `gitbook/`. Content derives from the D&D 5e SRD under CC-BY-4.0 (`NOTICE.md`).

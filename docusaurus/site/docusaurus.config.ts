@@ -91,6 +91,7 @@ const config: Config = {
         {href: DOCS_HUB_URL, label: '← Docs Hub', position: 'left'},
         {type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Guides'},
         {type: 'docSidebar', sidebarId: 'apiSidebar', position: 'left', label: 'API Reference'},
+        {to: '/chat', label: 'Ask the Docs', position: 'left'},
         {type: 'localeDropdown', position: 'right'},
         {href: 'https://github.com/mindfu23/2026_docs-gen-test', label: 'GitHub', position: 'right'},
       ],

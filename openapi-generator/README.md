@@ -3,8 +3,9 @@
 **Job:** turn the spec into a typed SDK — the **free, self-hosted** alternative to Stainless.
 No account, runs locally (Java). The OSS-tier baseline for the SDK-generation comparison.
 
-**Status: generated ✅** — a real Python client is in [`python/`](python/) (OpenAPI Generator 7.23.0,
-148 files: client, models, per-model docs, tests, `pyproject.toml`).
+**Status: generated ✅** — real clients in [`python/`](python/) (148 files) **and**
+[`typescript/`](typescript/) (typescript-fetch, 95 files), both OpenAPI Generator 7.23.0:
+client, models, per-model docs, tests, packaging.
 
 ## Reproduce / regenerate
 ```bash

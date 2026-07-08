@@ -10,6 +10,7 @@ site, maintain the docs.
 
 ## Start here
 - **[PLAN.md](PLAN.md)** — the method, the 3-layer taxonomy, and the phased execution checklist.
+- **[NEXT_STEPS.md](NEXT_STEPS.md)** — per-tool next steps: finish-capture + next-phase usage.
 - **[COMPARISON.md](COMPARISON.md)** — the deliverable (matrix + findings), filled in as you test.
 
 ## Layout
