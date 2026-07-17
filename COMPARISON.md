@@ -135,6 +135,11 @@ PR-first version.
   dialects across the publishers — a real cost when "just move the Markdown" is assumed.
 - **Who owns hosting is a first-class trade.** Docusaurus (you host, Netlify) vs Mintlify/GitBook
   (they host, their URL) — the SaaS tools take deployment off your plate *and* out of your control.
+- **The layers are blurring.** Mintlify ships its own **Slack "update your docs" agent** — seen
+  live *in the same Slack workspace as Promptless* — and GitBook has GitBook AI. So the layer-②
+  publishers are growing into layer-③ maintenance, directly overlapping the dedicated tool
+  (Promptless). The three-layer split is real, but the market is converging: the publisher you pick
+  may already do "docs keep pace with changes" in-house.
 - **Docs tooling is a correctness check on the API.** Running Docusaurus's `gen-api-docs` surfaced
   a **live, unreported dangling `$ref`** in Open5e's published spec (`SearchResult.oneOf` → a `Race`
   schema removed in a v2 rename). A spec that "works" in a browser can still be invalid to a `$ref`

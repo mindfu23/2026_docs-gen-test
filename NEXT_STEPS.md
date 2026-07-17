@@ -7,23 +7,25 @@ extend it beyond the demo). See `PLAN.md` for the overall plan, `COMPARISON.md` 
 ## Status at a glance
 | Tool | Layer | Comparison status | Hosted/live? |
 |---|---|---|---|
-| OpenAPI Generator | ① generate | ✅ done (Python SDK generated) | n/a (local) |
+| OpenAPI Generator | ① generate | ✅ done (Python **+ TS** SDKs) | n/a (local) |
 | Speakeasy | ① generate | ✅ done (SDK + overlay findings) | local; hosted optional |
 | Stainless | ① generate | ✅ documented (service shut down) | n/a |
-| Docusaurus | ② publish | ✅ done (build + i18n + API ref) | ⬜ deploy pending |
-| Mintlify | ② publish | ✅ done (previewed, live Try-It) | ⬜ deploy pending |
-| GitBook | ② publish | ⬜ capture remaining | ⬜ publish pending |
-| Promptless | ③ maintain | ⬜ trigger remaining | n/a (PR bot) |
+| Docusaurus | ② publish | ✅ done (build + i18n + API ref + RAG scaffold) | ✅ deployed (Netlify) |
+| Mintlify | ② publish | ✅ done (previewed, live Try-It) | ⬜ host optional (subdir) |
+| GitBook | ② publish | ✅ done (round-trip confirmed) | ⬜ publish optional |
+| Promptless | ③ maintain | ⬜ **trigger remaining** (onboarding done) | n/a (PR bot) |
+| **Showcase hub** | index | ✅ deployed | `showcase-docs-gen.netlify.app` |
+
+**Progress: 6 of 7 tool tabs captured.** Only Promptless's trigger + capture remains.
 
 ---
 
 ## Layer ① — SDK generation
 
 ### OpenAPI Generator (free/OSS)
-- **A. Capture:** done — `openapi-generator/python` committed.
-- **B. Next phase:** generate the **TypeScript** client too (one-liner in its README); add a
-  `make regen` / npm script to regenerate on spec change; optionally compare `typescript-fetch`
-  vs `typescript-axios`. It's your $0 baseline — keep it as the "uncurated" reference.
+- **A. Capture:** done — `openapi-generator/python` **and `openapi-generator/typescript`** committed.
+- **B. Next phase:** add a `make regen` / npm script to regenerate on spec change; optionally compare
+  `typescript-fetch` vs `typescript-axios`. It's your $0 baseline — the "uncurated" reference.
 
 ### Speakeasy (commercial)
 - **A. Capture:** done. Optional polish: **approve the method-name overlay** in Studio to
@@ -45,11 +47,12 @@ extend it beyond the demo). See `PLAN.md` for the overall plan, `COMPARISON.md` 
 ### Docusaurus (self-host, max control)
 - **A. Capture:** done (build verified, API ref, en/en-GB i18n).
 - **B. Next phase:**
-  - **Deploy:** GitHub → Netlify, **base dir `docusaurus/site`** (`npm run build` runs
-    `gen-api-docs` automatically). Set the live URL in `showcase/src/tools.ts`.
-  - **RAG chatbot** (the LoRA/vLLM showcase): wire `netlify/functions/chat.ts` to a base model
-    + retrieval over Open5e (`shared/MODEL_LAYER.md`). **Gated on the LoRA safety screen** for the
-    voiced layer; runs base-only until then.
+  - **Deploy:** ✅ done — live at `docusaurus-test-docs.netlify.app`; `liveUrl` set in `tools.ts`.
+    *Verify the Netlify build succeeded incl. `gen-api-docs` + the `/chat` page (send me the log if not).*
+  - **RAG chatbot** (the LoRA/vLLM showcase): ✅ **scaffolded** — `netlify/functions/chat.ts` retrieves
+    from Open5e + calls the base model; `/chat` page + navbar link added. *Next:* set `LLM_*` env vars
+    on the Netlify site + run `netlify dev` (or deploy) so the function serves. **Voiced/LoRA layer
+    gated** on the safety screen; base-only until then.
   - **Voiced en-GB:** replace the British placeholder pages with the **British-voice LoRA** output
     once it clears safety.
   - Wire `apiSidebar` (uncomment in `sidebars.ts`); consider docs versioning.
@@ -63,39 +66,42 @@ extend it beyond the demo). See `PLAN.md` for the overall plan, `COMPARISON.md` 
     Speakeasy — a layer-① vs ② boundary finding).
 
 ### GitBook (SaaS, WYSIWYG + git-sync)
-- **A. Capture (remaining):**
-  1. Confirm the Git-Sync pulled Overview/Endpoints/Concepts.
-  2. **Run the authoring battery** (`shared/AUTHORING_OPS.md`): create page, drag-reorder, nest,
-     **inline-upload `sample-d20.svg`**, edit.
-  3. **Round-trip:** edit in GitBook → merge the change request → confirm a commit lands in
-     `gitbook/content/` (the bidirectional differentiator).
-  4. Screenshot the editor + the round-trip commit → fill the GitBook tab + COMPARISON.
-- **B. Next phase:** publish the site (public URL); set the header **Docs-Hub back-link** (UI);
-  add the **OpenAPI reference** via GitBook's OpenAPI feature; explore GitBook AI.
+- **A. Capture:** ✅ **done.** Git-Sync pulled the guides; authoring battery ran in the WYSIWYG
+  (created a page + inline image); the **round-trip confirmed** — a merged change request pushed a
+  Verified `gitbook-bot` commit (`GITBOOK-3`) back to `gitbook/content/` on `main`. Tab + COMPARISON filled.
+- **B. Next phase:** **publish the site** (public URL → add as GitBook's `liveUrl`); the header
+  Docs-Hub back-link is in `content/README.md` (syncs on push) + a UI header-link option; add the
+  **OpenAPI reference** via GitBook's OpenAPI feature; explore GitBook AI.
+  - *Housekeeping:* gitbook-bot commits to `main` — `git pull` before local commits to avoid divergence.
 
 ---
 
 ## Layer ③ — maintenance
 
 ### Promptless (AI doc-update PRs)
-- **A. Capture (remaining):** fire one trigger and capture the drafted doc-update PR:
-  - **Code path:** open a small doc-relevant PR on the **vLLM fork** → it drafts a doc-update PR.
-  - **Slack path:** `@Promptless` (or "Update Docs") on a thread in the Amber Xanadu workspace.
-  - Screenshot the PR/diff + citations → fill the Promptless tab.
-- **B. Next phase:** point its **publish target at a live docs site** (your Mintlify/GitBook) so it
-  maintains a real site; enable **passive Slack listening** on a channel; let it react to ongoing
-  fork churn; compare its drafts vs Mintlify's "outdated docs" PR check + GitBook AI.
+- **A. Capture (the last remaining tab):** onboarding is **done** (Chat=Slack, Docs repo=`_v2` fork,
+  Triggers=GitHub; Context skipped). Fire **one trigger** and capture the drafted doc-update PR:
+  - **Slack path:** invite/DM `@Promptless` in Amber Xanadu with a vLLM-relevant request, e.g.
+    *"@Promptless document the `--dtype` server flag (accepts auto/float16/bfloat16/float32, default auto)."*
+  - **Code path:** open a small doc-relevant PR on the `_v2` fork → it drafts a doc-update PR.
+  - Screenshot the PR/draft + citations → send to me → I fill the tab + swap the _pending_ COMPARISON block.
+- **B. Next phase:** point its **publish target at a live docs site**; enable **passive Slack listening**;
+  compare its drafts vs the **Mintlify Slack agent** (now in the same workspace — the "layers blurring"
+  finding) + GitBook AI.
 
 ---
 
 ## Project finalization (cross-cutting)
-1. **Fill remaining showcase tabs** (GitBook, Promptless) → flip `status` to `done` (then 7/7).
-2. **Deploy** the `showcase/` hub + Docusaurus; set each `liveUrl`; one find/replace of
-   **`REPLACE-WITH-HUB-URL`** (3 config files) → the doc-portal cross-links go live.
-3. **Write up `COMPARISON.md`** — the deliverable. Lead findings: layer-① curated-vs-verbose
+1. **Showcase tabs:** 6/7 filled — **only Promptless remains** (needs your trigger screenshot).
+2. **Deploy:** ✅ `showcase/` hub (`showcase-docs-gen.netlify.app`) **and** Docusaurus
+   (`docusaurus-test-docs.netlify.app`) are live; the **`REPLACE-WITH-HUB-URL`** token is replaced
+   in all 3 config files (redeploy/push each doc set to activate the back-links). Mintlify/GitBook
+   publishing is optional (set their `liveUrl` if you host them).
+3. **`COMPARISON.md`:** ✅ **drafted** — full write-up incl. the "layers are blurring" finding; the
+   Promptless section is the only _pending_ block. Lead findings: layer-① curated-vs-verbose
    (Speakeasy overlay vs OSS ~30-arg signatures), the **Open5e spec bug Docusaurus surfaced**,
-   callout-format portability in 3 dialects, who-owns-hosting, Mintlify's duplicate-label naming
-   quirk, GitBook's round-trip authoring.
+   callout portability in 3 dialects, who-owns-hosting, Mintlify's duplicate-label naming quirk,
+   GitBook's round-trip authoring, publishers growing into the maintenance layer.
 4. **Optional:** file the **Open5e upstream PR** (drafted in `open5e-contribution/`).
 5. **Optional:** work the **`FURTHER_TESTING.md`** backlog (search, versioning, RAG eval, lock-in).
 6. **Separate project:** the **LoRA content-safety screen** — gates the voiced i18n + RAG-with-LoRA.

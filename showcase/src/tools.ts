@@ -36,7 +36,7 @@ const pending = (extra: Partial<Tool>): Pick<Tool, "liveUrl" | "screenshot" | "s
   setupNotes: "",
   findings: "",
   status: "pending",
-  ...extra,
+  ...extra, 
 });
 
 export const tools: Tool[] = [

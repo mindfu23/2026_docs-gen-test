@@ -22,6 +22,8 @@ site, maintain the docs.
 | [stainless/](stainless/) · [mintlify/](mintlify/) · [docusaurus/](docusaurus/) · [gitbook/](gitbook/) · [promptless/](promptless/) | One folder per tool, each with a README of role + steps |
 
 ## Status
-Scaffold + plan + real spec obtained (Jun 18). The shared API is the **Open5e D&D 5e API**
-(CC-BY-4.0) — no GPU needed. Next: rework the 3 seed pages to the D&D surface, then fan out to
-the five tools. See [PLAN.md](PLAN.md) for the checklist.
+**6 of 7 tools captured.** Layer ① (OpenAPI Generator · Speakeasy · Stainless) and layer ②
+(Docusaurus · Mintlify · GitBook) are done; **Promptless** is connected with only its trigger +
+capture remaining. The **showcase hub** and **Docusaurus** are deployed to Netlify; the write-up in
+[COMPARISON.md](COMPARISON.md) is drafted (Promptless section pending). Per-tool next steps live in
+[NEXT_STEPS.md](NEXT_STEPS.md).
